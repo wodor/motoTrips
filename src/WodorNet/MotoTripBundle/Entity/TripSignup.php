@@ -5,12 +5,12 @@ namespace WodorNet\MotoTripBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * WodorNet\MotoTripBundle\Entity\TripSignups
+ * WodorNet\MotoTripBundle\Entity\TripSignup
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupsRepository")
+ * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupRepository")
  */
-class TripSignups
+class TripSignup
 {
     /**
      * @var integer $id

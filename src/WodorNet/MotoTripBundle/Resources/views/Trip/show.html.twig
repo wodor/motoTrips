@@ -1,3 +1,5 @@
+{% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
+{% block content %}
 <h1>Trip</h1>
 
 <table class="record_properties">
@@ -7,11 +9,11 @@
             <td>{{ entity.id }}</td>
         </tr>
         <tr>
-            <th>Creationdate</th>
+            <th>Creation Date</th>
             <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
         </tr>
         <tr>
-            <th>Terraintype</th>
+            <th>Terrain Type</th>
             <td>{{ entity.terrainType }}</td>
         </tr>
         <tr>
@@ -36,6 +38,11 @@
         </a>
     </li>
     <li>
+        <a href="{{ path('tripsignup_new') }}">
+            Dołącz
+        </a>
+    </li>
+    <li>
         <a href="{{ path('trip_edit', { 'id': entity.id }) }}">
             Edit
         </a>
@@ -47,3 +54,5 @@
         </form>
     </li>
 </ul>
+
+{% endblock %}
