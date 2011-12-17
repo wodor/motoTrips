@@ -1,5 +1,5 @@
 <?php
-namespace WodorNet\MotowypadBundle\Entity;
+namespace WodorNet\MotoTripBundle\Entity;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
