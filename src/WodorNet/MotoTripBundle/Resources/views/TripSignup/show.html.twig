@@ -1,0 +1,49 @@
+<h1>TripSignup</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Signupdate</th>
+            <td>{{ entity.signupDate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Signuptype</th>
+            <td>{{ entity.signupType }}</td>
+        </tr>
+        <tr>
+            <th>Trip</th>
+            <td>{{ entity.trip }}</td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        <tr>
+            <th>Testarray</th>
+            <td>{{ entity.testArray }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('tripsignup') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('tripsignup_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('tripsignup_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
