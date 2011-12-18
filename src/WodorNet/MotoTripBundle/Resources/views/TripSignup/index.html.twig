@@ -6,8 +6,6 @@
             <th>Id</th>
             <th>Signupdate</th>
             <th>Signuptype</th>
-            <th>Trip</th>
-            <th>User</th>
             <th>Testarray</th>
             <th>Actions</th>
         </tr>
@@ -18,8 +16,6 @@
             <td><a href="{{ path('tripsignup_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{% if entity.signupDate %}{{ entity.signupDate|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>{{ entity.signupType }}</td>
-            <td>{{ entity.trip }}</td>
-            <td>{{ entity.user }}</td>
             <td>{{ entity.testArray }}</td>
             <td>
                 <ul>

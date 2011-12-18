@@ -2,7 +2,10 @@
 
 namespace WodorNet\MotoTripBundle\Entity;
 
+use Doctrine\ORM\Query\AST\Subselect;
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * WodorNet\MotoTripBundle\Entity\Trip
@@ -57,11 +60,21 @@ class Trip
      */
     private $endDate;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="trip")
+     */
+    protected $tripSignups;
+
+    public function __construct()
+    {
+        $this->tripSignups = new ArrayCollection();
+    }
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,7 +94,7 @@ class Trip
     /**
      * Get date
      *
-     * @return date 
+     * @return date
      */
     public function getDate()
     {
@@ -101,7 +114,7 @@ class Trip
     /**
      * Get creationDate
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreationDate()
     {
@@ -121,7 +134,7 @@ class Trip
     /**
      * Get terrainType
      *
-     * @return string 
+     * @return string
      */
     public function getTerrainType()
     {
@@ -141,7 +154,7 @@ class Trip
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -161,7 +174,7 @@ class Trip
     /**
      * Get startDate
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getStartDate()
     {
@@ -181,10 +194,14 @@ class Trip
     /**
      * Get endDate
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getEndDate()
     {
         return $this->endDate;
+    }
+    
+    public function __toString() {
+        return substr($this->getDescription(),0,8);
     }
 }
