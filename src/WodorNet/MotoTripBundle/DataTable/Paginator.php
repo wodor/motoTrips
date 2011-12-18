@@ -3,6 +3,7 @@ namespace WodorNet\MotoTripBundle\DataTable;
 
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\Paginator as KnpPaginator;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
 
 class Paginator {
@@ -19,23 +20,20 @@ class Paginator {
     protected $request;
     
     /**
-     * @var callable
-     * method which converts array of objects  into dataTable friendly array of arrays with cols content
+     * @var string
+     * template for columns separated by <!--COLUMNSEPARATOR-->
      */
-    protected $rowFormatter;
+    protected $templateName;
     
-    public function __construct(KnpPaginator $paginator, Request $request) {
+    public function __construct(KnpPaginator $paginator, Request $request, TwigEngine $templating) {
         $this->paginator = $paginator;
         $this->request = $request;
-        $this->rowFormatter = 'iterator_to_array';
+        $this->templating = $templating;
     }
     
     
-    public function setRowFormatter($callable) {
-        $this->rowFormatter = $callable;
-    }
-    public function getRowFormatter() {
-        return $this->rowFormatter;
+    public function setItemTemplate($template) {
+        $this->templateName = $template;
     }
 
     public function paginate($data) {
@@ -57,8 +55,7 @@ class Paginator {
     
     private function formatRows($collection) {
         foreach($collection as $item) {
-            $m = $this->rowFormatter; 
-            $ret[] = $m($item);
+            $ret[] = explode('<!--COLUMNSEPARATOR-->',$this->templating->render($this->templateName, array('item' => $item)));
         }
         return $ret;
     }

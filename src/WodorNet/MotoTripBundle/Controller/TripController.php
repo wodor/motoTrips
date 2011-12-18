@@ -30,11 +30,9 @@ class TripController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
 
-        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator'); 
-        $paginator->setRowFormatter(function($trip) {
-                return array($trip->getDescription(), $trip->getStartDate()->format("Y-m-d"));       
-        });
+        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
         
+        $paginator->setItemTemplate('WodorNetMotoTripBundle:Trip:snippetItem.html.php');
         $output = $paginator->paginate($qb);
         
        return new Response(json_encode($output));
