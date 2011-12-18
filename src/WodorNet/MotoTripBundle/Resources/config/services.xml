@@ -3,18 +3,16 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <!--
+    
     <parameters>
-        <parameter key="wodor_net_moto_trip.example.class">WodorNet\MotoTripBundle\Example</parameter>
+        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator</parameter>
     </parameters>
 
     <services>
-        <service id="wodor_net_moto_trip.example" class="%wodor_net_moto_trip.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="wodor_net_moto_trip.datatable_paginator" class="%wodor_net_moto_trip.datatable_paginator.class%" scope="request">
+            <argument type="service" id="knp_paginator" />
+            <argument type="service" id="request" />
         </service>
     </services>
-    -->
+    
 </container>

@@ -4,3 +4,4 @@ vendor/
 .settings/
 app/cache/
 app/logs/
+/web/bundles

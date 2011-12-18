@@ -5,9 +5,18 @@
         <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" type="text/css" media="all" />
         <title>{% block title %}Demo Bundle{% endblock %}</title>
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css" type="text/css" media="all"/>
+    
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery-latest.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
+    
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/setup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    
+
+    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/jquery-ui.css') }}" type="text/css" media="all"/>
+    {# <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/demo_table.css') }}" type="text/css" media="all"/> #}
     </head>
     <body>
         <div id="symfony-wrapper">

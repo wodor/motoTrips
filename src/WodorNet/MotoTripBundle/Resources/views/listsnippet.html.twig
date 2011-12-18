@@ -1,0 +1,31 @@
+<div class="list_snippet">
+
+{% block list_content %}
+inherit this
+{% endblock %}
+
+</div>
+
+
+{% block list_javascript %}
+<script>
+
+$(document).ready(function() {
+	$('.dataTable').dataTable( {
+        "bProcessing": true,
+        "bServerSide": true,
+        "bJQueryUI"  : false,
+        //"sPaginationType": "full_numbers",
+        "iDisplayLength":5,
+        "sAjaxSource": Routing.generate('{% block source_route %}triplistsnippet{% endblock %}'),
+
+        "bLengthChange": false,
+        //"bPaginate": false,
+        "bFilter":false,
+        "bInfo":false,
+        "bProcessing":false,
+        "bSort":false,
+    } );
+} );
+</script>
+{% endblock %}
