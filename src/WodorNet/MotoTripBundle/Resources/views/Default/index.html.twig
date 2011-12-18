@@ -1,5 +1,9 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 
 {% block content %}
-Hello {{ name }}!
+
+  <div><a href="{{ path('trip') }}">Lista Wypadow</a></div>
+  <div><a href="{{ path('trip_new') }}">Dodaj wypad</a></div>
+  
+ 
 {% endblock %}

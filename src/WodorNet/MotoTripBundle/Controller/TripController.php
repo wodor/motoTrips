@@ -81,6 +81,8 @@ class TripController extends Controller
     public function createAction()
     {
         $entity  = new Trip();
+        
+        $entity->setCreationDate(new \DateTime());
         $request = $this->getRequest();
         $form    = $this->createForm(new TripType(), $entity);
         $form->bindRequest($request);
