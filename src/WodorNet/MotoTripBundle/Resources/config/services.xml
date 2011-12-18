@@ -12,6 +12,7 @@
         <service id="wodor_net_moto_trip.datatable_paginator" class="%wodor_net_moto_trip.datatable_paginator.class%" scope="request">
             <argument type="service" id="knp_paginator" />
             <argument type="service" id="request" />
+            <argument type="service" id="templating.engine.twig" />
         </service>
     </services>
     
