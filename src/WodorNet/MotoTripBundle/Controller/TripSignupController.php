@@ -39,9 +39,11 @@ class TripSignupController extends Controller
         if(!$trip instanceof Trip) {
             return $this->redirect($this->generateUrl('tripsignup_new'));
         }
-        
-  
-        
+
+        $entity->setTrip($trip);
+        $entity->setUser($user);
+        $entity->setSignupType('join');
+
         $request = $this->getRequest();
         $form    = $this->createForm(new TripSignupType(), $entity);
         
@@ -50,10 +52,7 @@ class TripSignupController extends Controller
         
             if ($form->isValid()) {
                 
-                $entity->setTrip($trip);
-                $entity->setUser($user);
-                $entity->setSignupType($user);
-                $entity->setSignupDate(new DateTime());
+                $entity->setSignupDate(new \DateTime());
                 
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($entity);

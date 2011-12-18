@@ -10,11 +10,11 @@ class TripType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('creationDate')
+            //->add('creationDate')
             ->add('terrainType')
             ->add('description')
-            ->add('startDate')
-            ->add('endDate')
+            ->add('startDate', null, array('widget' => 'single_text'))
+            ->add('endDate', null, array('widget' => 'single_text'))
         ;
     }
 

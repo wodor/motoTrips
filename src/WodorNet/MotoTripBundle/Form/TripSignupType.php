@@ -10,7 +10,7 @@ class TripSignupType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('signupDate')
+           // ->add('signupDate')
            // ->add('signupType')
            // ->add('trip')
           //  ->add('user')
