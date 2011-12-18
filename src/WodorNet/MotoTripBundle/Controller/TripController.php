@@ -2,6 +2,8 @@
 
 namespace WodorNet\MotoTripBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,6 +18,29 @@ use WodorNet\MotoTripBundle\Form\TripType;
  */
 class TripController extends Controller
 {
+    
+    /**
+     * List of latest trips
+     *
+     * @Route ("/upcomingTrips", name="upcomingTripsSnippet", options={"expose"=true}))
+     * @Template()
+     */
+    public function snippetListAction() {
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
+
+        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator'); 
+        $paginator->setRowFormatter(function($trip) {
+                return array($trip->getDescription(), $trip->getStartDate()->format("Y-m-d"));       
+        });
+        
+        $output = $paginator->paginate($qb);
+        
+       return new Response(json_encode($output));
+    }
+    
+
     /**
      * Lists all Trip entities.
      *
@@ -201,4 +226,6 @@ class TripController extends Controller
             ->getForm()
         ;
     }
+    
+    
 }

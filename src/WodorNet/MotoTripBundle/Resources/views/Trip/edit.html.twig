@@ -21,5 +21,13 @@
         </form>
     </li>
 </ul>
+<script>
+$(function() {
 
+	
+		$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
+    $( "#wodornet_mototripbundle_triptype_startDate" ).datepicker();
+    $( "#wodornet_mototripbundle_triptype_endDate" ).datepicker();
+});
+</script>
 {% endblock %}
