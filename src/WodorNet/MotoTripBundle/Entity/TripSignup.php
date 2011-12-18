@@ -3,6 +3,7 @@
 namespace WodorNet\MotoTripBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use WodorNet\MotoTripBundle\Entity\Trip;
 
 /**
  * WodorNet\MotoTripBundle\Entity\TripSignup
@@ -38,14 +39,16 @@ class TripSignup
     /**
      * @var object $trip
      *
-     * @ORM\Column(name="trip", type="object")
+     * @ORM\ManyToOne(targetEntity="Trip", inversedBy="tripSignups")
+     * @ORM\JoinColumn(name="trip", referencedColumnName="id")
      */
     private $trip;
 
     /**
      * @var object $user
      *
-     * @ORM\Column(name="user", type="object")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tripSignups")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
 
@@ -110,9 +113,9 @@ class TripSignup
     /**
      * Set trip
      *
-     * @param object $trip
+     * @param Trip $trip
      */
-    public function setTrip($trip)
+    public function setTrip(Trip $trip)
     {
         $this->trip = $trip;
     }
@@ -120,7 +123,7 @@ class TripSignup
     /**
      * Get trip
      *
-     * @return object 
+     * @return Trip 
      */
     public function getTrip()
     {

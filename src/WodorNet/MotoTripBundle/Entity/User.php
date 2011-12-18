@@ -1,8 +1,9 @@
 <?php
 namespace WodorNet\MotoTripBundle\Entity;
+
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -17,12 +18,22 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="user")
+     */
+    protected $tripSignups;
+    
+    
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->tripSignups = new ArrayCollection();
     }
     
+
+    public function __toString() {
+        return $this->username;
+    }
     
     
 }
