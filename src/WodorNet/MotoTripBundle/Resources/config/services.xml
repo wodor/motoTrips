@@ -3,7 +3,9 @@
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    
+
+
+
     <parameters>
         <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator</parameter>
     </parameters>
