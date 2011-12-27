@@ -1,3 +1,3 @@
 [submodule "src/Hudson/JQueryBundle"]
 	path = src/Hudson/JQueryBundle
-	url = git://github.com/dbykadorov/HudsonJQueryBundle.git
+	url = git://github.com/wodor/HudsonJQueryBundle.git
