@@ -24,6 +24,7 @@ class Trip
      */
     private $id;
 
+    private $dupa;
 
     /**
      * @var datetime $creationDate
