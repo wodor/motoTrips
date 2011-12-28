@@ -3,6 +3,8 @@
 namespace WodorNet\MotoTripBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use WodorNet\MotoTripBundle\Entity\Trip;
+
 
 /**
  * WodorNet\MotoTripBundle\Entity\RoadType
@@ -28,6 +30,10 @@ class RoadType
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Trip", mappedBy="roadTypes")
+     */
+    private $trips;
 
     /**
      * Get id
@@ -57,5 +63,9 @@ class RoadType
     public function getName()
     {
         return $this->name;
+    }
+
+    public function addTrip(Trip $trip) {
+        $this->trips[] = $trip;
     }
 }
