@@ -26,7 +26,8 @@ class TripController extends Controller
      * @Template()
      */
     public function snippetListAction() {
-        
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
 
@@ -86,6 +87,9 @@ class TripController extends Controller
     public function newAction()
     {
         $entity = new Trip();
+
+        $entity->setStartDate(new \DateTime());
+
         $form   = $this->createForm(new TripType(), $entity);
 
         return array(
