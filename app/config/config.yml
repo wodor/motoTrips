@@ -18,6 +18,9 @@ framework:
 
 # Twig Configuration
 twig:
+    form:
+        resources:
+            - 'HudsonJQueryBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 
