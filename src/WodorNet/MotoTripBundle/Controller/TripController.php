@@ -18,7 +18,6 @@ use WodorNet\MotoTripBundle\Form\TripType;
  */
 class TripController extends Controller
 {
-    
     /**
      * List of latest trips
      *
@@ -27,7 +26,8 @@ class TripController extends Controller
      */
     public function snippetListAction() {
 
-        /** @noinspection PhpUndefinedMethodInspection */
+
+
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
 
@@ -87,8 +87,13 @@ class TripController extends Controller
     public function newAction()
     {
         $entity = new Trip();
+        $nextHour = new \DateTime(date("Y-m-d H:00:00"));
+        $nextHour->modify('next hour');
+        $tomorrow = clone $nextHour;
+        $tomorrow->modify('next day');
 
-        $entity->setStartDate(new \DateTime());
+        $entity->setStartDate($nextHour);
+        $entity->setEndDate($tomorrow);
 
         $form   = $this->createForm(new TripType(), $entity);
 
@@ -138,7 +143,6 @@ class TripController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
-
         $entity = $em->getRepository('WodorNetMotoTripBundle:Trip')->find($id);
 
         if (!$entity) {

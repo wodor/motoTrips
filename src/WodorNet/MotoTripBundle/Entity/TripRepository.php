@@ -12,13 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class TripRepository extends EntityRepository
 {
-    
-    public function findUpcomingTrips($limit) {
+
+    public function findUpcomingTrips() {
 
         $qb = $this->createQueryBuilder('t');
-        $qb->setMaxResults($limit);
-        
-        
+
         $qb->add('where',  $qb->expr()->gt('t.startDate', ':now'));
         $qb->add('orderBy', "t.startDate asc");
         

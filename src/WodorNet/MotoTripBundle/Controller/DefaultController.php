@@ -16,7 +16,7 @@ class DefaultController extends Controller
     {
         return array('name' => 'dfupa');
     }
-    
+
     /**
      * @Route("/any")
      * @Template()
