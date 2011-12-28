@@ -20,7 +20,7 @@ class TripControllerTest extends WebTestCase
      * 
      * @dataProvider offsetCases
      */
-    public function testOffsetToPage($offset, $limit) {
+    public function tXestOffsetToPage($offset, $limit) {
         
         $page = \WodorNet\MotoTripBundle\Controller\TripController::offsetToPage($offset, $limit); 
         $expectedOffset = abs($page - 1) * $limit;

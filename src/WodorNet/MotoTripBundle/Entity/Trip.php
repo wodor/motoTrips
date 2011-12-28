@@ -24,8 +24,6 @@ class Trip
      */
     private $id;
 
-    private $dupa;
-
     /**
      * @var datetime $creationDate
      *
@@ -36,7 +34,7 @@ class Trip
     /**
      * @var string $terrainType
      *
-     * @ORM\Column(name="terrainType", type="string", length=255)
+     * @ORM\Column(name="terrainType", type="array")
      */
     private $terrainType;
 
@@ -81,27 +79,6 @@ class Trip
     {
         return $this->id;
     }
-
-    /**
-     * Set date
-     *
-     * @param date $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * Get date
-     *
-     * @return date
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
     /**
      * Set creationDate
      *
