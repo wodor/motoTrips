@@ -19,7 +19,7 @@ class TripType extends AbstractType
         );
 
         $builder
-            ->add('terrainType', 'choice',$terrainTypeOptions)
+           // ->add('terrainType', 'choice',$terrainTypeOptions)
             ->add('description')
             ->add('startDate','datepicker')
             ->add('endDate','datepicker')

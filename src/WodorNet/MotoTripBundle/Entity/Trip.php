@@ -2,6 +2,7 @@
 
 namespace WodorNet\MotoTripBundle\Entity;
 
+use WodorNet\MotoTripBundle\Entity\RoadType;
 use Doctrine\ORM\Query\AST\Subselect;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -31,12 +32,6 @@ class Trip
      */
     private $creationDate;
 
-    /**
-     * @var string $terrainType
-     *
-     * @ORM\Column(name="terrainType", type="array")
-     */
-    private $terrainType;
 
     /**
      * @var text $description
@@ -64,9 +59,20 @@ class Trip
      */
     protected $tripSignups;
 
+
+    /**
+     * @var string $terrainType
+     *
+     * @ORM\ManyToMany(targetEntity="RoadType", inversedBy="trips")
+     * @ORM\JoinTable(name="trips_roadtypes")
+     */
+    private $roadTypes;
+
+
     public function __construct()
     {
         $this->tripSignups = new ArrayCollection();
+        $this->roadTypes = new ArrayCollection();
     }
 
 
@@ -99,24 +105,10 @@ class Trip
         return $this->creationDate;
     }
 
-    /**
-     * Set terrainType
-     *
-     * @param string $terrainType
-     */
-    public function setTerrainType($terrainType)
-    {
-        $this->terrainType = $terrainType;
-    }
+    public function addRoadType(RoadType $roadType) {
 
-    /**
-     * Get terrainType
-     *
-     * @return string
-     */
-    public function getTerrainType()
-    {
-        return $this->terrainType;
+        $roadType->addTrip($this);
+        $this->roadTypes[] = $roadType;
     }
 
     /**

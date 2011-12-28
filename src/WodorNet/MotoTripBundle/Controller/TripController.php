@@ -121,6 +121,8 @@ class TripController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            $rt = $em->getRepository('WodorNetMotoTripBundle:RoadType')->find(1);
+            $entity->addRoadType($rt);
             $em->persist($entity);
             $em->flush();
 
