@@ -68,4 +68,8 @@ class RoadType
     public function addTrip(Trip $trip) {
         $this->trips[] = $trip;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
 }

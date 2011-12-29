@@ -174,4 +174,12 @@ class Trip
     public function __toString() {
         return substr($this->getDescription(),0,8);
     }
+
+    /**
+     * @return string
+     */
+    public function getRoadTypes()
+    {
+        return $this->roadTypes;
+    }
 }

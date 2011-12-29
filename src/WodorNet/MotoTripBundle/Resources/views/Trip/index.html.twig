@@ -8,7 +8,6 @@
         <tr>
             <th>Id</th>
             <th>Creationdate</th>
-            <th>Terraintype</th>
             <th>Description</th>
             <th>Startdate</th>
             <th>Enddate</th>
@@ -20,7 +19,6 @@
         <tr>
             <td><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{{ entity.terrainType }}</td>
             <td>{{ entity.description }}</td>
             <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif%}</td>

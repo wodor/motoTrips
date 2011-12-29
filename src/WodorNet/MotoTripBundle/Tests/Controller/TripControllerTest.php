@@ -6,28 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TripControllerTest extends WebTestCase
 {
-    
-    public function offsetCases() {
-        $cases = array();
-        $cases[] = array(2,2);
-        $cases[] = array(20,2);
-        $cases[] = array(0,20);
-        $cases[] = array(40,20);
-        return $cases;
-    }
-    
-    /**
-     * 
-     * @dataProvider offsetCases
-     */
-    public function tXestOffsetToPage($offset, $limit) {
-        
-        $page = \WodorNet\MotoTripBundle\Controller\TripController::offsetToPage($offset, $limit); 
-        $expectedOffset = abs($page - 1) * $limit;
-        $this->assertEquals($offset,$expectedOffset, "page num was $page");
-    }
-    
-    
     /*
     public function testCompleteScenario()
     {
