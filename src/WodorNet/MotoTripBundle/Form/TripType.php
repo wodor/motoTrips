@@ -9,20 +9,12 @@ class TripType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
 
-        $terrainTypeOptions['expanded'] = true;
-        $terrainTypeOptions['multiple'] = true;
-        $terrainTypeOptions['choices'] = array(
-            1 => 'tor crossowy',
-            2 => 'drogi nieutwardzone',
-            3 => 'asfalt',
-            4 => 'tor asfaltowy'
-        );
-
         $builder
            // ->add('terrainType', 'choice',$terrainTypeOptions)
             ->add('description')
             ->add('startDate','datepicker')
             ->add('endDate','datepicker')
+            ->add('roadTypes', null, array('expanded'=>true))
         ;
     }
 
