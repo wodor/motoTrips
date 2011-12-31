@@ -1,0 +1,18 @@
+body {
+    background: url("../images/bodybackground.png");
+    background-position: top center;
+}
+
+div.logo {
+
+
+}
+
+div#find_trip_box {
+
+}
+
+.Xcontainer_16 div {
+    border: solid 1px red;
+    border-collapse: collapse;
+}

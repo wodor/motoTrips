@@ -2,33 +2,35 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/page.css') }}" type="text/css" media="all" />
+
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/reset.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/text.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/mototrips.css') }}">
+
         <title>{% block title %}Demo Bundle{% endblock %}</title>
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
         {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
-    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
-    
+        <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
-    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-    
 
-    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/jquery-ui.css') }}" type="text/css" media="all"/>
+        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/jquery-ui.css') }}" type="text/css" media="all"/>
     {# <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/demo_table.css') }}" type="text/css" media="all"/> #}
     </head>
     <body>
-        <div id="symfony-wrapper">
-            <div id="symfony-header">
-                <a href="{{ path('_welcome') }}">
-                    <img src="{{ asset('bundles/acmedemo/images/logo.gif') }}" alt="Symfony">
+        <div class="container_16">
+            <div class="logo grid_7 push_1 ">
+                <a href="{{ path('default') }}">
+                    <img src="{{ asset('bundles/wodornetmototrip/images/logo.png') }}" alt="Logo Mototrips">
                 </a>
-                <form id="symfony-search" method="GET" action="http://symfony.com/search">
-                    <label for="symfony-search-field"><span>Search on Symfony Website</span></label>
-                    <input name="q" id="symfony-search-field" type="search" placeholder="Search on Symfony website" class="medium_txt">
-                    <input type="submit" class="symfony-button-grey" value="OK" />
-                </form>
             </div>
+
+            <div class="clear"></div>
+
 
             {% if app.session.flash('notice') %}
                 <div class="flash-message">
@@ -36,26 +38,13 @@
                 </div>
             {% endif %}
 
-            {% block content_header %}
-                <ul id="menu">
-                    {% block content_header_more %}
-                        <li><a href="{{ path('default') }}">Główna</a></li>
-                        <li><a href="{{ path('trip') }}">Lista Wypadow</a></li>
-                    {% endblock %}
-                </ul>
-
-                <div style="clear: both"></div>
-            {% endblock %}
+            <!--a href="{{ path('trip') }}">Lista Wypadow</a-->
 
             <div class="symfony-content">
                 {% block content %}
                 {% endblock %}
             </div>
 
-            {% if code is defined %}
-                <h2>Code behind this page</h2>
-                <div class="symfony-content">{{ code|raw }}</div>
-            {% endif %}
         </div>
     </body>
 </html>
