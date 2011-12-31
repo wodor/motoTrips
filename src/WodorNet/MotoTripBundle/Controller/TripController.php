@@ -50,8 +50,8 @@ class TripController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-       // $entities = $em->getRepository('WodorNetMotoTripBundle:Trip')->findAll();
-        $entities = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findByTrip(1);
+        $entities = $em->getRepository('WodorNetMotoTripBundle:Trip')->findAll();
+
 
         return array('entities' => $entities);
     }
