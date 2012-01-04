@@ -21,6 +21,9 @@ $loader->registerNamespaces(array(
     'Assetic'          => __DIR__.'/../vendor/assetic/src',
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
     'Hudson' => __DIR__ . '/../src',
+    'Buzz'     => __DIR__.'/../vendor/buzz/lib',
+    'Geocoder' => __DIR__.'/../vendor/Geocoder/src',
+    'Ivory'    => __DIR__.'/../vendor/bundles',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',

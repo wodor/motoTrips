@@ -98,9 +98,11 @@ class TripController extends Controller
 
         $form   = $this->createForm(new TripType(), $entity);
 
+        $fv = $form->createView();
+
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form'   => $fv
         );
     }
 

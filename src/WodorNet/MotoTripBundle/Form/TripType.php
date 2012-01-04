@@ -14,7 +14,7 @@ class TripType extends AbstractType
             ->add('description')
             ->add('startDate','datepicker')
             ->add('endDate','datepicker')
-            ->add('roadTypes', null, array('expanded'=>true))
+            ->add('roadTypes', null, array('expanded'=>true, 'csrf_protection'=>false))
         ;
     }
 

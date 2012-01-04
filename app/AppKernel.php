@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Hudson\JQueryBundle\HudsonJQueryBundle(),
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new WodorNet\MotoTripBundle\WodorNetMotoTripBundle(),
         );
 
