@@ -5,6 +5,8 @@
     <p>Twój motocykl się kurzy ? Pojechałbyś, ale nie masz z kim ?</p>
     <p>Znajdź wypad w swojej okolicy !</p>
     {% include 'WodorNetMotoTripBundle:Trip:upcomingSnippet.html.twig' %}
+    {% render "WodorNetMotoTripBundle:Default:allTripsMap" with {'max': 3} %}
+
     <div><a href="{{ path('trip') }}">Zobacz wszystkie wypady</a></div>
 </div>
 <div id="add_trip_box" class=" grid_8 ">

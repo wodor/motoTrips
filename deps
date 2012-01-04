@@ -60,3 +60,13 @@
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1
+
+[buzz]
+    git=http://github.com/kriswallsmith/Buzz.git
+
+[geocoder]
+    git=http://github.com/willdurand/Geocoder.git
+
+[IvoryGoogleMapBundle]
+    git=http://github.com/egeloen/IvoryGoogleMapBundle.git
+    target=/bundles/Ivory/GoogleMapBundle

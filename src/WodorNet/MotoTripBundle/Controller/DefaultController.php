@@ -18,6 +18,16 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/map", name="all_trips_map")
+     * @Template()
+     */
+    public function allTripsMapAction(){
+        $map = $this->get('ivory_google_map.map');
+
+        return array('map'=>$map);
+    }
+
+    /**
      * @Route("/any")
      * @Template()
      */
@@ -25,4 +35,6 @@ class DefaultController extends Controller
     {
         return array('name' => $name);
     }
+
+
 }
