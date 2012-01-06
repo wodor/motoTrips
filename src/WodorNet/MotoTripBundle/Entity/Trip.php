@@ -69,6 +69,20 @@ class Trip
     private $roadTypes;
 
 
+    /**
+     * @var float $lat
+     * @ORM\Column(type="decimal", precision=13, scale=10)
+     */
+    private $lat;
+
+    /**
+     * @var float $lng
+     * @ORM\Column(type="decimal", precision=13, scale=10)
+     */
+    private $lng;
+
+
+
     public function __construct()
     {
         $this->tripSignups = new ArrayCollection();
@@ -182,4 +196,49 @@ class Trip
     {
         return $this->roadTypes;
     }
+
+    /**
+     * @param float $lng
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @param float $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    public function setLocation($loc){
+        $this->setLat($loc['lat']);
+        $this->setLng($loc['lng']);
+    }
+
+    public function getLocation() {
+        return array(
+            'lat' => $this->getLat(),
+            'lng' => $this->getLng()
+        );
+    }
+
 }

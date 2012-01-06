@@ -68,5 +68,5 @@
     git=http://github.com/willdurand/Geocoder.git
 
 [IvoryGoogleMapBundle]
-    git=http://github.com/egeloen/IvoryGoogleMapBundle.git
+    git=http://github.com/wodor/IvoryGoogleMapBundle.git
     target=/bundles/Ivory/GoogleMapBundle
