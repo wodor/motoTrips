@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
+    - { resource: maps.yml}
 
 framework:
     #esi:             ~
@@ -21,6 +22,7 @@ twig:
     form:
         resources:
             - 'HudsonJQueryBundle:Form:fields.html.twig'
+            - 'WodorNetMotoTripBundle:Form:fields.html.twig'
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
 

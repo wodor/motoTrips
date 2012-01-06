@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WodorNet\MotoTripBundle\Entity\Trip;
 use WodorNet\MotoTripBundle\Form\TripType;
 
+
 /**
  * Trip controller.
  *
@@ -25,8 +26,6 @@ class TripController extends Controller
      * @Template()
      */
     public function snippetListAction() {
-
-
 
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
@@ -98,11 +97,9 @@ class TripController extends Controller
 
         $form   = $this->createForm(new TripType(), $entity);
 
-        $fv = $form->createView();
-
         return array(
             'entity' => $entity,
-            'form'   => $fv
+            'form'   => $form->createView(),
         );
     }
 

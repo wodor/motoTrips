@@ -16,6 +16,15 @@
             <argument type="service" id="request" />
             <argument type="service" id="templating.engine.twig" />
         </service>
+
+        <service id="wodor_net_moto_trip.type.mapPoint" class="WodorNet\MotoTripBundle\Form\MapPointType" scope="prototype">
+            <argument type="service" id="ivory_google_map.map" />
+            <argument type="service" id="ivory_google_map.event" />
+            <argument type="service" id="ivory_google_map.marker" />
+            <tag name="form.type" alias="mapPoint" />
+        </service>
+
     </services>
+
     
 </container>

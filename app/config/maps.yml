@@ -1,0 +1,10 @@
+ivory_google_map:
+    map:
+        map_options:
+            zoomControl: true;
+            mapTypeControl: true;
+        language: pl
+
+    event:
+        # Prefix used for the generation of the event javascript variable
+        prefix_javascript_variable: "event_"

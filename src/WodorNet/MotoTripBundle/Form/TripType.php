@@ -15,6 +15,7 @@ class TripType extends AbstractType
             ->add('startDate','datepicker')
             ->add('endDate','datepicker')
             ->add('roadTypes', null, array('expanded'=>true, 'csrf_protection'=>false))
+            ->add('location','mapPoint')
         ;
     }
 
@@ -22,4 +23,5 @@ class TripType extends AbstractType
     {
         return 'wodornet_mototripbundle_triptype';
     }
+
 }

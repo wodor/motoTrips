@@ -1,0 +1,22 @@
+{% block mapPoint_widget %}
+{% spaceless %}
+<div {{ block('widget_container_attributes') }}>
+
+<script type="text/javascript">
+    setTripMarker = function(event){
+        marker_trip.setPosition(event.latLng); marker_trip.setOptions({visible: true})
+        $('#{{form.lat.get('id')}}').val(event.latLng.lat());
+        $('#{{form.lng.get('id')}}').val(event.latLng.lng());
+    }
+</script>
+
+{{ google_map_container(map) }}
+{{ google_map_js(map) }}
+{{ google_map_css(map) }}
+
+{{ form_widget(form.lat) }}
+{{ form_widget(form.lng) }}
+
+</div>
+{% endspaceless %}
+{% endblock mapPoint_widget %}
