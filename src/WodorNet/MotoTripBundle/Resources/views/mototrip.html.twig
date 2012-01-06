@@ -9,11 +9,14 @@
         <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
         <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/mototrips.css') }}">
 
+        <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
         <title>{% block title %}Demo Bundle{% endblock %}</title>
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
         {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
         <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/mapevents.js') }}"></script>
         <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 

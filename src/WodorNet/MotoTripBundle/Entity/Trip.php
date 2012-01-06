@@ -34,6 +34,13 @@ class Trip
 
 
     /**
+     * @var text $title
+     *
+     * @ORM\Column(type="string")
+     */
+    private $title;
+
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
@@ -239,6 +246,22 @@ class Trip
             'lat' => $this->getLat(),
             'lng' => $this->getLng()
         );
+    }
+
+    /**
+     * @param \WodorNet\MotoTripBundle\Entity\text $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return \WodorNet\MotoTripBundle\Entity\text
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
 }
