@@ -3,6 +3,11 @@ body {
     background-position: top center;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lobster', cursive;
+    font-weight: 700;
+}
+
 div.logo {
 
 
@@ -16,3 +21,4 @@ div#find_trip_box {
     border: solid 1px red;
     border-collapse: collapse;
 }
+
