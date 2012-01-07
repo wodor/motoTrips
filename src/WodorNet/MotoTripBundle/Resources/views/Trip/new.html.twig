@@ -1,5 +1,5 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
-{% block content %}<h1>Trip creation</h1>
+{% block content %}<h1>{% trans %}Add Trip{% endtrans %}</h1>
 
 <form action="{{ path('trip_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
