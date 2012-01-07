@@ -1,15 +1,21 @@
 body {
     background: url("../images/bodybackground.png");
     background-position: top center;
+    background-repeat:repeat-x;
+    background-color: #dbcbbe;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', cursive;
     font-weight: 700;
+    text-shadow: 4px 4px 4px #888;
+}
+
+h1 {
+    font-size: 3em;
 }
 
 div.logo {
-
 
 }
 
@@ -22,3 +28,23 @@ div#find_trip_box {
     border-collapse: collapse;
 }
 
+textarea.big{
+    resize: vertical;
+    width: 100%;
+    height: 200px;
+}
+
+input.title {
+    width: 100%;
+    font-size:large;
+}
+
+label {
+    font-family: 'Lobster', cursive;
+    font-weight: 100;
+    font-size: 1.2em;
+}
+
+div.normalFont label {
+    font-family: "Arial", sans-serif;
+}

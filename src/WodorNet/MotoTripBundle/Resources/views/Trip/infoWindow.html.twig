@@ -1,0 +1,3 @@
+<h6>{{trip.title}}</h6>
+<p>{{trip.description|crop(40) }}</p>
+<a style="float: right;" href="{{ path('trip_show', { 'id': trip.id }) }}">{%trans%}Details{%endtrans%}</a>

@@ -8,3 +8,63 @@ ivory_google_map:
     event:
         # Prefix used for the generation of the event javascript variable
         prefix_javascript_variable: "event_"
+
+
+
+ivory_google_map:
+    map:
+        # Prefix used for the generation of the map javascript variable
+        prefix_javascript_variable: "map_"
+
+        # HTML container ID used for the map container
+        html_container: "map_canvas"
+
+        # If this flag is enabled, the map will autozoom on the overlays added
+        auto_zoom: false
+
+        # Center coordinate of the map
+        # If the autozoom flag is enabled, the center is not used
+        center:
+            longitude: 21
+            latitude: 49
+            no_wrap: true
+
+        # Zoom of the map
+        # If the autozoom flag is enabled, the zoom is not used
+        zoom: 4
+
+        # Bound of the map
+        # If the auto zoom flag is not enabled, the bound is not used
+        # If the bound extends overlays, coordinates of the overlays extended are used instead of these coordinates
+        # By default, there is no bound
+        bound:
+            south_west:
+                latitude: -2.1
+                longitude: -3.9
+                no_wrap: true
+            north_east:
+                latitude: 2.6
+                longitude: 1.4
+                no_wrap: true
+
+        # Default map type
+        # Available map type : hybrid, roadmap, satellite, terrain
+        type: "hybrid"
+
+        # Map width
+        width: "450"
+
+        # Map height
+        height: "300px"
+
+        # Custom map options
+        # By default, there is no map options
+        map_options:
+            disableDefaultUI: true
+            disableDoubleClickZoom: true
+
+        # Custom stylesheet options
+        # By default, there is no stylesheet options except width & height
+        stylesheet_options:
+            border: "1px solid #000"
+            background-color: "#fff"

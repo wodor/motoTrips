@@ -19,6 +19,20 @@ use WodorNet\MotoTripBundle\Form\TripType;
  */
 class TripController extends Controller
 {
+
+
+    /**
+     * List of latest trips
+     *
+     * @Route ("/{trip}/infoWindow", name="tripInfoWindow", options={"expose"=true}))
+     * @Template()
+     */
+    public function infoWindowAction($trip) {
+
+        return array('trip'=>$trip);
+    }
+
+
     /**
      * List of latest trips
      *

@@ -31,9 +31,16 @@ class RoadType
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $mapIcon;
+
+
+    /**
      * @ORM\ManyToMany(targetEntity="Trip", mappedBy="roadTypes")
      */
     private $trips;
+
 
     /**
      * Get id
@@ -71,5 +78,15 @@ class RoadType
 
     public function __toString() {
         return $this->getName();
+    }
+
+    public function setMapIcon($mapIcon)
+    {
+        $this->mapIcon = $mapIcon;
+    }
+
+    public function getMapIcon()
+    {
+        return $this->mapIcon;
     }
 }

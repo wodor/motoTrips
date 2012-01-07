@@ -20,6 +20,8 @@ class DefaultController extends Controller
         return array('name' => 'dfupa');
     }
 
+
+
     /**
      * @Route("/map", name="all_trips_map")
      * @Template()
@@ -47,35 +49,33 @@ class DefaultController extends Controller
             $marker = $this->get('ivory_google_map.marker');
             $marker->setPosition($trip->getLat(),$trip->getLng());
 
-
             $infoWindow = $this->get('ivory_google_map.info_window');
             $infoWindow->setOpenEvent(MouseEvent::CLICK);
-            $infoWindow->setContent(htmlspecialchars($trip->getDescription()));
+            $infoWindow->setAutoClose(true);
+
+            $infoWindowContent = $this->forward('WodorNetMotoTripBundle:Trip:infoWindow', array(
+                   'trip'  => $trip,
+            ));
+
+            $infoWindow->setContent($infoWindowContent->getContent());
 
             /**
-               * @var $event \Ivory\GoogleMapBundle\Model\Events\Event
-               */
+            * @var $event \Ivory\GoogleMapBundle\Model\Events\Event
+            */
             $event = $this->get('ivory_google_map.event');
 
             $event->setInstance($marker->getJavascriptVariable());
             $event->setEventName('click');
-            $event->setHandle('function() {
-            '.$infoWindow->getJavascriptVariable().'.open(tripsmap, '.$marker->getJavascriptVariable().');
-            if(openedInfoWindow !== undefined) {
-                openedInfoWindow.close();
-            }
-            openedInfoWindow = '.$infoWindow->getJavascriptVariable().';
-            }');
 
-            $marker->setOption('title',$trip->getDescription());
+            $marker->setOption('title',$trip->getTitle());
             $marker->setInfoWindow($infoWindow);
             $map->addMarker($marker);
-            $map->getEventManager()->addDomEvent($event);
 
         };
 
         return array('map'=>$map);
     }
+
 
     /**
      * @Route("/any")

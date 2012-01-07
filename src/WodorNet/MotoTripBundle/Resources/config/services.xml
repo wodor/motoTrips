@@ -24,6 +24,12 @@
             <tag name="form.type" alias="mapPoint" />
         </service>
 
+        <service  id="twig.extension.wodor_net.moto_trip" class="WodorNet\MotoTripBundle\Twig\Extension\MotoTripExtension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="twig.loader" />
+        </service>
+
+
     </services>
 
     

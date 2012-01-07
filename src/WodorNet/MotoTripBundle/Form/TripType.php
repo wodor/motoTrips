@@ -8,13 +8,12 @@ class TripType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
-
         $builder
-           // ->add('terrainType', 'choice',$terrainTypeOptions)
-            ->add('description')
+            ->add('title','text',  array('attr'=>array('class'=>'title')))
+            ->add('description','textarea', array('attr'=>array('class'=>'big')))
             ->add('startDate','datepicker')
             ->add('endDate','datepicker')
-            ->add('roadTypes', null, array('expanded'=>true, 'csrf_protection'=>false))
+            ->add('roadTypes', null, array('expanded'=>true, 'csrf_protection'=>false, 'attr'=>array('class'=>'normalFont')))
             ->add('location','mapPoint')
         ;
     }
