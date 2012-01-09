@@ -11,6 +11,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WodorNet\MotoTripBundle\Entity\Trip;
 use WodorNet\MotoTripBundle\Form\TripType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use JMS\SecurityExtraBundle\Annotation\SecureParam;
+
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 
 /**
  * Trip controller.
@@ -27,9 +36,10 @@ class TripController extends Controller
      * @Route ("/{trip}/infoWindow", name="tripInfoWindow", options={"expose"=true}))
      * @Template()
      */
-    public function infoWindowAction($trip) {
+    public function infoWindowAction($trip)
+    {
 
-        return array('trip'=>$trip);
+        return array('trip' => $trip);
     }
 
 
@@ -39,19 +49,20 @@ class TripController extends Controller
      * @Route ("/upcomingTrips", name="upcomingTripsSnippet", options={"expose"=true}))
      * @Template()
      */
-    public function snippetListAction() {
+    public function snippetListAction()
+    {
 
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
 
         $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
-        
+
         $paginator->setItemTemplate('WodorNetMotoTripBundle:Trip:snippetItem.html.php');
         $output = $paginator->paginate($qb);
-        
-       return new Response(json_encode($output));
+
+        return new Response(json_encode($output));
     }
-    
+
 
     /**
      * Lists all Trip entities.
@@ -88,8 +99,8 @@ class TripController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -97,6 +108,8 @@ class TripController extends Controller
      *
      * @Route("/new", name="trip_new")
      * @Template()
+     * @Secure(roles="ROLE_USER")
+     *
      */
     public function newAction()
     {
@@ -109,12 +122,40 @@ class TripController extends Controller
         $entity->setStartDate($nextHour);
         $entity->setEndDate($tomorrow);
 
-        $form   = $this->createForm(new TripType(), $entity);
+        $form = $this->createForm(new TripType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
+    }
+
+    /**
+     * gives Trip entity to the admin
+     *
+     * @Route("/{id}/give", name="trip_give")
+     * @Template()
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     * @Secure("ROLE_ADMIN")
+     *
+     */
+    public function giveAction(Trip $trip)
+    {
+
+        $aclProvider = $this->get('security.acl.provider');
+        $objectIdentity = ObjectIdentity::fromDomainObject($trip);
+        $acl = $aclProvider->createAcl($objectIdentity);
+
+        // retrieving the security identity of the currently logged-in user
+        $securityContext = $this->get('security.context');
+        $user = $securityContext->getToken()->getUser();
+        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+        // grant owner access
+        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+        $aclProvider->updateAcl($acl);
+
+        return new Response("ok");
     }
 
     /**
@@ -123,30 +164,45 @@ class TripController extends Controller
      * @Route("/create", name="trip_create")
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:new.html.twig")
+     * @Secure("ROLE_USER")
      */
     public function createAction()
     {
-        $entity  = new Trip();
-        
-        $entity->setCreationDate(new \DateTime());
+        $trip = new Trip();
+
+        $trip->setCreationDate(new \DateTime());
         $request = $this->getRequest();
-        $form    = $this->createForm(new TripType(), $entity);
+        $form = $this->createForm(new TripType(), $trip);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $rt = $em->getRepository('WodorNetMotoTripBundle:RoadType')->find(1);
-            $entity->addRoadType($rt);
-            $em->persist($entity);
+            $trip->addRoadType($rt);
+            $em->persist($trip);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trip_show', array('id' => $entity->getId())));
-            
+            // creating the ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($trip);
+            $acl = $aclProvider->createAcl($objectIdentity);
+
+            // retrieving the security identity of the currently logged-in user
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+            // grant owner access
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+            $aclProvider->updateAcl($acl);
+
+            return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
+
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'entity' => $trip,
+            'form' => $form->createView()
         );
     }
 
@@ -155,22 +211,19 @@ class TripController extends Controller
      *
      * @Route("/{id}/edit", name="trip_edit")
      * @Template()
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
+     *
      */
-    public function editAction($id)
+    public function editAction(Trip $trip)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $entity = $em->getRepository('WodorNetMotoTripBundle:Trip')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trip entity.');
-        }
-
-        $editForm = $this->createForm(new TripType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new TripType(), $trip);
+        $deleteForm = $this->createDeleteForm($trip->getId());
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $trip,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -181,34 +234,31 @@ class TripController extends Controller
      * @Route("/{id}/update", name="trip_update")
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
+     *
      */
-    public function updateAction($id)
+    public function updateAction(Trip $trip)
     {
-        $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('WodorNetMotoTripBundle:Trip')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trip entity.');
-        }
-
-        $editForm   = $this->createForm(new TripType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createForm(new TripType(), $trip);
+        $deleteForm = $this->createDeleteForm($trip->getId());
 
         $request = $this->getRequest();
 
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($trip);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trip_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('trip_edit', array('id' => $trip->getId())));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $trip,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -218,6 +268,7 @@ class TripController extends Controller
      *
      * @Route("/{id}/delete", name="trip_delete")
      * @Method("post")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
      */
     public function deleteAction($id)
     {
@@ -245,9 +296,8 @@ class TripController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
-    
-    
+
+
 }

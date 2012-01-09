@@ -10,6 +10,7 @@ use WodorNet\MotoTripBundle\Entity\TripSignup;
 use WodorNet\MotoTripBundle\Entity\Trip;
 use WodorNet\MotoTripBundle\Form\TripSignupType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * TripSignup controller.
  *
@@ -17,26 +18,27 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class TripSignupController extends Controller
 {
-    
-    
+
+
     /**
-    * Creates a new TripSignup entity.
-    *
-    * @Route("/signup/{tripId}", name="signup")
-    * @Template("WodorNetMotoTripBundle:TripSignup:usersignup.html.twig")
-    */
+     * Creates a new TripSignup entity.
+     *
+     * @Route("/signup/{tripId}", name="signup")
+     * @Template("WodorNetMotoTripBundle:TripSignup:usersignup.html.twig")
+     */
     public function signupAction($tripId)
     {
-    //* @MXXethod("post")
+
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
             throw new AccessDeniedException();
         }
-        $entity = new TripSignup();    
-    
+
+        $entity = new TripSignup();
+
         $user = $this->get('security.context')->getToken()->getUser();
         $trip = current($this->getDoctrine()->getEntitymanager()->getRepository('WodorNetMotoTripBundle:Trip')->findById($tripId));
-    
-        if(!$trip instanceof Trip) {
+
+        if (!$trip instanceof Trip) {
             return $this->redirect($this->generateUrl('tripsignup_new'));
         }
 
@@ -45,31 +47,31 @@ class TripSignupController extends Controller
         $entity->setSignupType('join');
 
         $request = $this->getRequest();
-        $form    = $this->createForm(new TripSignupType(), $entity);
-        
-        if($request->getMethod() === "POST") {
+        $form = $this->createForm(new TripSignupType(), $entity);
+
+        if ($request->getMethod() === "POST") {
             $form->bindRequest($request);
-        
+
             if ($form->isValid()) {
-                
+
                 $entity->setSignupDate(new \DateTime());
-                
+
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($entity);
                 $em->flush();
-        
+
                 return $this->redirect($this->generateUrl('tripsignup_show', array('id' => $entity->getId())));
-        
+
             }
         }
-    
+
         return array(
-                'entity' => $entity,
-                'form'   => $form->createView()
+            'entity' => $entity,
+            'form' => $form->createView()
         );
     }
-    
-    
+
+
     /**
      * Lists all TripSignup entities.
      *
@@ -104,8 +106,8 @@ class TripSignupController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -117,16 +119,14 @@ class TripSignupController extends Controller
     public function newAction()
     {
         $entity = new TripSignup();
-        $form   = $this->createForm(new TripSignupType(), $entity);
+        $form = $this->createForm(new TripSignupType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
-    
-    
-  
+
 
     /**
      * Creates a new TripSignup entity.
@@ -137,9 +137,9 @@ class TripSignupController extends Controller
      */
     public function createAction()
     {
-        $entity  = new TripSignup();
+        $entity = new TripSignup();
         $request = $this->getRequest();
-        $form    = $this->createForm(new TripSignupType(), $entity);
+        $form = $this->createForm(new TripSignupType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -148,12 +148,12 @@ class TripSignupController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('tripsignup_show', array('id' => $entity->getId())));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -177,8 +177,8 @@ class TripSignupController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -200,7 +200,7 @@ class TripSignupController extends Controller
             throw $this->createNotFoundException('Unable to find TripSignup entity.');
         }
 
-        $editForm   = $this->createForm(new TripSignupType(), $entity);
+        $editForm = $this->createForm(new TripSignupType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -215,8 +215,8 @@ class TripSignupController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -253,7 +253,6 @@ class TripSignupController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

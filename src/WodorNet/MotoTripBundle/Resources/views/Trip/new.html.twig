@@ -4,7 +4,7 @@
 <form action="{{ path('trip_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Create</button>
+        <button type="submit">{%trans%}Create{%endtrans%}</button>
     </p>
 </form>
 
@@ -18,3 +18,4 @@
 
 
 {% endblock %}
+
