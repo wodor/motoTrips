@@ -15,6 +15,9 @@ security:
 #           users:
 #               user:  { password: userpass, roles: [ 'ROLE_USER' ] }
 #               admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+    acl:
+        connection: default
+
 
     firewalls:
         main:

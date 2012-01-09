@@ -1,13 +1,4 @@
-ivory_google_map:
-    map:
-        map_options:
-            zoomControl: true;
-            mapTypeControl: true;
-        language: pl
 
-    event:
-        # Prefix used for the generation of the event javascript variable
-        prefix_javascript_variable: "event_"
 
 
 
@@ -24,32 +15,28 @@ ivory_google_map:
 
         # Center coordinate of the map
         # If the autozoom flag is enabled, the center is not used
-        center:
-            longitude: 21
-            latitude: 49
-            no_wrap: true
 
         # Zoom of the map
         # If the autozoom flag is enabled, the zoom is not used
-        zoom: 4
+        zoom: 2
 
         # Bound of the map
         # If the auto zoom flag is not enabled, the bound is not used
         # If the bound extends overlays, coordinates of the overlays extended are used instead of these coordinates
         # By default, there is no bound
-        bound:
-            south_west:
-                latitude: -2.1
-                longitude: -3.9
-                no_wrap: true
-            north_east:
-                latitude: 2.6
-                longitude: 1.4
-                no_wrap: true
+#        bound:
+#            south_west:
+#                latitude: -2.1
+#                longitude: -3.9
+#                no_wrap: true
+#            north_east:
+#                latitude: 2.6
+#                longitude: 1.4
+#                no_wrap: true
 
         # Default map type
         # Available map type : hybrid, roadmap, satellite, terrain
-        type: "hybrid"
+        type: "terrain"
 
         # Map width
         width: "450"
@@ -60,11 +47,19 @@ ivory_google_map:
         # Custom map options
         # By default, there is no map options
         map_options:
-            disableDefaultUI: true
-            disableDoubleClickZoom: true
+         #   disableDefaultUI: true
+         #   disableDoubleClickZoom: true
+            zoomControl: true;
+            mapTypeControl: true;
 
-        # Custom stylesheet options
+        language: pl
+
+       # Custom stylesheet options
         # By default, there is no stylesheet options except width & height
         stylesheet_options:
-            border: "1px solid #000"
-            background-color: "#fff"
+            background-color: "#dbcbbe"
+
+
+    event:
+        # Prefix used for the generation of the event javascript variable
+        prefix_javascript_variable: "event_"
