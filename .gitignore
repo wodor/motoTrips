@@ -7,3 +7,4 @@ app/cache/
 app/logs/
 /web/bundles
 .htaccess
+app/config/parameters.ini
