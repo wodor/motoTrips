@@ -20,7 +20,7 @@
 <div>{{ trip.description }}</div>
 
 
-<a href="{{ path('signup',{ 'tripId': trip.id }) }}">{% trans %}Join this trip{% endtrans %}</a>
+<a href="{{ path('signup',{ 'id': trip.id }) }}">{% trans %}Join this trip{% endtrans %}</a>
 
 {% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
 <a href="{{ path('trip_edit', { 'id': trip.id }) }}">{% trans %}Edit{% endtrans %}</a>

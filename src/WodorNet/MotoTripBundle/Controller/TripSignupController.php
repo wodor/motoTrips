@@ -11,6 +11,10 @@ use WodorNet\MotoTripBundle\Entity\Trip;
 use WodorNet\MotoTripBundle\Form\TripSignupType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 /**
  * TripSignup controller.
  *
@@ -23,50 +27,42 @@ class TripSignupController extends Controller
     /**
      * Creates a new TripSignup entity.
      *
-     * @Route("/signup/{tripId}", name="signup")
+     * @Route("/signup/{id}", name="signup")
      * @Template("WodorNetMotoTripBundle:TripSignup:usersignup.html.twig")
+     * @Secure("ROLE_USER")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
-    public function signupAction($tripId)
+    public function signupAction(Trip $trip)
     {
-
-        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException();
-        }
-
-        $entity = new TripSignup();
+        $signup = new TripSignup();
 
         $user = $this->get('security.context')->getToken()->getUser();
-        $trip = current($this->getDoctrine()->getEntitymanager()->getRepository('WodorNetMotoTripBundle:Trip')->findById($tripId));
 
-        if (!$trip instanceof Trip) {
-            return $this->redirect($this->generateUrl('tripsignup_new'));
-        }
-
-        $entity->setTrip($trip);
-        $entity->setUser($user);
-        $entity->setSignupType('join');
+        $signup->setTrip($trip);
+        $signup->setUser($user);
+        $signup->setSignupType('join');
 
         $request = $this->getRequest();
-        $form = $this->createForm(new TripSignupType(), $entity);
+        $form = $this->createForm(new TripSignupType(), $signup);
 
         if ($request->getMethod() === "POST") {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
 
-                $entity->setSignupDate(new \DateTime());
+                $signup->setSignupDate(new \DateTime());
 
                 $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($entity);
+                $em->persist($signup);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('tripsignup_show', array('id' => $entity->getId())));
+                return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
 
             }
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $signup,
             'form' => $form->createView()
         );
     }
@@ -127,7 +123,6 @@ class TripSignupController extends Controller
         );
     }
 
-
     /**
      * Creates a new TripSignup entity.
      *
@@ -146,9 +141,7 @@ class TripSignupController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
-
             return $this->redirect($this->generateUrl('tripsignup_show', array('id' => $entity->getId())));
-
         }
 
         return array(
