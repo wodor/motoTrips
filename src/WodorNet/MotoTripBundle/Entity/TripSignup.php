@@ -61,9 +61,18 @@ class TripSignup
 
 
     /**
+     * @var string $description Message to the owner of trip
+     *
+     * @ORM\Column(type="text")
+     *
+     */
+    private $description;
+
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +92,7 @@ class TripSignup
     /**
      * Get signupDate
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getSignupDate()
     {
@@ -103,7 +112,7 @@ class TripSignup
     /**
      * Get signupType
      *
-     * @return string 
+     * @return string
      */
     public function getSignupType()
     {
@@ -123,7 +132,7 @@ class TripSignup
     /**
      * Get trip
      *
-     * @return Trip 
+     * @return Trip
      */
     public function getTrip()
     {
@@ -143,7 +152,7 @@ class TripSignup
     /**
      * Get user
      *
-     * @return object 
+     * @return object
      */
     public function getUser()
     {
@@ -163,10 +172,26 @@ class TripSignup
     /**
      * Get testArray
      *
-     * @return array 
+     * @return array
      */
     public function getTestArray()
     {
         return $this->testArray;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
