@@ -99,8 +99,9 @@ class TripController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),);
+            'trip' => $entity,
+            //    'delete_form' => $deleteForm->createView(),
+        );
     }
 
     /**
