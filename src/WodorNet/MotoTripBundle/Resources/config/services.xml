@@ -29,6 +29,14 @@
             <argument type="service" id="twig.loader" />
         </service>
 
+        <service id="wodor_net_moto_trip.tripsignups" class="WodorNet\MotoTripBundle\TripSignups\Manager">
+            <argument type="service" id="wodor_net_moto_trip.entity_manager"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="wodor_net_moto_trip.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="false">
+        </service>
+
 
     </services>
 

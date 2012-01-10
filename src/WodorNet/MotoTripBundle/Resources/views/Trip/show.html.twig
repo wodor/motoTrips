@@ -31,4 +31,11 @@
 {% endif %}
 
 
+{% include 'WodorNetMotoTripBundle:TripSignup:approvedSnippet.html.twig'%}
+
+{% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
+{% include 'WodorNetMotoTripBundle:TripSignup:candidatesSnippet.html.twig' %}
+{% endif %}
+
+
 {% endblock %}

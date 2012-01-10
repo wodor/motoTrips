@@ -1,23 +1,13 @@
-<div class="list_snippet">
-
-{% block list_content %}
-inherit this
-{% endblock %}
-
-</div>
-
-
-{% block list_javascript %}
 <script>
 
 $(document).ready(function() {
-	$('.dataTable').dataTable( {
+	$('.{{tablename}}').dataTable( {
         "bProcessing": true,
         "bServerSide": true,
         "bJQueryUI"  : false,
         //"sPaginationType": "full_numbers",
         "iDisplayLength":5,
-        "sAjaxSource": Routing.generate({% block source_route %}triplistsnippet{% endblock %}),
+        "sAjaxSource": Routing.generate({{sourceRoute|raw}}),
 
         "bLengthChange": false,
         //"bPaginate": false,
@@ -28,4 +18,3 @@ $(document).ready(function() {
     } );
 } );
 </script>
-{% endblock %}

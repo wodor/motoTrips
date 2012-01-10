@@ -53,14 +53,6 @@ class TripSignup
     private $user;
 
     /**
-     * @var array $testArray
-     *
-     * @ORM\Column(name="testArray", type="array")
-     */
-    private $testArray;
-
-
-    /**
      * @var string $description Message to the owner of trip
      *
      * @ORM\Column(type="text")
@@ -68,6 +60,14 @@ class TripSignup
      */
     private $description;
 
+
+    /**
+     * @var string $description Message to the owner of trip
+     *
+     * @ORM\Column(type="string", length=20)
+     *
+     */
+    private $status = 'new';
 
     /**
      * Get id
@@ -160,26 +160,6 @@ class TripSignup
     }
 
     /**
-     * Set testArray
-     *
-     * @param array $testArray
-     */
-    public function setTestArray($testArray)
-    {
-        $this->testArray = $testArray;
-    }
-
-    /**
-     * Get testArray
-     *
-     * @return array
-     */
-    public function getTestArray()
-    {
-        return $this->testArray;
-    }
-
-    /**
      * @param string $description
      */
     public function setDescription($description)
@@ -193,5 +173,21 @@ class TripSignup
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

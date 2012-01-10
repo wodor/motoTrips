@@ -1,0 +1,16 @@
+{% block list_content %}
+<h2>{%trans%}Uczestnicy niezatwierdzeni{%endtrans%}</h2>
+<table class="candidatesTable">
+<thead>    
+    <tr> 
+    <th>Nazwa</th>
+    <th>Data</th>
+    <th>Akcje</th>
+    </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+{% endblock %}
+
+{% include 'WodorNetMotoTripBundle::datatable.html.twig' with {'sourceRoute': "'candidateTripSignups', { id: " ~ trip.id ~ " }" , 'tablename':'candidatesTable'} %}
