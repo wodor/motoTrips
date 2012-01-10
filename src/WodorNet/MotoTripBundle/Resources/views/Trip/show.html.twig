@@ -2,6 +2,8 @@
 {% block content %}
 <h1>{% trans %}Trip{% endtrans %}</h1>
 
+<a href="{{ path('trip') }}"> {% trans %}Back to the list{% endtrans %} </a>
+
 <div>
     <p>{% trans %}Start at{% endtrans %}</p>
 
@@ -18,33 +20,15 @@
 <div>{{ trip.description }}</div>
 
 
-<input type="button" value="Dołącz"/>
+<a href="{{ path('signup',{ 'tripId': trip.id }) }}">{% trans %}Join this trip{% endtrans %}</a>
 
+{% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
+<a href="{{ path('trip_edit', { 'id': trip.id }) }}">{% trans %}Edit{% endtrans %}</a>
+{% endif %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('trip') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('signup',{ 'tripId': trip.id }) }}">
-            Dołącz
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('trip_edit', { 'id': trip.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('trip_give', { 'id': trip.id }) }}">
-            Give
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('trip_delete', { 'id': trip.id }) }}" method="post">
-    </li>
-</ul>
+{% if is_granted('ROLE_ADMIN') or is_granted('DELETE', trip)  %}
+<a href="{{ path('trip_delete', { 'id': trip.id }) }}">{% trans %}Delete{% endtrans %}</a>
+{% endif %}
+
 
 {% endblock %}

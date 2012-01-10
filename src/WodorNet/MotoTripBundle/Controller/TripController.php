@@ -96,11 +96,9 @@ class TripController extends Controller
             throw $this->createNotFoundException('Unable to find Trip entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'trip' => $entity,
-            //    'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -213,7 +211,7 @@ class TripController extends Controller
      * @Route("/{id}/edit", name="trip_edit")
      * @Template()
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, EDIT)")
      *
      */
     public function editAction(Trip $trip)
@@ -236,7 +234,7 @@ class TripController extends Controller
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, EDIT)")
      *
      */
     public function updateAction(Trip $trip)
@@ -268,30 +266,19 @@ class TripController extends Controller
      * Deletes a Trip entity.
      *
      * @Route("/{id}/delete", name="trip_delete")
-     * @Method("post")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, OWNER)")
+     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, DELETE)")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
-    public function deleteAction($id)
+    public function deleteAction(Trip $trip)
     {
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
 
-        $form->bindRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('WodorNetMotoTripBundle:Trip')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Trip entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($trip);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('trip'));
     }
+
 
     private function createDeleteForm($id)
     {
