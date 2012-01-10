@@ -1,0 +1,5 @@
+<a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+<!--COLUMNSEPARATOR-->
+{{item.signupDate.format("Y-m-d")}}
+<!--COLUMNSEPARATOR-->
+<a href="{{ path('tripsignup_approve', { 'id': item.id}) }}" title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>

@@ -2,6 +2,9 @@
 
 namespace WodorNet\MotoTripBundle\Controller;
 
+
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,13 +26,77 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class TripSignupController extends Controller
 {
 
+    /**
+     * Approve the signup, ad-hoc
+     *
+     * @Route("/{id}/Approve/", name="tripsignup_approve", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
+     */
+    public function approveAction(TripSignup $tripSignup) {
+        // only owner of the trip which is binded to tripsignup
+        // is allowed to appprove
+
+        $securityContext = $this->get('security.context');
+
+        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip()) && !$securityContext->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
+        $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
+        $tripSignupsService->approve($tripSignup);
+
+    }
+
+    /**
+     * List of candidates to approve
+     *
+     * @Route("/{id}/Candidates/", name="candidateTripSignups", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     */
+    public function signupCandidatesListAction(Trip $trip) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findCandidatesByTrip($trip);
+
+        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
+
+        $paginator->setItemTemplate('WodorNetMotoTripBundle:TripSignup:candidateItem.html.twig');
+        $output = $paginator->paginate($qb);
+
+        return new Response(json_encode($output));
+
+    }
+
+
+    /**
+     * List of approved candidates
+     *
+     * @Route("/{id}/Approved/", name="approvedTripSignups", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     */
+    public function signupListAction(Trip $trip) {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findApprovedByTrip($trip);
+
+        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
+
+        $paginator->setItemTemplate('WodorNetMotoTripBundle:TripSignup:approvedItem.html.twig');
+        $output = $paginator->paginate($qb);
+
+        return new Response(json_encode($output));
+    }
+
 
     /**
      * Creates a new TripSignup entity.
      *
+     * @Secure("ROLE_ADMIN")
      * @Route("/signup/{id}", name="signup")
      * @Template("WodorNetMotoTripBundle:TripSignup:usersignup.html.twig")
-     * @Secure("ROLE_USER")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
     public function signupAction(Trip $trip)
@@ -70,9 +137,11 @@ class TripSignupController extends Controller
 
     /**
      * Lists all TripSignup entities.
+     * only for admin
      *
      * @Route("/", name="tripsignup")
      * @Template()
+     * @Secure("ROLE_ADMIN")
      */
     public function indexAction()
     {

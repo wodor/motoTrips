@@ -54,6 +54,8 @@ class Paginator {
     }
     
     private function formatRows($collection) {
+
+        $ret = array();
         foreach($collection as $item) {
             $ret[] = explode('<!--COLUMNSEPARATOR-->',$this->templating->render($this->templateName, array('item' => $item)));
         }

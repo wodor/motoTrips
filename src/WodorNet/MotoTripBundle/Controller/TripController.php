@@ -28,17 +28,14 @@ use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
  */
 class TripController extends Controller
 {
-
-
     /**
-     * List of latest trips
+     * Info window on map
      *
      * @Route ("/{trip}/infoWindow", name="tripInfoWindow", options={"expose"=true}))
      * @Template()
      */
     public function infoWindowAction($trip)
     {
-
         return array('trip' => $trip);
     }
 
