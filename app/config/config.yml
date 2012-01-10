@@ -68,3 +68,25 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: WodorNet\MotoTripBundle\Entity\User
+
+jms_security_extra:
+    # Whether you want to secure all services (true), or only secure specific
+    # services (false); see also below
+    secure_all_services: false
+
+    # Enabling this setting will add an additional special attribute "IS_IDDQD".
+    # Anybody with this attribute will effectively bypass all security checks.
+    enable_iddqd_attribute: false
+
+    # Enables expression language
+    expressions: false
+
+    # Allows you to disable some, or all built-in voters
+    voters:
+        disable_authenticated: false
+        disable_role:          false
+        disable_acl:           false
+
+    # Allows you to specify access control rules for specific methods, such
+    # as controller actions
+    method_access_control: { }
