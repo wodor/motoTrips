@@ -79,7 +79,7 @@ jms_security_extra:
     enable_iddqd_attribute: false
 
     # Enables expression language
-    expressions: false
+    expressions: true
 
     # Allows you to disable some, or all built-in voters
     voters:
