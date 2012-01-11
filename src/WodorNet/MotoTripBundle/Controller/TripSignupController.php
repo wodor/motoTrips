@@ -5,7 +5,7 @@ namespace WodorNet\MotoTripBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use WodorNet\MotoTripBundle\Controller\MotoTripController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -16,6 +16,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
@@ -27,21 +29,65 @@ class TripSignupController extends Controller
 {
 
     /**
+     * resign the signup, ad-hoc
+     *
+     * @Route("/{id}/disapprove/", name="tripsignup_disapprove", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
+     */
+    public function disapproveAction(TripSignup $tripSignup)
+    {
+
+        $this->checkOwnership($tripSignup);
+
+        $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
+        $tripSignupsService->disapprove($tripSignup);
+    }
+
+    /**
+     * resign the signup, ad-hoc
+     *
+     * @Route("/{id}/resign/", name="tripsignup_resign", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
+     * @PreAuthorize("hasPermission(#tripSignup, 'OWNER')")
+     */
+    public function resignAction(TripSignup $tripSignup)
+    {
+
+        $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
+        $tripSignupsService->resign($tripSignup);
+
+    }
+
+    /**
+     * reject the signup, ad-hoc
+     *
+     * @Route("/{id}/reject/", name="tripsignup_reject", options={"expose"=true})
+     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
+     */
+    public function rejectAction(TripSignup $tripSignup)
+    {
+
+        $this->checkOwnership($tripSignup);
+
+        $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
+        $tripSignupsService->reject($tripSignup);
+
+    }
+
+    /**
      * Approve the signup, ad-hoc
      *
      * @Route("/{id}/Approve/", name="tripsignup_approve", options={"expose"=true})
      * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
      */
-    public function approveAction(TripSignup $tripSignup) {
-        // only owner of the trip which is binded to tripsignup
-        // is allowed to appprove
+    public function approveAction(TripSignup $tripSignup)
+    {
 
-        $securityContext = $this->get('security.context');
-
-        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip()) && !$securityContext->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException();
-        }
+        $this->checkOwnership($tripSignup);
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->approve($tripSignup);
@@ -55,7 +101,8 @@ class TripSignupController extends Controller
      * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
-    public function signupCandidatesListAction(Trip $trip) {
+    public function signupCandidatesListAction(Trip $trip)
+    {
 
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findCandidatesByTrip($trip);
@@ -77,7 +124,8 @@ class TripSignupController extends Controller
      * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
-    public function signupListAction(Trip $trip) {
+    public function signupListAction(Trip $trip)
+    {
 
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findApprovedByTrip($trip);
@@ -88,6 +136,7 @@ class TripSignupController extends Controller
         $output = $paginator->paginate($qb);
 
         return new Response(json_encode($output));
+        //return array();
     }
 
 
@@ -123,8 +172,9 @@ class TripSignupController extends Controller
                 $em->persist($signup);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
+                $this->grantAccessForCurrentUser($signup);
 
+                return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
             }
         }
 
@@ -316,5 +366,21 @@ class TripSignupController extends Controller
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm();
+    }
+
+
+    /**
+     * Checks it tripSingup is for the trip that user is owner of
+     * owner for
+     *
+     * @param \WodorNet\MotoTripBundle\Entity\TripSignup $tripSignup
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    private function checkOwnership(TripSignup $tripSignup)
+    {
+        $securityContext = $this->get('security.context');
+        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip()) && !$securityContext->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
     }
 }

@@ -3,8 +3,8 @@
 namespace WodorNet\MotoTripBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use WodorNet\MotoTripBundle\Controller\MotoTripController as Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -14,10 +14,6 @@ use WodorNet\MotoTripBundle\Form\TripType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\SecurityExtraBundle\Annotation\SecureParam;
-
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
 
@@ -178,22 +174,9 @@ class TripController extends Controller
             $em->persist($trip);
             $em->flush();
 
-            // creating the ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($trip);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrieving the security identity of the currently logged-in user
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-
-            // grant owner access
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
+            $this->grantAccessForCurrentUser($trip);
 
             return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
-
         }
 
         return array(
@@ -208,7 +191,7 @@ class TripController extends Controller
      * @Route("/{id}/edit", name="trip_edit")
      * @Template()
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("permitAll()")
+     * @PreAuthorize("hasRole('ADMIN') or hasPermission(#trip, 'EDIT')")
      */
     public function editAction(Trip $trip)
     {
@@ -234,7 +217,7 @@ class TripController extends Controller
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, EDIT)")
+     * @PreAuthorize("hasRole('ADMIN') or hasPermission(#trip, 'EDIT')")
      *
      */
     public function updateAction(Trip $trip)

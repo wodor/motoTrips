@@ -14,4 +14,9 @@ Back to the list: Powrót
 Join this trip: Dołącz do wypadu
 Describe Yourself: Opisz siebie, podaj login z forum, lub daj się jakoś rozpoznać:
 Send: Wyślij
-mail.subject.new_trip_signup: Nowy Uczestnik
+mail:
+    subject:
+        trip_signup:
+            approve: Nowy Uczestnik wypadu
+            resign: Uczestnik zrezygnował z wypadu
+            reject: Odrzucono Twoje uczestnictwo
