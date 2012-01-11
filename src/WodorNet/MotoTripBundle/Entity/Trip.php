@@ -89,7 +89,6 @@ class Trip
     private $lng;
 
 
-
     public function __construct()
     {
         $this->tripSignups = new ArrayCollection();
@@ -106,6 +105,7 @@ class Trip
     {
         return $this->id;
     }
+
     /**
      * Set creationDate
      *
@@ -126,7 +126,8 @@ class Trip
         return $this->creationDate;
     }
 
-    public function addRoadType(RoadType $roadType) {
+    public function addRoadType(RoadType $roadType)
+    {
 
         $roadType->addTrip($this);
         $this->roadTypes[] = $roadType;
@@ -191,9 +192,10 @@ class Trip
     {
         return $this->endDate;
     }
-    
-    public function __toString() {
-        return substr($this->getDescription(),0,8);
+
+    public function __toString()
+    {
+        return substr($this->getDescription(), 0, 8);
     }
 
     /**
@@ -236,12 +238,14 @@ class Trip
         return $this->lat;
     }
 
-    public function setLocation($loc){
+    public function setLocation($loc)
+    {
         $this->setLat($loc['lat']);
         $this->setLng($loc['lng']);
     }
 
-    public function getLocation() {
+    public function getLocation()
+    {
         return array(
             'lat' => $this->getLat(),
             'lng' => $this->getLng()
