@@ -17,9 +17,23 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
-
         return array('name' => 'dfupa');
+    }
+
+    /**
+     * @Route("/userbar", name="default2")
+     * @Template()
+     */
+    public function userBarAction()
+    {
+
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
+        return array(
+            'user' => $user,
+            'csrf_token' => $csrfToken,
+        );
     }
 
 

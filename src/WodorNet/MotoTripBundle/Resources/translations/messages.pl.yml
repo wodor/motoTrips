@@ -20,3 +20,7 @@ mail:
             approve: Nowy Uczestnik wypadu
             resign: Uczestnik zrezygnował z wypadu
             reject: Odrzucono Twoje uczestnictwo
+
+The presented password is invalid.: "Podane hasło jest niepoprawne"
+The presented password cannot be empty.: "Hasło nie może puste"
+The credentials were changed from another session.: "Hasło zostało zmienione w innym oknie"
