@@ -2,7 +2,7 @@
 
 namespace WodorNet\MotoTripBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use WodorNet\MotoTripBundle\Controller\MotoTripController as Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -25,9 +25,7 @@ class RoadTypeController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-
         $entities = $em->getRepository('WodorNetMotoTripBundle:RoadType')->findAll();
-
         return array('entities' => $entities);
     }
 
@@ -50,8 +48,8 @@ class RoadTypeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -63,11 +61,11 @@ class RoadTypeController extends Controller
     public function newAction()
     {
         $entity = new RoadType();
-        $form   = $this->createForm(new RoadTypeType(), $entity);
+        $form = $this->createForm(new RoadTypeType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -80,9 +78,9 @@ class RoadTypeController extends Controller
      */
     public function createAction()
     {
-        $entity  = new RoadType();
+        $entity = new RoadType();
         $request = $this->getRequest();
-        $form    = $this->createForm(new RoadTypeType(), $entity);
+        $form = $this->createForm(new RoadTypeType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -91,12 +89,12 @@ class RoadTypeController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('roadtype_show', array('id' => $entity->getId())));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -120,8 +118,8 @@ class RoadTypeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -143,7 +141,7 @@ class RoadTypeController extends Controller
             throw $this->createNotFoundException('Unable to find RoadType entity.');
         }
 
-        $editForm   = $this->createForm(new RoadTypeType(), $entity);
+        $editForm = $this->createForm(new RoadTypeType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -158,8 +156,8 @@ class RoadTypeController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -196,7 +194,6 @@ class RoadTypeController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

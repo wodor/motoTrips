@@ -34,6 +34,8 @@ class Subscriber implements EventSubscriberInterface
     {
         return array(
             MotoTripEvents::onTripSignupApprove => 'onTripSignupApprove',
+            MotoTripEvents::onTripSignupReject => 'onTripSignupReject',
+            MotoTripEvents::onTripSignupResign => 'onTripSignupResign',
         );
     }
 
@@ -43,6 +45,22 @@ class Subscriber implements EventSubscriberInterface
     public function onTripSignupApprove(TripSignupEvent $event)
     {
         return $this->sender->sendSingnupApprove($event->getTripSignup());
+    }
+
+    /**
+     * @param \WodorNet\MotoTripBundle\Event\TripSignupEvent $event
+     */
+    public function onTripSignupReject(TripSignupEvent $event)
+    {
+        return $this->sender->sendSingnupReject($event->getTripSignup());
+    }
+
+    /**
+     * @param \WodorNet\MotoTripBundle\Event\TripSignupEvent $event
+     */
+    public function onTripSignupResign(TripSignupEvent $event)
+    {
+        return $this->sender->sendSingnupResign($event->getTripSignup());
     }
 
 }

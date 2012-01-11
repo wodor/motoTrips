@@ -1,0 +1,13 @@
+<a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+<!--COLUMNSEPARATOR-->
+{{item.signupDate.format("Y-m-d")}}
+<!--COLUMNSEPARATOR-->
+{% if is_expr_granted("hasPermission(object, 'OWNER')", item.trip) %}
+<a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}" title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
+{% endif %}
+
+
+{% if is_expr_granted("hasPermission(object, 'OWNER')", item) %}
+<a href="{{ path('tripsignup_resign', { 'id': item.id}) }}"
+   title="{% trans %}Resign{% endtrans %}">{% trans %}Resign{% endtrans %}</a>
+{% endif %}
