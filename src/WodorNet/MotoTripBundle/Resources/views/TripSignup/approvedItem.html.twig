@@ -4,6 +4,8 @@
 <!--COLUMNSEPARATOR-->
 {% if is_expr_granted("hasPermission(object, 'OWNER')", item.trip) %}
 <a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}" title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
+<a href="{{ path('tripsignup_show', { 'id': item.id}) }}"
+   title="{% trans %}Details{% endtrans %}">{% trans %}Details{% endtrans %}</a>
 {% endif %}
 
 

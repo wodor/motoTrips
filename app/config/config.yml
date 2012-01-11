@@ -76,7 +76,7 @@ jms_security_extra:
 
     # Enabling this setting will add an additional special attribute "IS_IDDQD".
     # Anybody with this attribute will effectively bypass all security checks.
-    enable_iddqd_attribute: false
+    enable_iddqd_attribute: true
 
     # Enables expression language
     expressions: true

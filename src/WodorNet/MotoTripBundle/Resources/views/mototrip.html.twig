@@ -1,52 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/reset.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/text.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/mototrips.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/text.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/mototrips.css') }}">
 
-        <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-        <title>{% block title %}Demo Bundle{% endblock %}</title>
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <title>{% block title %}Demo Bundle{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 
-        {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
-        <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/mapevents.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/mapevents.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 
 
     {# <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/demo_table.css') }}" type="text/css" media="all"/> #}
     </head>
-    <body>
-        <div class="container_16">
-            <div class="logo grid_7 push_1 ">
-                <a href="{{ path('default') }}">
-                    <img src="{{ asset('bundles/wodornetmototrip/images/logo.png') }}" alt="Logo Mototrips">
-                </a>
-            </div>
+<body>
+<div class="container_16">
+    <div class="logo grid_7 push_1 ">
+        <a href="{{ path('default') }}">
+            <img src="{{ asset('bundles/wodornetmototrip/images/logo.png') }}" alt="Logo Mototrips">
+        </a>
+    </div>
 
-            <div class="clear"></div>
+    <div class="clear"></div>
 
 
-            {% if app.session.flash('notice') %}
-                <div class="flash-message">
-                    <em>Notice</em>: {{ app.session.flash('notice') }}
-                </div>
-            {% endif %}
+    {% if app.session.flash('notice') %}
+    <div class="flash-message">
+        <em>Notice</em>: {{ app.session.flash('notice') }}
+    </div>
+    {% endif %}
 
-            <!--a href="{{ path('trip') }}">Lista Wypadow</a-->
+    <div class="symfony-content">
+        {% block content %}
+        {% endblock %}
+    </div>
 
-            <div class="symfony-content">
-                {% block content %}
-                {% endblock %}
-            </div>
-
-        </div>
-    </body>
+</div>
+</body>
 </html>
 

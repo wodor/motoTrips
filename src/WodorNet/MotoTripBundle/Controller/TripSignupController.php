@@ -2,7 +2,6 @@
 
 namespace WodorNet\MotoTripBundle\Controller;
 
-
 use Symfony\Component\HttpFoundation\Response;
 
 use WodorNet\MotoTripBundle\Controller\MotoTripController as Controller;
@@ -37,7 +36,6 @@ class TripSignupController extends Controller
      */
     public function disapproveAction(TripSignup $tripSignup)
     {
-
         $this->checkOwnership($tripSignup);
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
@@ -54,7 +52,6 @@ class TripSignupController extends Controller
      */
     public function resignAction(TripSignup $tripSignup)
     {
-
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->resign($tripSignup);
 
@@ -69,12 +66,10 @@ class TripSignupController extends Controller
      */
     public function rejectAction(TripSignup $tripSignup)
     {
-
         $this->checkOwnership($tripSignup);
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->reject($tripSignup);
-
     }
 
     /**
@@ -86,12 +81,10 @@ class TripSignupController extends Controller
      */
     public function approveAction(TripSignup $tripSignup)
     {
-
         $this->checkOwnership($tripSignup);
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->approve($tripSignup);
-
     }
 
     /**
@@ -143,10 +136,10 @@ class TripSignupController extends Controller
     /**
      * Creates a new TripSignup entity.
      *
-     * @Secure("ROLE_ADMIN")
      * @Route("/signup/{id}", name="signup")
      * @Template("WodorNetMotoTripBundle:TripSignup:usersignup.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
+     * @PreAuthorize("isAuthenticated()")
      */
     public function signupAction(Trip $trip)
     {
@@ -206,23 +199,14 @@ class TripSignupController extends Controller
      * Finds and displays a TripSignup entity.
      *
      * @Route("/{id}/show", name="tripsignup_show")
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction(TripSignup $tripSignup)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TripSignup entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),);
+            'tripSignup' => $tripSignup,
+        );
     }
 
     /**
@@ -379,7 +363,7 @@ class TripSignupController extends Controller
     private function checkOwnership(TripSignup $tripSignup)
     {
         $securityContext = $this->get('security.context');
-        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip()) && !$securityContext->isGranted('ROLE_ADMIN')) {
+        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip())) {
             throw new AccessDeniedException();
         }
     }
