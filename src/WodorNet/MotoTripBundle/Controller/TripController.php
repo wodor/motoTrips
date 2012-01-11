@@ -208,11 +208,14 @@ class TripController extends Controller
      * @Route("/{id}/edit", name="trip_edit")
      * @Template()
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, EDIT)")
-     *
+     * @PreAuthorize("permitAll()")
      */
     public function editAction(Trip $trip)
     {
+
+        //   $aclProvider = $this->get('security.acl.provider');
+        //   $aclProvider->findAcl( ObjectIdentity::fromDomainObject($trip));
+
 
         $editForm = $this->createForm(new TripType(), $trip);
         $deleteForm = $this->createDeleteForm($trip->getId());

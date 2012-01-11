@@ -1,32 +1,35 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 
     <parameters>
-        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator</parameter>
+        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator
+        </parameter>
     </parameters>
 
     <services>
-        <service id="wodor_net_moto_trip.datatable_paginator" class="%wodor_net_moto_trip.datatable_paginator.class%" scope="request">
-            <argument type="service" id="knp_paginator" />
-            <argument type="service" id="request" />
-            <argument type="service" id="templating.engine.twig" />
+        <service id="wodor_net_moto_trip.datatable_paginator" class="%wodor_net_moto_trip.datatable_paginator.class%"
+                 scope="request">
+            <argument type="service" id="knp_paginator"/>
+            <argument type="service" id="request"/>
+            <argument type="service" id="templating.engine.twig"/>
         </service>
 
-        <service id="wodor_net_moto_trip.type.mapPoint" class="WodorNet\MotoTripBundle\Form\MapPointType" scope="prototype">
-            <argument type="service" id="ivory_google_map.map" />
-            <argument type="service" id="ivory_google_map.event" />
-            <argument type="service" id="ivory_google_map.marker" />
-            <tag name="form.type" alias="mapPoint" />
+        <service id="wodor_net_moto_trip.type.mapPoint" class="WodorNet\MotoTripBundle\Form\MapPointType"
+                 scope="prototype">
+            <argument type="service" id="ivory_google_map.map"/>
+            <argument type="service" id="ivory_google_map.event"/>
+            <argument type="service" id="ivory_google_map.marker"/>
+            <tag name="form.type" alias="mapPoint"/>
         </service>
 
-        <service  id="twig.extension.wodor_net.moto_trip" class="WodorNet\MotoTripBundle\Twig\Extension\MotoTripExtension" public="false">
-            <tag name="twig.extension" />
-            <argument type="service" id="twig.loader" />
+        <service id="twig.extension.wodor_net.moto_trip"
+                 class="WodorNet\MotoTripBundle\Twig\Extension\MotoTripExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service" id="twig.loader"/>
         </service>
 
         <service id="wodor_net_moto_trip.tripsignups" class="WodorNet\MotoTripBundle\TripSignups\Manager">
@@ -34,11 +37,18 @@
             <argument type="service" id="event_dispatcher"/>
         </service>
 
-        <service id="wodor_net_moto_trip.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="false">
+        <service id="wodor_net_moto_trip.entity_manager" factory-service="doctrine" factory-method="getEntityManager"
+                 class="Doctrine\ORM\EntityManager" public="false">
+        </service>
+
+        <service id="wodor_net_moto_trip.mailing.sender" class="WodorNet\MotoTripBundle\Mailing\Sender" scope="request">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating.engine.twig"/>
+            <argument type="service" id="translator"/>
         </service>
 
 
     </services>
 
-    
+
 </container>
