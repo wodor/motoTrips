@@ -41,24 +41,21 @@ class Sender
      */
     public function sendSingnupApprove(TripSignup $tripSignup)
     {
-        $tripSignup->getTrip();
 
         $message = \Swift_Message::newInstance()
             ->setSubject($this->translator->trans('mail.subject.trip_signup.approve'))
             ->setFrom('wodor@wodor.net')
-            ->setTo('recipient@example.com')
+            ->setTo($tripSignup->getTrip()->getUser()->getEmail())
             ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
         return $this->mailer->send($message);
     }
 
     public function sendSingnupResign(TripSignup $tripSignup)
     {
-        $tripSignup->getTrip();
-
         $message = \Swift_Message::newInstance()
             ->setSubject($this->translator->trans('mail.subject.trip_signup.resign'))
             ->setFrom('wodor@wodor.net')
-            ->setTo('recipient@example.com')
+            ->setTo($tripSignup->getTrip()->getUser()->getEmail())
             ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
         return $this->mailer->send($message);
     }
@@ -66,12 +63,10 @@ class Sender
 
     public function sendSingnupReject(TripSignup $tripSignup)
     {
-        $tripSignup->getTrip();
-
         $message = \Swift_Message::newInstance()
             ->setSubject($this->translator->trans('mail.subject.trip_signup.reject'))
             ->setFrom('wodor@wodor.net')
-            ->setTo('recipient@example.com')
+            ->setTo($tripSignup->getUser()->getEmail())
             ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
         return $this->mailer->send($message);
     }
