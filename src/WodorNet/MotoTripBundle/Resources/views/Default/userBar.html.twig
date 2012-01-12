@@ -1,18 +1,25 @@
 {% if is_expr_granted("isAuthenticated()") %}
 {{ user.email }} <a href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
 {% else %}
-<form action="{{ path("fos_user_security_check") }}" method="post">
+<form action="{{ path("fos_user_security_check") }}" method="post" class="top_login">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-    <input type="text" id="username" name="_username" value=""/>
+    <p>
+        {#<label for="username">Zaloguj się:</label>#}
+    <input type="text" onclick="if(this.value == 'Login') this.value=''" id="username" name="_username" value="Login"/>
+        <input type="text" onclick="this.type='password'; this.value=''" id="password" name="_password" value="Hasło"/>
+        <input type="submit" id="_submit" name="_submit"
+               value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
 
-    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-    <input type="password" id="password" name="_password"/>
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="position:relative;top:2px"/>
+        <label for="remember_me" class="normal">Zapamiętaj mnie</label>
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+        <a href="{{path('fos_user_registration_register')}}"><input type="button" id="_submit" name="_submit"
+                                                                    value="Rejestracja&raquo;"/></a>
+    </p>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+
 </form>
+
+
         {% endif %}
