@@ -26,7 +26,6 @@ class DefaultController extends Controller
      */
     public function userBarAction()
     {
-
         $user = $this->get('security.context')->getToken()->getUser();
 
         $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
@@ -35,7 +34,6 @@ class DefaultController extends Controller
             'csrf_token' => $csrfToken,
         );
     }
-
 
     /**
      * @Route("/map", name="all_trips_map")
