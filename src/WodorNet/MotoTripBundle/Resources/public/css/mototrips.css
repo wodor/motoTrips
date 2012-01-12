@@ -1,14 +1,25 @@
+html {
+    overflow: -moz-scrollbars-vertical;
+}
+
 body {
     background: url("../images/bodybackground.jpg");
     background-position: top center;
     background-repeat: no-repeat;
     background-color: #ded6ce;
+    font-family: verdana, sans-serif;
+    font-size: 0.8em;
+    color: #403b37;
+}
+
+p {
+    line-height: 1.3em;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster',   cursive;
-    font-weight: 700;
-    text-shadow: 4px 4px 4px #444;
+    font-weight: 400;
+    text-shadow: 4px 4px 4px #777;
     color: #403b37
 }
 
@@ -16,11 +27,19 @@ h1 {
     font-size: 3em;
 }
 
+h3 {
+    font-size: 2.2em;
+}
+
+h4 {
+    font-size: 1.5em;
+}
+
 .h_icon {
     background-image: url("../images/ikony.gif");
     background-repeat: no-repeat;
     line-height: 25px;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
 a {
@@ -37,7 +56,9 @@ a {
 }
 
 div.logo {
-    height: 335px;
+    margin-top: 40px;
+    padding-left: 25px;
+    height: 325px;
 }
 
 .Xcontainer_16 div {
@@ -66,7 +87,7 @@ div.normalFont label {
     font-family: "Arial", sans-serif;
 }
 
-form.top_login {
+.topBar {
     padding: 5px;
     padding-left: 15px;
     background: rgb(230, 230, 230);
@@ -101,7 +122,27 @@ form.top_login p {
 }
 
 input[type=submit], input[type=button], input[type=reset] {
-    font-family: 'Lobster',   cursive;
+    font-family: 'Lobster', cursive;
     background-color: #403b37;
     color: #f4ece5;
+}
+
+div.topBar {
+
+    width: 100%;
+    text-align: right;
+}
+
+.mainpageBox p {
+
+    margin: 0 0 10px 40px;
+    text-align: justify;
+}
+
+.mainpageBox h4 {
+    margin: 0 0 20px 40px;
+}
+
+div#map {
+    margin-top: 20px;
 }

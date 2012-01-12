@@ -1,22 +1,25 @@
 {% if is_expr_granted("isAuthenticated()") %}
-{{ user.email }} <a href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
+<div class="topBar">
+    Zalogowany: {{ user.username}}
+    <a href="{{path('fos_user_profile_show')}}">{% trans %}Twój Profil{% endtrans %}</a>
+    <a href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
+
+</div>
 {% else %}
-<form action="{{ path("fos_user_security_check") }}" method="post" class="top_login">
+<form action="{{ path("fos_user_security_check") }}" method="post" class="top_login topBar">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-    <p>
-        {#<label for="username">Zaloguj się:</label>#}
-    <input type="text" onclick="if(this.value == 'Login') this.value=''" id="username" name="_username" value="Login"/>
-        <input type="text" onclick="this.type='password'; this.value=''" id="password" name="_password" value="Hasło"/>
-        <input type="submit" id="_submit" name="_submit"
-               value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
+    {#<label for="username">Zaloguj się:</label>#}
+    <input type="text" onfocus="if(this.value == 'Login') this.value=''" id="username" name="_username" value="Login"/>
+    <input type="text" onfocus="this.type='password'; this.value=''" id="password" name="_password" value="Hasło"/>
+    <input type="submit" id="_submit" name="_submit"
+           value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
 
-        <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="position:relative;top:2px"/>
-        <label for="remember_me" class="normal">Zapamiętaj mnie</label>
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="position:relative;top:2px"/>
+    <label for="remember_me" class="normal">Zapamiętaj</label>
 
-        <a href="{{path('fos_user_registration_register')}}"><input type="button" id="_submit" name="_submit"
-                                                                    value="Rejestracja&raquo;"/></a>
-    </p>
+    <a href="{{path('fos_user_registration_register')}}"><input type="button" id="_submit" name="_submit"
+                                                                value="Rejestracja&raquo;"/></a>
 
 
 </form>

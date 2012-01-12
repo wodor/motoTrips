@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/mototrips.css') }}">
 
-    <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin-ext' rel='stylesheet' type='text/css'>
 
     <title>{% block title %}Demo Bundle{% endblock %}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
@@ -24,13 +24,13 @@
     </head>
 <body>
 <div class="container_16">
-
-
     <div class="grid_8 prefix_8 userbar">
+        {% if '/login' not in app.request.getRequestUri %}
         {% render "WodorNetMotoTripBundle:Default:userBar" %}
+        {% endif %}
     </div>
 
-    <div class="logo grid_7 push_1 ">
+    <div class="logo grid_7  ">
         <a href="{{ path('default') }}">
             <img src="{{ asset('bundles/wodornetmototrip/images/logo.png') }}" alt="Logo Mototrips">
         </a>
