@@ -78,6 +78,7 @@ class TripController extends Controller
      *
      * @Route("/{id}/show", name="trip_show")
      * @Template()
+     * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
     public function showAction($id)
     {

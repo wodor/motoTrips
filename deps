@@ -84,8 +84,9 @@
     target=/bundles/Ivory/GoogleMapBundle
 
 [FOSUserBundle]
-    git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
+    git=git://github.com/wodor/FOSUserBundle.git
     target=bundles/FOS/UserBundle
+    version=origin/patch-1
 
 [FOSJsRoutingBundle]
     git=git://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git

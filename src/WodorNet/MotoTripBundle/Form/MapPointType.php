@@ -11,7 +11,8 @@ use Ivory\GoogleMapBundle\Model\Map;
 use Ivory\GoogleMapBundle\Model\Overlays\Marker;
 use Ivory\GoogleMapBundle\Model\Events\Event;
 
-class MapPointType extends AbstractType {
+class MapPointType extends AbstractType
+{
 
     /**
      * @var $map \Ivory\GoogleMapBundle\Model\Map
@@ -28,7 +29,8 @@ class MapPointType extends AbstractType {
      */
     protected $event;
 
-    public function __construct(Map $map, Event $event, Marker $marker) {
+    public function __construct(Map $map, Event $event, Marker $marker)
+    {
         $this->map = $map;
         $this->event = $event;
         $this->marker = $marker;
@@ -49,11 +51,11 @@ class MapPointType extends AbstractType {
      */
     public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder->add('lat','hidden', array(
-            'attr' =>  array('class' => $builder->getName().'lat'),
+        $builder->add('lat', 'hidden', array(
+            'attr' => array('class' => $builder->getName() . 'lat'),
         ))
-        ->add('lng','hidden', array(
-            'attr' =>  array('class' => $builder->getName().'lng'),
+            ->add('lng', 'hidden', array(
+            'attr' => array('class' => $builder->getName() . 'lng'),
         ));
     }
 
@@ -68,16 +70,17 @@ class MapPointType extends AbstractType {
 
         $this->map = $this->map;
 
-        if($showMarker) {
+        if ($showMarker) {
             $this->map->setCenter((float)$value['lat'], (float)$value['lng'], true);
             $this->map->setMapOption('zoom', 10);
         }
 
         $this->map->setJavascriptVariable('map');
 
-        $this->event->setInstance($this->map->getJavascriptVariable());
-        $this->event->setEventName('click');
+
         $this->event->setHandle('setTripMarker');
+
+        $e2 = clone $this->event;
 
 
         $this->marker->setJavascriptVariable('marker_trip');
@@ -86,7 +89,14 @@ class MapPointType extends AbstractType {
         $this->marker->setOption('draggable', true);
         $this->marker->setOption('visible', $showMarker);
 
+        $this->event->setInstance($this->map->getJavascriptVariable());
+        $this->event->setEventName('click');
+
+        $e2->setEventName('dragend');
+        $e2->setInstance($this->marker->getJavascriptVariable());
+
         $this->map->getEventManager()->addDomEvent($this->event);
+        $this->map->getEventManager()->addDomEvent($e2);
         $this->map->addMarker($this->marker);
 
         $view->set('map', $this->map);
