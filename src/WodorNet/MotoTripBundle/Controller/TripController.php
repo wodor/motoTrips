@@ -80,19 +80,34 @@ class TripController extends Controller
      * @Template()
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
-    public function showAction($id)
+    public function showAction(Trip $trip)
     {
-        $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('WodorNetMotoTripBundle:Trip')->find($id);
+        /**
+         * @var $map \Ivory\GoogleMapBundle\Model\Map
+         */
+        $map = $this->get('ivory_google_map.map');
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Trip entity.');
-        }
+        $map->setJavascriptVariable('tripsmap');
 
+
+        $map->setAutoZoom(false);
+        //$map->setMapOptions(array'zoom',9);
+
+        $map->setMapOption('width', '460px');
+        $map->setStylesheetOption('width', '460px');
+        $map->setStylesheetOption('height', '460px');
+
+        $map->setCenter($trip->getLat(), $trip->getLng());
+
+
+        $marker = $this->get('ivory_google_map.marker');
+        $marker->setPosition($trip->getLat(), $trip->getLng());
+        $map->addMarker($marker);
 
         return array(
-            'trip' => $entity,
+            'map' => $map,
+            'trip' => $trip,
         );
     }
 

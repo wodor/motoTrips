@@ -26,3 +26,5 @@ The presented password cannot be empty.: "Hasło nie może puste"
 The credentials were changed from another session.: "Hasło zostało zmienione w innym oknie"
 Bad credentials: "Podane hasło jest niepoprawne"
 Logout: Wyloguj
+Start at: Początek
+End at: Koniec
