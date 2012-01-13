@@ -24,7 +24,7 @@ class MotoTripExtension extends \Twig_Extension
     }
 
 
-    public function intldate(\DateTime $str, $format = "eeee d MMMM yyyy")
+    public function intldate(\DateTime $str, $format = "eeee d MMMM yyyy hh:mm")
     {
 
         $formatter = new \IntlDateFormatter(
