@@ -188,8 +188,8 @@ class TripController extends Controller
             $trip->setCreator($user);
 
             $em = $this->getDoctrine()->getEntityManager();
-            $rt = $em->getRepository('WodorNetMotoTripBundle:RoadType')->find(1);
-            $trip->addRoadType($rt);
+            //$rt = $em->getRepository('WodorNetMotoTripBundle:RoadType')->find(1);
+            //$trip->addRoadType($rt);
             $em->persist($trip);
             $em->flush();
 

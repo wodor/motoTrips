@@ -28,8 +28,14 @@ $loader->registerNamespaces(array(
     'Buzz' => __DIR__ . '/../vendor/buzz/lib',
     'Ivory' => __DIR__ . '/../vendor/bundles',
     'Behat\Gherkin' => __DIR__.'/../vendor/behat/gherkin/src',
+    'Behat\Mink'       => __DIR__.'/../vendor/behat/mink/src',
+    'Behat\MinkBundle' => __DIR__.'/../vendor/bundles',
     'Behat\Behat'   => __DIR__.'/../vendor/behat/behat/src',
     'Behat\BehatBundle' => __DIR__.'/../vendor/bundles',
+
+    'Behat\SahiClient' => __DIR__.'/../vendor/behat/sahi/src',
+    'Buzz'             => __DIR__.'/../vendor/buzz/lib',
+
     'PSS'     => __DIR__.'/../vendor/bundles',
     'Mockery' => __DIR__.'/../vendor/mockery/library',
 

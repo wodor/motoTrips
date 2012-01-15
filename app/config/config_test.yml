@@ -12,3 +12,33 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+mink:
+    base_url:   http://motowypady.tyr/app_test.php
+    show_cmd:             google-chrome %s
+    sahi:       ~
+    browser_name:  chrome
+
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                driver:   %database_driver%
+                host:     %database_host%
+                port:     %database_port%
+                dbname:   motowypady_test
+                user:     %database_user%
+                password: %database_password%
+                charset:  UTF8
+            acl:
+                driver:   %database_driver%
+                host:     %database_host%
+                port:     %database_port%
+                dbname:   motowypady_test_acl
+                user:     %database_user%
+                password: %database_password%
+                charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: true
+        auto_mapping: true

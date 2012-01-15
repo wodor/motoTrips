@@ -110,14 +110,6 @@
 [Mockery]
     git=https://github.com/padraic/mockery.git
 
-[gherkin]
-    git=https://github.com/Behat/Gherkin.git
-    target=/behat/gherkin
-
-[behat]
-    git=https://github.com/Behat/Behat.git
-    target=/behat/behat
-
 [BehatBundle]
     git=https://github.com/Behat/BehatBundle.git
     target=/bundles/Behat/BehatBundle
