@@ -11,6 +11,7 @@ class RoadTypeType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('mapIcon')
         ;
     }
 

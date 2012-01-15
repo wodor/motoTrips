@@ -98,3 +98,32 @@
 [KnpPaginatorBundle]
     git=http://github.com/KnpLabs/KnpPaginatorBundle.git
     target=bundles/Knp/Bundle/PaginatorBundle
+
+[doctrine-migrations]
+    git=http://github.com/doctrine/migrations.git
+
+[DoctrineMigrationsBundle]
+    git=http://github.com/symfony/DoctrineMigrationsBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
+
+
+[Mockery]
+    git=https://github.com/padraic/mockery.git
+
+[gherkin]
+    git=https://github.com/Behat/Gherkin.git
+    target=/behat/gherkin
+
+[behat]
+    git=https://github.com/Behat/Behat.git
+    target=/behat/behat
+
+[BehatBundle]
+    git=https://github.com/Behat/BehatBundle.git
+    target=/bundles/Behat/BehatBundle
+
+
+[PssMockeryBundle]
+    git=https://github.com/PolishSymfonyCommunity/PSSMockeryBundle.git
+    target=/bundles/PSS/Bundle/MockeryBundle
+

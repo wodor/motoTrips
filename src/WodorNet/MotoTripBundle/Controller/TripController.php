@@ -184,13 +184,16 @@ class TripController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
+            $user = $this->get('security.context')->getToken()->getUser();
+            $trip->setCreator($user);
+
             $em = $this->getDoctrine()->getEntityManager();
             $rt = $em->getRepository('WodorNetMotoTripBundle:RoadType')->find(1);
             $trip->addRoadType($rt);
             $em->persist($trip);
             $em->flush();
 
-            $this->grantAccessForCurrentUser($trip);
+          //  $this->grantAccessForCurrentUser($trip);
 
             return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
         }

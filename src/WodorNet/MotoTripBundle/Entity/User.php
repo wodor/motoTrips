@@ -22,18 +22,25 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="user")
      */
     protected $tripSignups;
-    
-    
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Trip", mappedBy="creator")
+     */
+    protected $trips;
+
+
     public function __construct()
     {
         parent::__construct();
         $this->tripSignups = new ArrayCollection();
     }
-    
 
-    public function __toString() {
+
+    public function __toString()
+    {
         return $this->username;
     }
-    
-    
+
+
 }

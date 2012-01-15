@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Hudson\JQueryBundle\HudsonJQueryBundle(),
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+            new Symfony\Bundle\DoctrineMigrationsBundle\DoctrineMigrationsBundle(),
             new WodorNet\MotoTripBundle\WodorNetMotoTripBundle(),
         );
 
@@ -33,6 +34,10 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Behat\BehatBundle\BehatBundle();
+            $bundles[] = new PSS\Bundle\MockeryBundle\PSSMockeryBundle();
+
+
         }
 
         return $bundles;
@@ -42,4 +47,17 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
     }
+
+    /**
+     * @return string
+     */
+    protected function getContainerBaseClass()
+    {
+        if ('test' == $this->environment) {
+            return '\PSS\Bundle\MockeryBundle\DependencyInjection\MockerContainer';
+        }
+
+        return parent::getContainerBaseClass();
+    }
 }
+

@@ -10,6 +10,7 @@ class MotoTripEvents
     //   const onTripSignupCreate = 'tripSignup.create';
 
     const onTripSignupApprove = 'tripSignup.approve';
+    const onTripSignupDisapprove = 'tripSignup.disapprove';
     const onTripSignupReject = 'tripSignup.reject';
     const onTripSignupResign = 'tripSignup.resign';
 

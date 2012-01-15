@@ -8,13 +8,18 @@ use Doctrine\ORM\Query\AST\Subselect;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+
+use WodorNet\MotoTripBundle\Security\OwnerAware;
+
 /**
  * WodorNet\MotoTripBundle\Entity\Trip
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripRepository")
  */
-class Trip
+class Trip implements OwnerAware
 {
     /**
      * @var integer $id
@@ -41,11 +46,27 @@ class Trip
     private $title;
 
     /**
+     * @var object $user
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="trips")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $creator;
+
+
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @var text $descriptionPrivate
+     *
+     * @ORM\Column( type="text")
+     */
+    private $descriptionPrivate;
 
     /**
      * @var datetime $startDate
@@ -268,4 +289,51 @@ class Trip
         return $this->title;
     }
 
+    /**
+     * @param \WodorNet\MotoTripBundle\Entity\text $descriptionPrivate
+     */
+    public function setDescriptionPrivate($descriptionPrivate)
+    {
+        $this->descriptionPrivate = $descriptionPrivate;
+    }
+
+    /**
+     * @return \WodorNet\MotoTripBundle\Entity\text
+     */
+    public function getDescriptionPrivate()
+    {
+        return $this->descriptionPrivate;
+    }
+
+    public function getObjectIdentity()
+    {
+        return ObjectIdentity::fromDomainObject($this);
+    }
+
+    public function getSecurityIdentity()
+    {
+        return UserSecurityIdentity::fromAccount($this->getCreator());
+    }
+
+
+    /**
+     * @param object $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return object
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    public function getOwnerFieldName()
+    {
+        return 'Creator';
+    }
 }

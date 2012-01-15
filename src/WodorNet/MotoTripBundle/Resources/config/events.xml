@@ -9,5 +9,19 @@
             <tag name="wodor_net_moto_trip.subscriber"/>
             <argument type="service" id="wodor_net_moto_trip.mailing.sender"/>
         </service>
+
+        <service id="wodor_net_moto_trip.security_subscriber_symfony"
+                 class="WodorNet\MotoTripBundle\Security\SymfonySubscriber"
+                >
+            <tag name="wodor_net_moto_trip.subscriber"/>
+            <argument type="service" id="security.acl.provider"/>
+        </service>
+
+        <service id="wodor_net_moto_trip.security_subscriber_doctrine" public="false"
+                 class="WodorNet\MotoTripBundle\Security\DoctrineSubscriber" >
+            <tag name="doctrine.event_subscriber" connection="default" />
+            <argument type="service" id="security.acl.provider"/>
+
+        </service>
     </services>
 </container>
