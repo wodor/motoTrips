@@ -127,3 +127,14 @@
     git=https://github.com/PolishSymfonyCommunity/PSSMockeryBundle.git
     target=/bundles/PSS/Bundle/MockeryBundle
 
+[mink]
+    git=https://github.com/Behat/Mink.git
+    target=/behat/mink
+
+[SahiClient]
+    git=https://github.com/Behat/SahiClient
+    target=/behat/sahi
+
+[MinkBundle]
+    git=https://github.com/Behat/MinkBundle.git
+    target=/bundles/Behat/MinkBundle
