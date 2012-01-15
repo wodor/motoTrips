@@ -1,6 +1,7 @@
 {
     "require":{
         "willdurand/geocoder":"*",
+        "behat/common-contexts":"*"
     }
 
 }
