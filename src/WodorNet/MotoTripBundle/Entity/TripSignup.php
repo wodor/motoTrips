@@ -3,7 +3,11 @@
 namespace WodorNet\MotoTripBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+
 use WodorNet\MotoTripBundle\Entity\Trip;
+use WodorNet\MotoTripBundle\Security\OwnerAware;
 
 /**
  * WodorNet\MotoTripBundle\Entity\TripSignup
@@ -11,7 +15,7 @@ use WodorNet\MotoTripBundle\Entity\Trip;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupRepository")
  */
-class TripSignup
+class TripSignup implements OwnerAware
 {
     /**
      * @var integer $id
@@ -159,6 +163,11 @@ class TripSignup
         return $this->user;
     }
 
+    public function getOwnerFieldName()
+    {
+        return 'User';
+    }
+
     /**
      * @param string $description
      */
@@ -190,4 +199,16 @@ class TripSignup
     {
         return $this->status;
     }
+
+    public function getObjectIdentity()
+    {
+        return ObjectIdentity::fromDomainObject($this);
+    }
+
+    public function getSecurityIdentity()
+    {
+        return UserSecurityIdentity::fromAccount($this->getUser());
+    }
+
+
 }

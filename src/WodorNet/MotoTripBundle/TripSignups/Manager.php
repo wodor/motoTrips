@@ -57,7 +57,7 @@ class Manager
         $this->em->flush();
 
         $event = new TripSignupEvent($tripSignup);
-        $this->dispatcher->dispatch(MotoTripEvents::onTripSignupReject, $event);
+        $this->dispatcher->dispatch(MotoTripEvents::onTripSignupDisapprove, $event);
     }
 
     /**
