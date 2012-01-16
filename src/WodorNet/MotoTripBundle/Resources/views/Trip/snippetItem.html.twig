@@ -1,6 +1,23 @@
-<a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a>
-<!--COLUMNSEPARATOR-->
-<div class="month_{{item.startDate.format("m")}}">
-{{item.startDate.format("d")}}
+{%spaceless%}
+<div class=" month_all month_{{item.startDate.format("m")}}">
+
+<span>{{item.startDate.format("d")}}</span>
 </div>
-{{item.getDuration|intlinterval}}
+<!--COLUMNSEPARATOR-->
+<table class="tabela_lista">
+    <tr><td colspan="3"><a class="nazwa_wyjazdu" href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a></td></tr>
+    <tr>
+        <td class="duration ikona zegarek">{{item.getDuration|intlinterval}}</td>
+        <td>{% for road in item.roadTypes%}
+                <div class="ikona road_{{road}}">&nbsp;{{road}}</div>
+            {%endfor%}
+        </td>
+        <td></td>
+    </tr>
+</table>
+{%endspaceless%}
+
+
+
+
+

@@ -146,3 +146,98 @@ div.topBar {
 div#map {
     margin-top: 20px;
 }
+/*Lista wypadow mala*/
+.month_all{
+    display: block;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 2em;
+    width: 80px;
+    height: 65px;
+
+    background-image: url("../images/miesiace_sprite.png");
+    background-repeat: no-repeat;
+}
+.month_01 {
+
+    background-position: -25px -20px;
+
+}
+.month_02 {
+    background-position: -25px -94px;
+
+}
+.month_03 {
+    background-position: -25px -168px;
+
+}
+.month_04 {
+    background-position: -25px -244px;
+
+}
+.month_05 {
+    background-position: -25px -320px;
+
+}
+.month_06 {
+    background-position: -25px -394px;
+
+}
+.month_07 {
+    background-position: -25px -470px;
+
+}
+.month_08 {
+    background-position: -25px -546px;
+
+}
+.month_09 {
+    background-position: -25px -620px;
+}
+.month_10 {
+    background-position: -25px -695px;
+}
+.month_11 {
+    background-position: -25px -770px;
+}
+.month_12 {
+    background-position: -25px -844px;
+}
+
+.tabela_lista{
+    width: 300px;
+    margin: 3px 0 0 15px;
+}
+.nazwa_wyjazdu{
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+    font-size: 1.5em;
+}
+
+
+.ikona  {
+    width: 26px;
+    height: 26px;
+    background-image: url("../images/ikony_all.png");
+    background-repeat: no-repeat;
+    display: table-cell;
+    padding-left: 30px;
+    padding-right: 10px;
+    font-weight: bold;
+    font-size:  1.2em;
+}
+
+td.duration{
+    width: 80px;
+
+    background-position: 0px -153px;
+}
+
+.road_szosa{
+    background-position: 0px -200px;
+}
+
+.road_szuter{
+    background-position: 0px -249px;
+}
