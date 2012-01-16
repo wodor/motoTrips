@@ -1,3 +1,6 @@
 <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a>
 <!--COLUMNSEPARATOR-->
-{{item.startDate.format("Y-m-d")}} 
+<div class="month_{{item.startDate.format("m")}}">
+{{item.startDate.format("d")}}
+</div>
+{{item.getDuration|intlinterval}}

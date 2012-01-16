@@ -50,7 +50,7 @@ class TripController extends Controller
 
         $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
 
-        $paginator->setItemTemplate('WodorNetMotoTripBundle:Trip:snippetItem.html.php');
+        $paginator->setItemTemplate('WodorNetMotoTripBundle:Trip:snippetItem.html.twig');
         $output = $paginator->paginate($qb);
 
         return new Response(json_encode($output));

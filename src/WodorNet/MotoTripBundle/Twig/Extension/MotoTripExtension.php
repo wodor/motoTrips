@@ -20,6 +20,7 @@ class MotoTripExtension extends \Twig_Extension
         return array(
             'crop' => new \Twig_Filter_Method($this, 'crop'),
             'intldate' => new \Twig_Filter_Method($this, 'intldate'),
+            'intlinterval' => new \Twig_Filter_Method($this, 'intlinterval'),
         );
     }
 
@@ -37,6 +38,15 @@ class MotoTripExtension extends \Twig_Extension
         );
 
         return $formatter->format($str);
+    }
+
+    public function intlinterval(\DateInterval $str) {
+        if(  $str->format("%a") != "0"){
+            return $str->format("%a")." d";
+        }
+        else {
+            return $str->format("%h")." h";
+        }
     }
 
     public function crop($str, $len)
