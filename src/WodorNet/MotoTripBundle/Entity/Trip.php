@@ -216,7 +216,7 @@ class Trip implements OwnerAware
 
     public function __toString()
     {
-        return substr($this->getDescription(), 0, 8);
+        return (string)substr($this->getDescription(), 0, 8);
     }
 
     /**
@@ -336,4 +336,10 @@ class Trip implements OwnerAware
     {
         return 'Creator';
     }
+
+    public function getDuration() {
+        return $this->getStartDate()->diff($this->getEndDate());
+
+    }
+
 }
