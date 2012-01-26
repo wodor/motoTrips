@@ -94,38 +94,7 @@ div.normalFont label {
     background: rgba(160, 160, 160, 0.2);
 }
 
-form.top_login input {
-    font-size: 12px;
-    border: 1px solid #f4ece5;
-    color: #395164
-}
 
-form.top_login label.normal {
-    font-size: 12px;
-    font-family: Arial, "sans-serif";
-    color: #395164;
-}
-
-form.top_login input[type=submit], form.top_login input[type=button], form.top_login input[type=reset] {
-    background-color: #395164;
-    color: #f4ece5;
-}
-
-form.top_login input[type=text], form.top_login input[type=password] {
-    width: 80px;
-}
-
-form.top_login p {
-    margin: 0;
-    padding: 0;
-
-}
-
-input[type=submit], input[type=button], input[type=reset] {
-    font-family: 'Lobster', cursive;
-    background-color: #403b37;
-    color: #f4ece5;
-}
 
 div.topBar {
 
@@ -241,3 +210,72 @@ td.duration{
 .road_szuter{
     background-position: 0px -249px;
 }
+
+
+/* formularze */
+
+form.top_login input {
+    font-size: 12px;
+    border: 1px solid #f4ece5;
+    color: #395164
+}
+
+form.top_login label.normal {
+    font-size: 12px;
+    font-family: Arial, "sans-serif";
+    color: #395164;
+}
+
+form.top_login input[type=submit], form.top_login input[type=button], form.top_login input[type=reset] {
+    background-color: #395164;
+    color: #f4ece5;
+}
+
+form.top_login input[type=text], form.top_login input[type=password] {
+    width: 80px;
+}
+
+form.top_login p {
+    margin: 0;
+    padding: 0;
+}
+
+input[type=text] {
+    border: solid 1px #403b37;
+}
+
+input[type=submit], input[type=button], input[type=reset] {
+    font-family: 'Lobster', cursive;
+    background-color: #403b37;
+    color: #f4ece5;
+    border: 1px solid #f4ece5;
+}
+
+.bigButton {
+    font-size: 20px;
+}
+
+/* validacja */
+
+form.validated ul {
+
+    border: solid 1px red;
+}
+
+form.validated ul li {
+    color: red;
+    list-style-type: none;
+}
+
+/* end validacja */
+
+
+/* end formularze */
+
+
+.footer {
+    margin: 50px  0 20px 0 ;
+    font-size: 0.8em;
+    text-align: center;
+}
+

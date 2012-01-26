@@ -1,43 +1,44 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
-{% block content %}<h1>{%trans%}Trip edit{%endtrans%}</h1>
+{% block content %}<h1>{%trans%}Trip{%endtrans%}</h1>
 
-<form action="{{ path('trip_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<div class="grid_9">
+<form class="validated" action="{{ path('trip_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
+    <p style="text-align: right; margin-top: 20px;">
+        <input class="bigButton" type="submit" value="Zapisz"/>
     </p>
 </form>
-
-<div class="help">
-    Opisz trase, którą masz zamiar jechać. ile kilometrów masz zamiar zrobić dziennie, jakimi drogami i w jakim tempie.
-    Napisz jak dużo jeździsz, zachęć (lub zniechęć) początkujących motocyklistów.
-    Jeżeli planujesz nocleg, to opisz czego można się spodziewać i koszt.
-    Przed wyjazdem pamiętaj o przypomnieniu wszyskim zasad jazdy w grupie.
 </div>
 
-<div class="help">
-    Oznacz miejsce z którego wyruszasz. Wkrótce dodamy możliwość oznaczania innych miejsc, na razie użyj do tego opisu.
+<div class="grid_7">
+    <div class="help">
+        Podaj tytuł, który zawiera czas i miejsce. Na przykład "Puszcza Notecka w Weeknd - Enduro", "Kilkudniowy wyjazd na Czechy".
+    </div>
+
+    <div class="help" style="margin-top: 15px;">
+        <b>Te informacje będą widoczne dla wszystkich odwiedzających serwis motoWypady.</b><br/>
+        Opisz trasę, którą masz zamiar jechać, ile kilometrów przejedziesz dziennie, jakimi drogami i w jakim tempie.
+        Napisz coś o sobie, zachęć (lub zniechęć) początkujących (lub "wymagających") motocyklistów.
+        Jeżeli znalazłeś już nocleg, to opisz czeg9o można się spodziewać i orinetacyjny koszt.
+        Przed wyjazdem pamiętaj o przypomnieniu wszyskim zasad jazdy w grupie.
+    </div>
+
+    <div class="help" style="margin-top: 60px">Tutaj wpisz informacje, które będa widoczne <b>tylko dla użytkowników,
+        których zatwierdziłeś</b> jako uczestników wypadu. Jest to właściwe miejsce na podawanie adresów lub telefonów.
+    </div>
+    <div class="help">
+
+    </div>
+    
+    <br>
+    <div class="help" style="margin-top: 240px">
+        Oznacz miejsce z którego wyruszasz. Wkrótce dodamy możliwość oznaczania punktów na trasie.
+        <br>
+        Jeżeli nie chcesz podawać dokładnej lokalizacji oznacz skrzyżowanie, lub centrum miejscowości nieopodal.
+        W <b>opisie widocznym tylko dla uczestników</b> wyjaśnij gdzie dokładnie jest spot.
+        Wkrótce lepsze możliwości ukrywania lokalizacji przed obcymi.
+    </div>
+
+
 </div>
-
-
-<div class="help">
-    Jeżeli nie chcesz podawać dokładnej lokalizacji oznacz skrzyżowanie, lub centrum miejscowości nieopodal.
-    W opisie dla uczestników wyjaśnij gdzie dokładnie jest spot.
-    Wkrótce lepsze możliwości ukrywania lokalizacji przed obcymi.
-</div>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('trip') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('trip_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
-
 {% endblock %}

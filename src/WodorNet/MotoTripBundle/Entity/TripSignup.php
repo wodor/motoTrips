@@ -14,9 +14,13 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class TripSignup implements OwnerAware
 {
+
+    const STATUS_NEW = 'new';
+
     /**
      * @var integer $id
      *
@@ -71,7 +75,7 @@ class TripSignup implements OwnerAware
      * @ORM\Column(type="string", length=20)
      *
      */
-    private $status = 'new';
+    private $status = self::STATUS_NEW;
 
     /**
      * Get id

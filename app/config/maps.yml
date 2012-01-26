@@ -39,7 +39,7 @@ ivory_google_map:
         type: "terrain"
 
         # Map width
-        width: "940px"
+        width: "524px"
 
         # Map height
         height: "300px"

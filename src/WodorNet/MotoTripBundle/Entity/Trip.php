@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\AST\Subselect;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
@@ -18,6 +19,7 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Trip implements OwnerAware
 {
@@ -42,6 +44,8 @@ class Trip implements OwnerAware
      * @var text $title
      *
      * @ORM\Column(type="string")
+     * @Assert\MinLength(limit=10, message="Dobry tytuł przyda się wszystkim")
+     * @Assert\MaxLength(limit=60)
      */
     private $title;
 
@@ -58,6 +62,7 @@ class Trip implements OwnerAware
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\MinLength(limit=20, message="Nie tak szybko! Napisz kilka słow o wypadzie")
      */
     private $description;
 
@@ -65,6 +70,7 @@ class Trip implements OwnerAware
      * @var text $descriptionPrivate
      *
      * @ORM\Column( type="text")
+     * @Assert\MinLength(limit=2, message="Na pewno nie masz nic do przekazania zaufanym osobom?")
      */
     private $descriptionPrivate;
 
@@ -72,6 +78,8 @@ class Trip implements OwnerAware
      * @var datetime $startDate
      *
      * @ORM\Column(name="startDate", type="datetime")
+     * @Assert\DateTime()
+     *
      */
     private $startDate;
 
@@ -79,6 +87,7 @@ class Trip implements OwnerAware
      * @var datetime $endDate
      *
      * @ORM\Column(name="endDate", type="datetime")
+     * @Assert\DateTime()
      */
     private $endDate;
 
@@ -106,6 +115,7 @@ class Trip implements OwnerAware
     /**
      * @var float $lng
      * @ORM\Column(type="decimal", precision=13, scale=10)
+     * @Assert\NotBlank(message="Kliknij na mapie poniżej aby pokazać miejsce startu")
      */
     private $lng;
 
@@ -149,7 +159,6 @@ class Trip implements OwnerAware
 
     public function addRoadType(RoadType $roadType)
     {
-
         $roadType->addTrip($this);
         $this->roadTypes[] = $roadType;
     }
@@ -202,6 +211,13 @@ class Trip implements OwnerAware
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
+    }
+
+    /**
+     * @Assert\True(message="Data wyjazdu musi być przed datą zakończenia")
+     */
+    public function isStartDateBeforeEndDate() {
+        return $this->startDate<$this->endDate;
     }
 
     /**
@@ -339,7 +355,6 @@ class Trip implements OwnerAware
 
     public function getDuration() {
         return $this->getStartDate()->diff($this->getEndDate());
-
     }
 
 }
