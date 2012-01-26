@@ -27,7 +27,6 @@ class DoctrineSubscriber implements  \Doctrine\Common\EventSubscriber
     }
 
     /**
-     *
      * Keeps acl Owner and field designated to be owner in domain model in sync
      * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args
      */
@@ -48,7 +47,5 @@ class DoctrineSubscriber implements  \Doctrine\Common\EventSubscriber
 
             }
         }
-
-
     }
 }

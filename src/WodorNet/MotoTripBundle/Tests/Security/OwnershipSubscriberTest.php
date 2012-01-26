@@ -3,7 +3,7 @@ namespace WodorNet\MotoTripBundle\Security;
 
 use WodorNet\MotoTripBundle\Security\DoctrineSubscriber;
 
-require_once '/home/wodor/wrk/www/motowypady/src/WodorNet/MotoTripBundle/Security/DoctrineSubscriber.php';
+require_once '/home/wodor/wrk/www/motowypady/src/WodorNet/MotoTripBundle/Security/OwnershipSubscriber.php';
 
 /**
  * Test class for DoctrineSubscriber.

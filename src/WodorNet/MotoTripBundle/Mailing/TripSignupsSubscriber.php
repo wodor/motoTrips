@@ -11,7 +11,7 @@ use WodorNet\MotoTripBundle\Mailing\Sender;
  * < Stof> wodor: no, subscribers are registered lazily too
  * < Stof> well, in 2.1
  */
-class Subscriber implements EventSubscriberInterface
+class TripSignupsSubscriber implements EventSubscriberInterface
 {
     /**
      * @var \WodorNet\MotoTripBundle\Mailing\Sender
