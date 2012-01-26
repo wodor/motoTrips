@@ -112,33 +112,6 @@ class TripController extends Controller
     }
 
     /**
-     * Displays a form to create a new Trip entity.
-     *
-     * @Route("/new", name="trip_new")
-     * @Template()
-     * @Secure(roles="ROLE_USER")
-     *
-     */
-    public function newAction()
-    {
-        $entity = new Trip();
-        $nextHour = new \DateTime(date("Y-m-d H:00:00"));
-        $nextHour->modify('next hour');
-        $tomorrow = clone $nextHour;
-        $tomorrow->modify('next day');
-
-        $entity->setStartDate($nextHour);
-        $entity->setEndDate($tomorrow);
-
-        $form = $this->createForm(new TripType(), $entity);
-
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
      * gives Trip entity to the admin
      *
      * @Route("/{id}/give", name="trip_give")
@@ -167,11 +140,40 @@ class TripController extends Controller
     }
 
     /**
+     * Displays a form to create a new Trip entity.
+     *
+     * @Route("/new", name="trip_new")
+     * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
+     * @Secure(roles="ROLE_USER")
+     *
+     */
+    public function newAction()
+    {
+        $trip = new Trip();
+        $nextHour = new \DateTime(date("Y-m-d H:00:00"));
+        $nextHour->modify('next hour');
+        $tomorrow = clone $nextHour;
+        $tomorrow->modify('next day');
+
+        $trip->setStartDate($nextHour);
+        $trip->setEndDate($tomorrow);
+
+        $form = $this->createForm(new TripType(), $trip);
+
+        return array(
+            'entity' => $trip,
+            'edit_form' => $form->createView(),
+        );
+    }
+
+
+
+    /**
      * Creates a new Trip entity.
      *
-     * @Route("/create", name="trip_create")
+     * @Route("/update", name="trip_create")
      * @Method("post")
-     * @Template("WodorNetMotoTripBundle:Trip:new.html.twig")
+     * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
      * @Secure("ROLE_USER")
      */
     public function createAction()
@@ -200,7 +202,7 @@ class TripController extends Controller
 
         return array(
             'entity' => $trip,
-            'form' => $form->createView()
+            'edit_form' => $form->createView()
         );
     }
 
@@ -214,11 +216,6 @@ class TripController extends Controller
      */
     public function editAction(Trip $trip)
     {
-
-        //   $aclProvider = $this->get('security.acl.provider');
-        //   $aclProvider->findAcl( ObjectIdentity::fromDomainObject($trip));
-
-
         $editForm = $this->createForm(new TripType(), $trip);
         $deleteForm = $this->createDeleteForm($trip->getId());
 
@@ -232,7 +229,7 @@ class TripController extends Controller
     /**
      * Edits an existing Trip entity.
      *
-     * @Route("/{id}/update", name="trip_update")
+     * @Route("/update/{id}", name="trip_update")
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
