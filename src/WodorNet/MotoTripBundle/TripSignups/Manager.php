@@ -91,4 +91,6 @@ class Manager
         $this->dispatcher->dispatch(MotoTripEvents::onTripSignupResign, $event);
     }
 
+
+
 }

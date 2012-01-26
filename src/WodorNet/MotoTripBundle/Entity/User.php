@@ -34,6 +34,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->tripSignups = new ArrayCollection();
+        $this->trips = new ArrayCollection();
     }
 
 
@@ -42,5 +43,41 @@ class User extends BaseUser
         return $this->username;
     }
 
+    public function addTripSignup($tripSignups)
+    {
+        $this->tripSignups[] = $tripSignups;
+    }
+
+    public function getTripSignups()
+    {
+        return $this->tripSignups;
+    }
+
+    public function addTrip($trips)
+    {
+        $this->trips[] = $trips;
+    }
+
+    public function getTrips()
+    {
+        return $this->trips;
+    }
+
+    /**
+     * Move it to service layer ?
+     * @param Trip $trip
+     * @return bool
+     */
+    public function isCandidateForTrip(Trip $trip) {
+        foreach($this->getTripSignups() as $tripsignup) {
+            /** @var $tripsignup \WodorNet\MotoTripBundle\Entity\TripSignup */
+            if($tripsignup->getStatus() == TripSignup::STATUS_NEW) {
+                if($tripsignup->getTrip() === $trip) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

@@ -3,12 +3,10 @@ namespace WodorNet\MotoTripBundle\Security;
 /**
  * Gives and takes permissions,
  * listens to events from Symfony event dispatcher
- *
  */
-
 use Symfony\Component\Security\Acl\Model\MutableAclProviderInterface;
 use \Symfony\Component\Security\Acl\Permission\MaskBuilder;
-class DoctrineSubscriber implements  \Doctrine\Common\EventSubscriber
+class OwnershipSubscriber implements  \Doctrine\Common\EventSubscriber
 {
 
     /**
@@ -23,29 +21,36 @@ class DoctrineSubscriber implements  \Doctrine\Common\EventSubscriber
 
     public function getSubscribedEvents()
     {
-        return array('preUpdate');
+        return array('postPersist');
     }
 
     /**
      * Keeps acl Owner and field designated to be owner in domain model in sync
      * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args
      */
-    public function preUpdate(\Doctrine\ORM\Event\PreUpdateEventArgs $args)
+    public function postPersist(\Doctrine\ORM\Event\PreUpdateEventArgs $args)
     {
+        echo "dasd'";exit('ss');
+        // ODPALA SIE TYLKO NA UPDATE
         /**
          * @var $entity OwnerAware
          */
         $entity = $args->getEntity();
 
         if ($entity instanceof OwnerAware) {
-            if ($args->hasChangedField($entity->getOwnerFieldName())) {
-                // TODO find acl for Previous Owner and delete it
+            $this->ownershipUpdate($entity, $args);
+        }
+    }
 
-                $acl = $this->aclProvider->createAcl($entity->getObjectIdentity(), $entity->getSecurityIdentity());
-                $acl->insertObjectAce($entity->getSecurityIdentity(), MaskBuilder::MASK_OWNER);
-                $this->aclProvider->updateAcl($acl);
+    public function ownershipUpdate($entity, $args)
+    {
+        if ($args->hasChangedField($entity->getOwnerFieldName())) {
+            // TODO find acl for Previous Owner and delete it
 
-            }
+            $acl = $this->aclProvider->createAcl($entity->getObjectIdentity(), $entity->getSecurityIdentity());
+            $acl->insertObjectAce($entity->getSecurityIdentity(), MaskBuilder::MASK_OWNER);
+            $this->aclProvider->updateAcl($acl);
+
         }
     }
 }
