@@ -20,18 +20,21 @@ use WodorNet\MotoTripBundle\Entity;
 class FeatureContext extends MinkContext //BehatContext //MinkContext if you want to test web
 {
 
+    protected $myLogin;
 
     public function __construct($kernel)
     {
+        $this->useContext('acl', new \WodorNet\MotoTripBundle\Features\Context\AclContext($kernel));
         $this->useContext('symfony_doctrine', new \Behat\CommonContexts\SymfonyDoctrineContext($kernel));
         $this->useContext('web_extra', new \Behat\CommonContexts\WebExtraContext($kernel));
         $this->useContext('symfony_extra', new \Behat\CommonContexts\SymfonyExtraContext($kernel));
         $this->useContext('redirect', new \Behat\CommonContexts\RedirectContext($kernel));
+        $this->useContext('trip', new \WodorNet\MotoTripBundle\Features\Context\TripContext($kernel));
         parent::__construct($kernel);
     }
 
 
-   /**
+    /**
      * @Given /^the site has following users:$/
      */
     public function theSiteHasFollowingUsers(TableNode $table)
@@ -74,16 +77,26 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
 
 
     /**
+     * @Given /^I am "([^"]*)"$/
+     */
+    public function iAm($login)
+    {
+        $this->myLogin = $login;
+    }
+
+
+    /**
      * @Given /^I am logged in as "([^"]*)" with "([^"]*)" password$/
      */
     public function iAmLoggedInAsWithPassword($login, $pass)
     {
         return array(
+            new Step\Given('I am "' . $login . '"'),
             new Step\When('I go to "/login"'),
             new Step\When('I fill in "Nazwa użytkownika:" with "'.$login.'"'),
             new Step\When('I fill in "Hasło:" with "'.$pass.'"'),
             new Step\When('I press "Zaloguj"'),
-            new Step\Then('I should be on "/"'),
+          //  new Step\Then('I should be on "/"'),
         );
     }
 
@@ -122,16 +135,14 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
         return $this->_application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
     }
 
-//
-// Place your definition and hook methods here:
-//
-//    /**
-//     * @Given /^I have done something with "([^"]*)"$/
-//     */
-//    public function iHaveDoneSomethingWith($argument)
-//    {
-//        $container = $this->getContainer();
-//        $container->get('some_service')->doSomethingWith($argument);
-//    }
-//
+    public function getMyLogin()
+    {
+        return $this->myLogin;
+    }
+
+    public function getMe() {
+        return current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:User')->findByUsername($this->getMyLogin()));
+    }
+
+
 }

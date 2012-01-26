@@ -3,13 +3,14 @@ Feature: tripCreation
     As a logged in user
     I need to be able to add trips
 
-
 Background:
   Given the site has following users:
   | username | password | email               |
   | Kreator  | 123456   | wodor@wodor.net     |
   | Konsumer | 22@222   | wod.orw@gmail.com   |
-
+  Given the site has following trips:
+  | creator | title |
+  | Kreator | wypad  w góry |
 
 
 @javascript
@@ -25,7 +26,10 @@ Scenario: Add a trip
     And I press "Dodaj"
     Then I should see "The testing test of the test"
 
-
-
+Scenario: Go to join trip
+    Given I am logged in as "Konsumer" with "22@222" password
+    And I go to "/trip/1/show"
+    And I follow "Dołącz do wypadu"
+    Then I should see "Dołącz do wypadu"
 
 

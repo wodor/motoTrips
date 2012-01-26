@@ -1,37 +1,50 @@
 <?php
 namespace WodorNet\MotoTripBundle\Tests\Entity;
 
-use WodorNet\MotoTripBundle\Entity\Trip;
+use Doctrine\Common\Collections\ArrayCollection;
 
-class TripTest extends \PHPUnit_Framework_TestCase
+use WodorNet\MotoTripBundle\Entity\Trip;
+use WodorNet\MotoTripBundle\Entity\TripSignup;
+use WodorNet\MotoTripBundle\Entity\User;
+
+class UserTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var  \WodorNet\MotoTripBundle\Entity\User
+     */
+    private $user;
 
-    public function GetDurationProvider() {
+    public function setUp() {
+        $this->user = new User();
+        parent::setUp();
+    }
+
+    public function testGetTripSignups() {
 
         $trip = new Trip();
-        $trip->setStartDate(new \DateTime("2012-01-01 12:10"));
-        $trip->setEndDate(new \DateTime("2012-01-01 18:10"));
+        $tripSignup = new TripSignup();
+        $tripSignup->setTrip($trip);
+        $tripSignup->setStatus(TripSignup::STATUS_NEW);
 
-        $exp[] = array($trip, new \DateInterval("PT6H"));
+        $this->user->addTripSignup($tripSignup);
 
-        return $exp;
+        $this->assertEquals(new ArrayCollection(array($tripSignup)), $this->user->getTripSignups());
+
+        return $tripSignup;
     }
 
     /**
-     * @dataProvider GetDurationProvider
+     * @depends  testGetTripSignups
      */
-    public function  testGetDuration($trip, \DateInterval $interval) {
+    public function testIsCandidateForTrip(TripSignup $tripSignup) {
 
-        $this->assertEquals($trip->getDuration()->format('%R%h'), $interval->format('%R%h'));
+        $this->user->addTripSignup($tripSignup);
+
+        $this->assertTrue($this->user->isCandidateForTrip($tripSignup->getTrip()));
+        $this->assertFalse($this->user->isCandidateForTrip(new Trip()));
 
     }
-}
 
-/**
- * do przetestowania
- *
- * wywołanie zdarzen przy zapisie
- * wykonanie zdarzen
- *
- */
+
+}

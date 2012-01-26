@@ -1,62 +1,79 @@
 <?php
 
-
 namespace WodorNet\MotoTripBundle\Features\Context;
 
-use Behat\BehatBundle\Context\BehatContext,
-    Behat\BehatBundle\Context\MinkContext;
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
-use Behat\Behat\Context\Step;
-
-use WodorNet\MotoTripBundle\Entity;
-
+use Behat\BehatBundle\Context\BehatContext;
+use Symfony\Bundle\SecurityBundle\Command\InitAclCommand;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 /**
  * Feature context.
  */
-class TripContext extends  BehatContext
+class AclContext extends  BehatContext
 {
+
     /**
-     * @Given /^the site has following trips:$/
+     * @Then /^I have "([^"]*)" permission for "([^"]*)" trip$/
      */
-    public function theSiteHasFollowingTrips(TableNode $table)
+    public function iHavePermissionForTrip($permission, $tripTitle)
     {
-        $hash = $table->getHash();
-        $em = $this->getEntityManager();
-        foreach ($hash as $row) {
-            $trip = new Entity\Trip();
-            $creator = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($row['creator']));
+        /** @var $trip \WodorNet\MotoTripBundle\Entity\Trip */
+        $trip = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
 
-            $trip->setCreator($creator);
-            $trip->setCreationDate(new \DateTime());
-            $trip->setStartDate(new \DateTime());
-            $trip->setEndDate(new \DateTime("tomorrow"));
-            $trip->setLocation(array('lat'=>'10.00', 'lng'=>'20.00'));
-            $trip->setTitle($row['title']);
-            $trip->setDescription('Lorem ipsum dolor sit amet');
-            $trip->setDescriptionPrivate("The very private description");
 
-            $em->persist($trip);
-
+        $aclProvider = $this->getContainer()->get('security.acl.provider');
+        foreach($aclProvider->findAcl($trip->getObjectIdentity(), array($trip->getObjectIdentity()) )->getObjectAces() as $acl ) {
+            $acl->isGranted(array(MaskBuilder::MASK_OWNER), array($trip->getObjectIdentity()));
         }
-        $em->flush();
+
+        /** @var $pe \JMS\SecurityExtraBundle\Security\Acl\Expression\PermissionEvaluator */
+        //        $pe = $this->getContainer()->get('security.acl.permission_evaluator');
+        //
+//
+//        $trip->getObjectIdentity();
+//
+//        $pe->hasPermission($trip->getSecurityIdentity(), $trip->getObjectIdentity(), MaskBuilder::MASK_OWNER);
+        return true;
     }
+
     /**
-     * @Given /^User "([^"]*)" should be in trip candiates for trip "([^"]*)"$/
+     * @param \Behat\Behat\Event\ScenarioEvent|\Behat\Behat\Event\OutlineExampleEvent $event
+     *
+     * @BeforeScenario
+     *
+     * @return null
      */
-    public function UserShouldBeInTripCandiatesOf($userName, $tripId)
+    public function setUp($event)
     {
-        $em = $this->getEntityManager();
-        $candidate = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($userName));
-        $trip = current($em->getRepository('WodorNetMotoTripBundle:Trip')->findById($tripId));
 
-        return $candidate->isCandidateForTrip($trip);
+        $kernel = new \AppKernel("test", true);
+        $kernel->boot();
+        $this->_application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $this->_application->setAutoExit(false);
 
+        // I use drop and create to avoid need for separate entity manager
+        // i dont want to complicate config only for this purpose
+        $this->runConsole("doctrine:database:drop", array("--force" => true, '--connection' => 'acl'));
+        $this->runConsole("doctrine:database:create", array('--connection' => 'acl'));
+        $this->runConsole("cache:warmup");
+
+        // franca jebana gubi polaczenie do bazy i jest  SQLSTATE[3D000]: Invalid catalog name: 1046 No database selected
+        // let's reconnect to db as it was recreated
+        $kernel = new \AppKernel("test", true);
+        $kernel->boot();
+        $this->_application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
+        $this->_application->setAutoExit(false);
+
+        $this->runConsole("init:acl");
     }
 
+    protected function runConsole($command, Array $options = array())
+    {
+        $options["-e"] = "test";
+        $options = array_merge($options, array('command' => $command));
+
+        return $this->_application->run(new \Symfony\Component\Console\Input\ArrayInput($options), new \Symfony\Component\Console\Output\ConsoleOutput());
+    }
 
     /**
      * Returns entity manager
@@ -67,5 +84,6 @@ class TripContext extends  BehatContext
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
+
 
 }
