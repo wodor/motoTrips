@@ -6,7 +6,9 @@ namespace WodorNet\MotoTripBundle\Security;
  */
 use Symfony\Component\Security\Acl\Model\MutableAclProviderInterface;
 use \Symfony\Component\Security\Acl\Permission\MaskBuilder;
-class OwnershipSubscriber implements  \Doctrine\Common\EventSubscriber
+use \Doctrine\ORM\Event\OnFlushEventArgs;
+
+class OwnershipSubscriber implements \Doctrine\Common\EventSubscriber
 {
 
     /**
@@ -24,14 +26,13 @@ class OwnershipSubscriber implements  \Doctrine\Common\EventSubscriber
         return array('postPersist');
     }
 
+
     /**
      * Keeps acl Owner and field designated to be owner in domain model in sync
      * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args
      */
-    public function postPersist(\Doctrine\ORM\Event\PreUpdateEventArgs $args)
+    public function postPersist(\Doctrine\ORM\Event\LifecycleEventArgs $args)
     {
-        echo "dasd'";exit('ss');
-        // ODPALA SIE TYLKO NA UPDATE
         /**
          * @var $entity OwnerAware
          */
@@ -42,15 +43,31 @@ class OwnershipSubscriber implements  \Doctrine\Common\EventSubscriber
         }
     }
 
-    public function ownershipUpdate($entity, $args)
+    public function ownershipUpdate($entity)
     {
-        if ($args->hasChangedField($entity->getOwnerFieldName())) {
-            // TODO find acl for Previous Owner and delete it
+        //if ($args->hasChangedField($entity->getOwnerFieldName())) {
+        // switch to onFlush
 
-            $acl = $this->aclProvider->createAcl($entity->getObjectIdentity(), $entity->getSecurityIdentity());
-            $acl->insertObjectAce($entity->getSecurityIdentity(), MaskBuilder::MASK_OWNER);
-            $this->aclProvider->updateAcl($acl);
+        $acl = $this->aclProvider->createAcl($entity->getObjectIdentity(), $entity->getSecurityIdentity());
+        $acl->insertObjectAce($entity->getSecurityIdentity(), MaskBuilder::MASK_OWNER);
+        $this->aclProvider->updateAcl($acl); // this is untested by current test
 
-        }
+        //}
     }
+
+    public function postUpdate()
+    {
+        // TODO find acl for Previous Owner and delete it
+        // `if field changed
+
+    }
+
+
+    public function preRemove()
+    {
+        // TODO find acl for  curent Owner and delete it
+
+    }
+
+
 }

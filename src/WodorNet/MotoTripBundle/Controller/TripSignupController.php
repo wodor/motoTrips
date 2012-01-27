@@ -165,8 +165,6 @@ class TripSignupController extends Controller
                 $em->persist($signup);
                 $em->flush();
 
-                $this->grantAccessForCurrentUser($signup);
-
                 return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
             }
         }

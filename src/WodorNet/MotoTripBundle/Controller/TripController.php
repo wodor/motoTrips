@@ -167,7 +167,6 @@ class TripController extends Controller
     }
 
 
-
     /**
      * Creates a new Trip entity.
      *
@@ -194,8 +193,6 @@ class TripController extends Controller
             //$trip->addRoadType($rt);
             $em->persist($trip);
             $em->flush();
-
-          //  $this->grantAccessForCurrentUser($trip);
 
             return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
         }
@@ -251,7 +248,7 @@ class TripController extends Controller
             $em->persist($trip);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('trip_edit', array('id' => $trip->getId())));
+            return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
         }
 
         return array(

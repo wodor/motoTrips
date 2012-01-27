@@ -14,7 +14,6 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class TripSignup implements OwnerAware
 {
