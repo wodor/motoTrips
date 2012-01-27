@@ -6,13 +6,19 @@ use Behat\BehatBundle\Context\BehatContext;
 use Symfony\Bundle\SecurityBundle\Command\InitAclCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 /**
  * Feature context.
  */
-class AclContext extends  BehatContext
+class AclContext extends BehatContext
 {
 
     /**
+     * TODO
+     * this does not checks $this->aclProvider->updateAcl($acl)
+     * this test shoul use user as from a parameter not taken from inside of the object
+     * this test shoul use user as from a parameter not taken from inside of the object
+     *
      * @Then /^I have "([^"]*)" permission for "([^"]*)" trip$/
      */
     public function iHavePermissionForTrip($permission, $tripTitle)
@@ -20,20 +26,21 @@ class AclContext extends  BehatContext
         /** @var $trip \WodorNet\MotoTripBundle\Entity\Trip */
         $trip = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
 
-
-        $aclProvider = $this->getContainer()->get('security.acl.provider');
-        foreach($aclProvider->findAcl($trip->getObjectIdentity(), array($trip->getObjectIdentity()) )->getObjectAces() as $acl ) {
-            $acl->isGranted(array(MaskBuilder::MASK_OWNER), array($trip->getObjectIdentity()));
+        if (!$trip instanceof \WodorNet\MotoTripBundle\Entity\Trip) {
+            throw new \InvalidArgumentException('Trip titled "' . $tripTitle . '" does not exist');
         }
 
-        /** @var $pe \JMS\SecurityExtraBundle\Security\Acl\Expression\PermissionEvaluator */
-        //        $pe = $this->getContainer()->get('security.acl.permission_evaluator');
-        //
-//
-//        $trip->getObjectIdentity();
-//
-//        $pe->hasPermission($trip->getSecurityIdentity(), $trip->getObjectIdentity(), MaskBuilder::MASK_OWNER);
-        return true;
+        $aclProvider = $this->getContainer()->get('security.acl.provider');
+        foreach ($aclProvider->findAcl($trip->getObjectIdentity(), array($trip->getObjectIdentity()))->getObjectAces() as $entry) {
+            /** @var $entry \Symfony\Component\Security\Acl\Domain\Entry */
+            $granted = $entry->getAcl()->isGranted(array(MaskBuilder::MASK_OWNER), array($trip->getSecurityIdentity()));
+
+            if ($granted) {
+                return true;
+            }
+        }
+
+        throw new \RuntimeException("OWNER of trip $tripTitle is not set properly");
     }
 
     /**

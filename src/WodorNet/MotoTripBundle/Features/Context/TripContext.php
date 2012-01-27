@@ -4,12 +4,12 @@
 namespace WodorNet\MotoTripBundle\Features\Context;
 
 use Behat\BehatBundle\Context\BehatContext,
-    Behat\BehatBundle\Context\MinkContext;
+Behat\BehatBundle\Context\MinkContext;
 use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Exception\PendingException;
+Behat\Behat\Context\TranslatedContextInterface,
+Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Context\Step;
 
 use WodorNet\MotoTripBundle\Entity;
@@ -17,7 +17,7 @@ use WodorNet\MotoTripBundle\Entity;
 /**
  * Feature context.
  */
-class TripContext extends  BehatContext
+class TripContext extends BehatContext
 {
     /**
      * @Given /^the site has following trips:$/
@@ -59,19 +59,26 @@ class TripContext extends  BehatContext
     }
 
     /**
+     * @Given /^I edit trip "([^"]*)"$/
+     */
+    public function iEditTrip($title)
+    {
+        $trip = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($title));
+
+        $trip->setDescription($title . " desc ");
+        $this->getEntityManager()->persist($trip);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @Given /^I create trip "([^"]*)"$/
      */
     public function iCreateTrip($title)
     {
-       $trip = $this->getTrip($this->getMainContext()->getMe(), array('title'=>$title."sss"));
-       $this->getEntityManager()->persist($trip);
-       $this->getEntityManager()->flush();
+        $trip = $this->getTrip($this->getMainContext()->getMe(), array('title' => $title));
 
-        $trip->setTitle($title);
         $this->getEntityManager()->persist($trip);
         $this->getEntityManager()->flush();
-
-
     }
 
     protected function getTrip($creator, $data)

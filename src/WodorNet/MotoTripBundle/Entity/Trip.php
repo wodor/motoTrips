@@ -19,7 +19,6 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class Trip implements OwnerAware
 {
@@ -216,8 +215,9 @@ class Trip implements OwnerAware
     /**
      * @Assert\True(message="Data wyjazdu musi być przed datą zakończenia")
      */
-    public function isStartDateBeforeEndDate() {
-        return $this->startDate<$this->endDate;
+    public function isStartDateBeforeEndDate()
+    {
+        return $this->startDate < $this->endDate;
     }
 
     /**
@@ -353,7 +353,8 @@ class Trip implements OwnerAware
         return 'Creator';
     }
 
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->getStartDate()->diff($this->getEndDate());
     }
 
