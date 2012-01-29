@@ -91,21 +91,18 @@ class TripSignupController extends Controller
      * List of candidates to approve
      *
      * @Route("/{id}/Candidates/", name="candidateTripSignups", options={"expose"=true})
-     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @Template("WodorNetMotoTripBundle:TripSignup:candidatesSnippet.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
     public function signupCandidatesListAction(Trip $trip)
     {
 
         $em = $this->getDoctrine()->getEntityManager();
+        /** @var $qb \Doctrine\ORM\QueryBuilder */
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findCandidatesByTrip($trip);
 
-        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
-
-        $paginator->setItemTemplate('WodorNetMotoTripBundle:TripSignup:candidateItem.html.twig');
-        $output = $paginator->paginate($qb);
-
-        return new Response(json_encode($output));
+        $tripSignups = $qb->getQuery()->getResult();
+        return array('tripSignups' => $tripSignups);
 
     }
 
@@ -114,7 +111,7 @@ class TripSignupController extends Controller
      * List of approved candidates
      *
      * @Route("/{id}/Approved/", name="approvedTripSignups", options={"expose"=true})
-     * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
+     * @Template("WodorNetMotoTripBundle:TripSignup:approvedSnippet.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
     public function signupListAction(Trip $trip)
@@ -123,13 +120,8 @@ class TripSignupController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findApprovedByTrip($trip);
 
-        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
-
-        $paginator->setItemTemplate('WodorNetMotoTripBundle:TripSignup:approvedItem.html.twig');
-        $output = $paginator->paginate($qb);
-
-        return new Response(json_encode($output));
-        //return array();
+        $tripSignups = $qb->getQuery()->getResult();
+        return array('tripSignups' => $tripSignups);
     }
 
 

@@ -10,9 +10,34 @@
         </tr>
         </thead>
         <tbody>
+
+        {% for item in tripSignups %}
+        <tr>
+            <td>
+                <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+            </td>
+            <td>
+                {{item.signupDate.format("Y-m-d")}}
+            </td>
+            <td>
+                {% if is_expr_granted("hasPermission(object, 'OWNER')", item.trip) %}
+                <a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}"
+                   title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
+                <a href="{{ path('tripsignup_show', { 'id': item.id}) }}"
+                   title="{% trans %}Details{% endtrans %}">{% trans %}Details{% endtrans %}</a>
+                {% endif %}
+
+
+                {% if is_expr_granted("hasPermission(object, 'OWNER')", item) %}
+                <a href="{{ path('tripsignup_resign', { 'id': item.id}) }}"
+                   title="{% trans %}Resign{% endtrans %}">{% trans %}Resign{% endtrans %}</a>
+                {% endif %}
+
+            </td>
+        </tr>
+        {% endfor %}
+
         </tbody>
     </table>
 </div>
 {% endblock %}
-
-{% include 'WodorNetMotoTripBundle::datatable.html.twig' with {'sourceRoute': "'approvedTripSignups', { id: " ~ trip.id ~ " }" , 'tablename':'dataTable2'} %}
