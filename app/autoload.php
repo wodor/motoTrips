@@ -30,7 +30,7 @@ $loader->registerNamespaces(array(
     'Behat\Mink' => __DIR__ . '/../vendor/behat/mink/src',
     'Behat\MinkBundle' => __DIR__ . '/../vendor/bundles',
     'Behat\Behat' => __DIR__ . '/../vendor/behat/behat/src',
-    // 'Behat\Behat'   => __DIR__.'/../vendor/BehatCommonContexts',
+    'Behat\CommonContexts' => __DIR__ . '/../vendor/BehatCommonContexts',
     'Behat\BehatBundle' => __DIR__ . '/../vendor/bundles',
 
     'Behat\SahiClient' => __DIR__ . '/../vendor/behat/sahi/src',

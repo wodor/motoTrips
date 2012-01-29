@@ -13,6 +13,7 @@ web_profiler:
 swiftmailer:
     disable_delivery: true
 
+
 mink:
     base_url:   http://motowypady.tyr/app_test.php
     show_cmd:             google-chrome %s
