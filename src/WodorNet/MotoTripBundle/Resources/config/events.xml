@@ -8,8 +8,8 @@
 
         <service id="wodor_net_moto_trip.mailing_subscriber_tripsignup"
                  class="WodorNet\MotoTripBundle\Mailing\TripSignupsSubscriber">
-            <tag name="doctrine.event_subscriber" connection="default"/>
-            <argument type="service" id="service_container"/>
+            <tag name="wodor_net_moto_trip.subscriber"/>
+            <argument type="service" id="wodor_net_moto_trip.mailing.sender"/>
         </service>
 
         <service id="wodor_net_moto_trip.security_subscriber_tripsignup"

@@ -41,7 +41,7 @@ class TripSignup implements OwnerAware
      *
      * @ORM\Column(name="signupType", type="string", length=255)
      */
-    private $signupType;
+    private $signupType = 'join';
 
     /**
      * @var object $trip

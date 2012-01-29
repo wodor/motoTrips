@@ -3,7 +3,9 @@
 namespace WodorNet\MotoTripBundle\Entity;
 
 use Doctrine\ORM\EntityRepository,
- WodorNet\MotoTripBundle\Entity\Trip;
+WodorNet\MotoTripBundle\Entity\Trip,
+WodorNet\MotoTripBundle\Entity\User;
+
 /**
  * TripSignupRepository
  *
@@ -14,7 +16,8 @@ class TripSignupRepository extends EntityRepository
 {
 
 
-    private function findByTrip(Trip $trip){
+    private function findByTrip(Trip $trip)
+    {
 
         $qb = $this->createQueryBuilder('ts');
 
@@ -23,7 +26,7 @@ class TripSignupRepository extends EntityRepository
             $qb->expr()->eq('ts.trip', ':trip')
         );
 
-        $qb->add('where',  $where);
+        $qb->add('where', $where);
 
         $qb->add('orderBy', "ts.signupDate asc");
 
@@ -33,7 +36,8 @@ class TripSignupRepository extends EntityRepository
 
     }
 
-    public function findCandidatesByTrip(Trip $trip) {
+    public function findCandidatesByTrip(Trip $trip)
+    {
 
         $qb = $this->findByTrip($trip);
         $qb->setParameter('status', 'new');
@@ -41,13 +45,32 @@ class TripSignupRepository extends EntityRepository
 
     }
 
-    public function findApprovedByTrip(Trip $trip) {
+    public function findApprovedByTrip(Trip $trip)
+    {
 
         $qb = $this->findByTrip($trip);
         $qb->setParameter('status', 'approved');
 
         return $qb;
-
     }
 
+    /**
+     * Finds signup to $trip by $user
+     */
+    public function getByTripAndUser(Trip $trip, User $user)
+    {
+        $qb = $this->createQueryBuilder('ts');
+
+        $where = $qb->expr()->andx(
+            $qb->expr()->eq('ts.trip', ':trip'),
+            $qb->expr()->eq('ts.user', ':user')
+        );
+
+        $qb->add('where', $where);
+
+        $qb->setParameter('trip', $trip);
+        $qb->setParameter('user', $user);
+
+        return current($qb->getQuery()->getResult());
+    }
 }

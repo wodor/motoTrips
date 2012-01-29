@@ -1,5 +1,6 @@
 <?php
 namespace WodorNet\MotoTripBundle\Mailing;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use WodorNet\MotoTripBundle\Event\TripSignupEvent;
 use WodorNet\MotoTripBundle\MotoTripEvents;
 use WodorNet\MotoTripBundle\Mailing\Sender;
@@ -10,7 +11,7 @@ use WodorNet\MotoTripBundle\Mailing\Sender;
  * < Stof> wodor: no, subscribers are registered lazily too
  * < Stof> well, in 2.1
  */
-class TripSignupsSubscriber implements \Doctrine\Common\EventSubscriber
+class TripSignupsSubscriber implements EventSubscriberInterface
 {
     /**
      * @var \WodorNet\MotoTripBundle\Mailing\Sender
@@ -20,48 +21,30 @@ class TripSignupsSubscriber implements \Doctrine\Common\EventSubscriber
     /**
      * @param \WodorNet\MotoTripBundle\Mailing\Sender $sender
      */
-    public function __construct(\Symfony\Component\DependencyInjection\Container $container)
+    public function __construct(Sender $sender)
     {
-        //$container->get('wodor_net_moto_trip.mailing.sender');
-        // $this->sender = $sender;
+        $this->sender = $sender;
     }
 
-    public function getSubscribedEvents()
+    /**
+     * @static
+     * @return array
+     */
+    static public function getSubscribedEvents()
     {
-        return array('postPersist', 'postUpdate');
+        return array(
+            MotoTripEvents::onTripSignupCreate => 'onTripSignupCreate',
+            MotoTripEvents::onTripSignupApprove => 'onTripSignupApprove',
+            MotoTripEvents::onTripSignupDisapprove => 'onTripSignupDisapprove',
+            MotoTripEvents::onTripSignupReject => 'onTripSignupReject',
+            MotoTripEvents::onTripSignupResign => 'onTripSignupResign',
+        );
     }
 
-    public function postPersist(\Doctrine\ORM\Event\LifecycleEventArgs $args)
+    public function onTripSignupCreate(TripSignupEvent $event)
     {
-        /**
-         * @var $tripSignup TripSignup
-         */
-        $tripSignup = $args->getEntity();
-
-        if ($tripSignup instanceof \WodorNet\MotoTripBundle\Entity\TripSignup) {
-
-        }
-
+        return $this->sender->sendSingnupCreate($event->getTripSignup());
     }
-
-    public function  postUpdate(\Doctrine\ORM\Event\LifecycleEventArgs $args)
-    {
-        echo "XXXXXXDXXXXXXXX";
-    }
-
-//    /**
-//     * @static
-//     * @return array
-//     */
-//    static public function getSubscribedEvents()
-//    {
-//        return array(
-//            MotoTripEvents::onTripSignupApprove => 'onTripSignupApprove',
-//            MotoTripEvents::onTripSignupDisapprove => 'onTripSignupDisapprove',
-//            MotoTripEvents::onTripSignupReject => 'onTripSignupReject',
-//            MotoTripEvents::onTripSignupResign => 'onTripSignupResign',
-//        );
-//    }
 
     /**
      * @param \WodorNet\MotoTripBundle\Event\TripSignupEvent $event

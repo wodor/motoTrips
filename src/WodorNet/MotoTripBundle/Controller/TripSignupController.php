@@ -143,34 +143,37 @@ class TripSignupController extends Controller
      */
     public function signupAction(Trip $trip)
     {
-        $signup = new TripSignup();
+        $tripSignup = new TripSignup();
+
 
         $user = $this->get('security.context')->getToken()->getUser();
-
-        $signup->setTrip($trip);
-        $signup->setUser($user);
-        $signup->setSignupType('join');
+        $tripSignup->setTrip($trip);
+        $tripSignup->setUser($user);
+        $tripSignup->setSignupType('join');
 
         $request = $this->getRequest();
-        $form = $this->createForm(new TripSignupType(), $signup);
+        $form = $this->createForm(new TripSignupType(), $tripSignup);
 
         if ($request->getMethod() === "POST") {
             $form->bindRequest($request);
 
             if ($form->isValid()) {
 
-                $signup->setSignupDate(new \DateTime());
+                $tripSignup->setSignupDate(new \DateTime());
 
                 $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($signup);
+                $em->persist($tripSignup);
                 $em->flush();
+
+                $event = new \WodorNet\MotoTripBundle\Event\TripSignupEvent($tripSignup);
+                $this->get('event_dispatcher')->dispatch(\WodorNet\MotoTripBundle\MotoTripEvents::onTripSignupCreate, $event);
 
                 return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
             }
         }
 
         return array(
-            'entity' => $signup,
+            'entity' => $tripSignup,
             'form' => $form->createView()
         );
     }

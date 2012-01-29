@@ -36,6 +36,47 @@ class TripContext extends BehatContext
     }
 
     /**
+     * @Given /^the "([^"]*)" trip has the following signups:$/
+     */
+    public function theTripHasTheFollowingSignups($tripTitle, TableNode $table)
+    {
+
+        $hash = $table->getHash();
+        $em = $this->getEntityManager();
+        echo "\n\n" . $tripTitle;
+        $trip = current($em->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
+        foreach ($hash as $row) {
+            $user = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($row['user']));
+            $tripSignup = new \WodorNet\MotoTripBundle\Entity\TripSignup();
+            $tripSignup->setTrip($trip);
+            $tripSignup->setUser($user);
+            $tripSignup->setStatus($row['status']);
+            $tripSignup->setSignupDate(new \DateTime());
+            $tripSignup->setDescription('Mane tekel fares');
+
+            $em->persist($tripSignup);
+
+        }
+        $em->flush();
+    }
+
+    /**
+     * @When /^signup of "([^"]*)" for "([^"]*)" is approved$/
+     */
+    public function signupOfForIsApproved($userName, $tripTitle)
+    {
+        $em = $this->getEntityManager();
+        $candidate = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($userName));
+        $trip = current($em->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
+
+        $manager = $this->getContainer()->get('wodor_net_moto_trip.tripsignups');
+
+        $tripSignup = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->getByTripAndUser($trip, $candidate);
+        $manager->approve($tripSignup);
+    }
+
+
+    /**
      * @Given /^User "([^"]*)" should be in trip candiates for trip "([^"]*)"$/
      */
     public function UserShouldBeInTripCandiatesOf($userName, $tripId)

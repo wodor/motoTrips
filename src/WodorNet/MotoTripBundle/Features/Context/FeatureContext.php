@@ -4,12 +4,12 @@
 namespace WodorNet\MotoTripBundle\Features\Context;
 
 use Behat\BehatBundle\Context\BehatContext,
-    Behat\BehatBundle\Context\MinkContext;
+Behat\BehatBundle\Context\MinkContext;
 use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Exception\PendingException;
+Behat\Behat\Context\TranslatedContextInterface,
+Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Context\Step;
 
 use WodorNet\MotoTripBundle\Entity;
@@ -26,9 +26,9 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
     {
         $this->useContext('acl', new \WodorNet\MotoTripBundle\Features\Context\AclContext($kernel));
         $this->useContext('symfony_doctrine', new \Behat\CommonContexts\SymfonyDoctrineContext($kernel));
-        $this->useContext('web_extra', new \Behat\CommonContexts\WebExtraContext($kernel));
-        $this->useContext('symfony_extra', new \Behat\CommonContexts\SymfonyExtraContext($kernel));
-        $this->useContext('redirect', new \Behat\CommonContexts\RedirectContext($kernel));
+        $this->useContext('web_extra', new \Behat\CommonContexts\MinkExtraContext($kernel));
+        $this->useContext('symfony_extra', new \Behat\CommonContexts\SymfonyMailerContext($kernel));
+        $this->useContext('redirect', new \Behat\CommonContexts\MinkRedirectContext($kernel));
         $this->useContext('trip', new \WodorNet\MotoTripBundle\Features\Context\TripContext($kernel));
         parent::__construct($kernel);
     }
@@ -70,7 +70,7 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
         /** @var $page \Behat\Mink\Element\DocumentElement */
         $page = $this->getSession()->getPage();
 
-        $el = $page->find('css','#map_canvas div div div');
+        $el = $page->find('css', '#map_canvas div div div');
         $el->click();
 
     }
@@ -93,13 +93,12 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
         return array(
             new Step\Given('I am "' . $login . '"'),
             new Step\When('I go to "/login"'),
-            new Step\When('I fill in "Nazwa użytkownika:" with "'.$login.'"'),
-            new Step\When('I fill in "Hasło:" with "'.$pass.'"'),
+            new Step\When('I fill in "Nazwa użytkownika:" with "' . $login . '"'),
+            new Step\When('I fill in "Hasło:" with "' . $pass . '"'),
             new Step\When('I press "Zaloguj"'),
-          //  new Step\Then('I should be on "/"'),
+            //  new Step\Then('I should be on "/"'),
         );
     }
-
 
 
     /**
@@ -140,7 +139,8 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
         return $this->myLogin;
     }
 
-    public function getMe() {
+    public function getMe()
+    {
         return current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:User')->findByUsername($this->getMyLogin()));
     }
 
