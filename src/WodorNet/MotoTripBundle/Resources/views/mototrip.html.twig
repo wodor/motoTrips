@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/text.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
@@ -15,6 +16,7 @@
 
     {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
     <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/mapevents.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -37,6 +39,16 @@
     </div>
 
     <div class="clear"></div>
+    {% block page_menu %}
+
+    <div class="menu grid_16">
+        <a href="{{ path('default') }}" class="menuButton">Start</a>
+        <a href="{{ path('trip_new') }}" class="menuButton">Dodaj Wypad</a>
+        <a href="{{ path('trip') }}" class="menuButton">Wypady</a>
+        <a href="{{ path('fos_user_registration_register') }}" class="menuButton">Rejestracja</a>
+        <a href="mailto:info@motowypady.pl" class="menuButton">Kontakt</a>
+    </div>
+    {% endblock %}
 
 
     {% if app.session.flash('notice') %}

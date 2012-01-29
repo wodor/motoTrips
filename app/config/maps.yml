@@ -39,10 +39,10 @@ ivory_google_map:
         type: "terrain"
 
         # Map width
-        width: "524px"
+        width: "100%"
 
         # Map height
-        height: "300px"
+        height: "480px"
 
         # Custom map options
         # By default, there is no map options
