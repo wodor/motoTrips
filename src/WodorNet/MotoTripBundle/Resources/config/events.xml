@@ -5,21 +5,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="wodor_net_moto_trip.mailing" class="WodorNet\MotoTripBundle\Mailing\TripSignupsSubscriber" scope="request">
-            <tag name="wodor_net_moto_trip.subscriber"/>
-            <argument type="service" id="wodor_net_moto_trip.mailing.sender"/>
+
+        <service id="wodor_net_moto_trip.mailing_subscriber_tripsignup"
+                 class="WodorNet\MotoTripBundle\Mailing\TripSignupsSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+            <argument type="service" id="service_container"/>
         </service>
 
         <service id="wodor_net_moto_trip.security_subscriber_tripsignup"
                  class="WodorNet\MotoTripBundle\Security\TripSignupsSubscriber"
                 >
-            <tag name="doctrine.event_subscriber" connection="default" />
+            <tag name="doctrine.event_subscriber" connection="default"/>
             <argument type="service" id="security.acl.provider"/>
         </service>
 
         <service id="wodor_net_moto_trip.security_subscriber" public="false"
-                 class="WodorNet\MotoTripBundle\Security\OwnershipSubscriber" >
-            <tag name="doctrine.event_subscriber" connection="default" />
+                 class="WodorNet\MotoTripBundle\Security\OwnershipSubscriber">
+            <tag name="doctrine.event_subscriber" connection="default"/>
             <argument type="service" id="security.acl.provider"/>
 
         </service>

@@ -3,8 +3,6 @@
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-require __DIR__ . '/../vendor/.composer/autoload.php';
-
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
     'Symfony' => array(__DIR__ . '/../vendor/symfony/src', __DIR__ . '/../vendor/bundles'),
@@ -17,7 +15,7 @@ $loader->registerNamespaces(array(
     'Knp\\Bundle' => __DIR__ . '/../vendor/bundles',
 
     'Doctrine\\Common' => __DIR__ . '/../vendor/doctrine-common/lib',
-    'Doctrine\\DBAL\\Migrations' => __DIR__.'/../vendor/doctrine-migrations/lib',
+    'Doctrine\\DBAL\\Migrations' => __DIR__ . '/../vendor/doctrine-migrations/lib',
     'Doctrine\\DBAL' => __DIR__ . '/../vendor/doctrine-dbal/lib',
     'Doctrine' => __DIR__ . '/../vendor/doctrine/lib',
     'Doctrine\\Tests' => __DIR__ . '/../vendor/doctrine/tests',
@@ -26,23 +24,29 @@ $loader->registerNamespaces(array(
     'Metadata' => __DIR__ . '/../vendor/metadata/src',
     'Hudson' => __DIR__ . '/../src',
     'Buzz' => __DIR__ . '/../vendor/buzz/lib',
+    'Geocoder' => __DIR__ . '/../vendor/geocoder/src',
     'Ivory' => __DIR__ . '/../vendor/bundles',
-    'Behat\Gherkin' => __DIR__.'/../vendor/behat/gherkin/src',
-    'Behat\Mink'       => __DIR__.'/../vendor/behat/mink/src',
-    'Behat\MinkBundle' => __DIR__.'/../vendor/bundles',
-    'Behat\Behat'   => __DIR__.'/../vendor/behat/behat/src',
-    'Behat\BehatBundle' => __DIR__.'/../vendor/bundles',
+    'Behat\Gherkin' => __DIR__ . '/../vendor/behat/gherkin/src',
+    'Behat\Mink' => __DIR__ . '/../vendor/behat/mink/src',
+    'Behat\MinkBundle' => __DIR__ . '/../vendor/bundles',
+    'Behat\Behat' => __DIR__ . '/../vendor/behat/behat/src',
+    // 'Behat\Behat'   => __DIR__.'/../vendor/BehatCommonContexts',
+    'Behat\BehatBundle' => __DIR__ . '/../vendor/bundles',
 
-    'Behat\SahiClient' => __DIR__.'/../vendor/behat/sahi/src',
-    'Buzz'             => __DIR__.'/../vendor/buzz/lib',
+    'Behat\SahiClient' => __DIR__ . '/../vendor/behat/sahi/src',
 
-    'PSS'     => __DIR__.'/../vendor/bundles',
-    'Mockery' => __DIR__.'/../vendor/mockery/library',
+    'Buzz' => __DIR__ . '/../vendor/buzz/lib',
+
+    'PSS' => __DIR__ . '/../vendor/bundles',
+    'Mockery' => __DIR__ . '/../vendor/mockery/library',
 
 ));
+
+
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__ . '/../vendor/twig-extensions/lib',
     'Twig_' => __DIR__ . '/../vendor/twig/lib',
+    'Mockery' => __DIR__ . '/../vendor/mockery/library',
 ));
 
 // intl
@@ -52,10 +56,6 @@ if (!function_exists('intl_get_error_code')) {
     $loader->registerPrefixFallbacks(array(__DIR__ . '/../vendor/symfony/src/Symfony/Component/Locale/Resources/stubs'));
 }
 
-$loader->registerPrefixes(array(
-    //--
-    'Mockery'                        => __DIR__ . '/../vendor/mockery/library',
-));
 
 $loader->registerNamespaceFallbacks(array(
     __DIR__ . '/../src',
