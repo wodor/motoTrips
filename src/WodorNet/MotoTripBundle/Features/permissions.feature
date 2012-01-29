@@ -32,7 +32,6 @@ Scenario: As a OwnerOfTheTrip I can approve a Candidate to my trip, to let him b
     | Konsumer | new    |
     When signup of "Konsumer" for "wypad w góry" is approved
     And "Konsumer" has "VIEW" permission for "wypad w góry"
-    And email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
 
 
 Scenario: As a OwnerOfTheTrip I can see the list of candidates
@@ -42,14 +41,15 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates
     And I am logged in as "Kreator" with "123456" password
     When I go to "trip/1/show"
     Then I should see "Konsumer"
+    When I follow "Approve"
+    Then  "Konsumer" has "VIEW" permission for "wypad w góry"
+    And email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
 
 
 Scenario: As an Attendee i can see private information of the trip
 
 Scenario: As an Candidate I cannot see private information
 Scenario: As an User (which is not owner of the trip) I cannot see candidates
-
-
 
 
 

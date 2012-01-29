@@ -1,16 +1,29 @@
 {% block list_content %}
 <h2>{%trans%}Uczestnicy niezatwierdzeni{%endtrans%}</h2>
 <table class="candidatesTable">
-<thead>    
-    <tr> 
-    <th>Nazwa</th>
-    <th>Data</th>
-    <th>Akcje</th>
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Data</th>
+        <th>Akcje</th>
     </tr>
-</thead>
-<tbody>
-</tbody>
+    </thead>
+    <tbody>
+    {% for item in tripSignups %}
+    <tr>
+        <td>
+            <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+        </td>
+        <td>
+            {{item.signupDate.format("Y-m-d")}}
+        </td>
+        <td>
+            <a href="{{ path('tripsignup_approve', { 'id': item.id}) }}"
+               title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
 {% endblock %}
 
-{% include 'WodorNetMotoTripBundle::datatable.html.twig' with {'sourceRoute': "'candidateTripSignups', { id: " ~ trip.id ~ " }" , 'tablename':'candidatesTable'} %}

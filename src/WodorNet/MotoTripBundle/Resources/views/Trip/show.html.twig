@@ -5,10 +5,11 @@
 <h1>{{trip.title}}</h1>
 
 
-
 <div class="grid_8">
-    <p>{% trans %}Start at{% endtrans %}     {{ trip.startDate|intldate }}</p>
+    <p>{% trans %}Start at{% endtrans %} {{ trip.startDate|intldate }}</p>
+
     <p>   {% trans %}End at{% endtrans %} {{ trip.endDate|intldate }}</p>
+
     <p>{{ trip.description }}</p>
 
 
@@ -23,11 +24,6 @@
 </div>
 
 
-
-
-
-
-
 <a href="{{ path('signup',{ 'id': trip.id }) }}">{% trans %}Join this trip{% endtrans %}</a>
 
 {% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
@@ -39,10 +35,10 @@
 {% endif %}
 
 
-{% include 'WodorNetMotoTripBundle:TripSignup:approvedSnippet.html.twig'%}
+{% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}
 
 {% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
-{% include 'WodorNetMotoTripBundle:TripSignup:candidatesSnippet.html.twig' %}
+{% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
 {% endif %}
 
 
