@@ -6,7 +6,8 @@
 
 
     <parameters>
-        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator</parameter>
+        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator
+        </parameter>
     </parameters>
 
     <services>
@@ -40,7 +41,7 @@
                  class="Doctrine\ORM\EntityManager" public="false">
         </service>
 
-        <service id="wodor_net_moto_trip.mailing.sender" class="WodorNet\MotoTripBundle\Mailing\Sender" scope="request">
+        <service id="wodor_net_moto_trip.mailing.sender" class="WodorNet\MotoTripBundle\Mailing\Sender">
             <argument type="service" id="mailer"/>
             <argument type="service" id="templating.engine.twig"/>
             <argument type="service" id="translator"/>

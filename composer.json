@@ -1,7 +1,91 @@
 {
     "require":{
-        "willdurand/geocoder":"*",
-        "behat/common-contexts":"*"
+        "php":">=5.3.2",
+        "symfony/symfony":"2.0.9",
+
+        "doctrine/orm":">=2.1.0,<2.2.0-dev",
+        "twig/extensions":"*",
+
+        "symfony/assetic-bundle":"*",
+        "sensio/generator-bundle":"2.0.*",
+        "sensio/framework-extra-bundle":"2.0.*",
+        "sensio/distribution-bundle":"2.0.*",
+        "jms/security-extra-bundle":"1.1.0",
+        "behat/common-contexts":"*",
+        "behat/behat-bundle":"*",
+        "behat/mink-bundle":"*",
+        "swiftmailer/swiftmailer":"4.1.5",
+
+        "jms/di-extra-bundle":"*",
+        "friendsofsymfony/user-bundle":"*",
+        "friendsofsymfony/jsrouting-bundle":"*",
+        "knplabs/knp-paginator-bundle":"*",
+
+
+        "doctrine/migrations2":"*",
+        "doctrine/doctrine-bundle":"*",
+
+        "doctrine/doctrine-migrations-bundle":"*",
+        "polishsymfonycommunity/mockery-bundle":"*",
+
+        "egeloen/google-map-bundle":"*"
+
+    },
+
+    "repositories":{
+        "behat/mink-deps":{
+            "composer":{
+                "url":"behat.org"
+            }
+        },
+
+        "doctrine/migrations2":{
+            "package":{
+                "version":"1",
+                "name":"doctrine/migrations",
+                "type":"library",
+                "description":"Database Schema migrations using Doctrine DBAL",
+                "keywords":["migrations", "database"],
+                "homepage":"http://www.doctrine-project.org",
+                "license":"LGPL",
+                "authors":[
+                    {
+                        "name":"Be    njamin Eberlei",
+                        "email":"kontakt@beberlei.de"
+                    },
+                    {
+                        "name":"Jonathan Wage",
+                        "email":"jonwage@gmail.com"
+                    }
+                ],
+                "require":{
+                    "php":">=5.3.2",
+                    "ext-pdo":"*",
+
+                    "doctrine/dbal":">=2.0"
+                },
+                "source":{
+                    "url":"git://github.com/doctrine/migrations.git",
+                    "type":"git",
+                    "reference":"master"
+                },
+                "autoload":{
+                    "psr-0":{
+                        "Doctrine\\DBAL\\Migrations":"lib"
+                    }
+                }
+            }
+        }
+    },
+
+    "autoload":{
+        "psr-0":{
+            "Acme":"src/",
+            "WodorNet":"src/",
+            "Hudson":"src/",
+            "Ivory":"vendor"
+        }
     }
 
 }
+

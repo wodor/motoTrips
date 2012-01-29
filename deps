@@ -79,6 +79,9 @@
 [buzz]
     git=http://github.com/kriswallsmith/Buzz.git
 
+[geocoder]
+    git=git://github.com/willdurand/Geocoder.git
+
 [IvoryGoogleMapBundle]
     git=http://github.com/wodor/IvoryGoogleMapBundle.git
     target=/bundles/Ivory/GoogleMapBundle
@@ -106,9 +109,16 @@
     git=http://github.com/symfony/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
 
-
 [Mockery]
     git=https://github.com/padraic/mockery.git
+
+[gherkin]
+    git=https://github.com/Behat/Gherkin.git
+    target=/behat/gherkin
+
+[behat]
+    git=https://github.com/Behat/Behat.git
+    target=/behat/behat
 
 [BehatBundle]
     git=https://github.com/Behat/BehatBundle.git
@@ -130,3 +140,6 @@
 [MinkBundle]
     git=https://github.com/Behat/MinkBundle.git
     target=/bundles/Behat/MinkBundle
+
+[BehatCommonContexts]
+    git=git://github.com/Behat/CommonContexts.git
