@@ -1,25 +1,25 @@
 {% block list_content %}
 <div class="list_snippet">
     <h2>{%trans%}Uczestnicy{%endtrans%}</h2>
-    <table class="dataTable2">
+    <table class="dataTable2 candidatesTable">
         <thead>
         <tr>
-            <th>Nazwa</th>
-            <th>Data</th>
-            <th>Akcje</th>
+            <th class="kolumna_1">Nazwa</th>
+            <th class="kolumna_2">Data</th>
+            <th class="kolumna_3">Akcje</th>
         </tr>
         </thead>
         <tbody>
 
         {% for item in tripSignups %}
         <tr>
-            <td>
+            <td class="kolumna_1">
                 <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
             </td>
-            <td>
+            <td class="kolumna_2">
                 {{item.signupDate.format("Y-m-d")}}
             </td>
-            <td>
+            <td class="kolumna_3">
                 {% if is_expr_granted("hasPermission(object, 'OWNER')", item.trip) %}
                 <a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}"
                    title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>

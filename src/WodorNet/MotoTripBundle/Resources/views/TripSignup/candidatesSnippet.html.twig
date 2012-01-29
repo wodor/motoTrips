@@ -3,22 +3,23 @@
 <table class="candidatesTable">
     <thead>
     <tr>
-        <th>Nazwa</th>
-        <th>Data</th>
-        <th>Akcje</th>
+        <th class="kolumna_1">Nazwa</th>
+        <th class="kolumna_2">Data</th>
+        <th class="kolumna_3">Akcje</th>
     </tr>
     </thead>
     <tbody>
     {% for item in tripSignups %}
-    <tr>
-        <td>
+    <tr class="wiersz_1">
+        <td class="kolumna_1">
             <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
         </td>
-        <td>
+        <td class="kolumna_2">
             {{item.signupDate.format("Y-m-d")}}
         </td>
-        <td>
+        <td class="kolumna_3">
             <a href="{{ path('tripsignup_approve', { 'id': item.id}) }}"
+               class="Button midButton"
                title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>
         </td>
     </tr>

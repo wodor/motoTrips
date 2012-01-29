@@ -6,14 +6,15 @@
 
 
 <div class="grid_8">
-    <p>{% trans %}Start at{% endtrans %} {{ trip.startDate|intldate }}</p>
+    <p><strong>{% trans %}Start at{% endtrans %}</strong> {{ trip.startDate|intldate }}</p>
 
-    <p>   {% trans %}End at{% endtrans %} {{ trip.endDate|intldate }}</p>
+    <p><strong>{% trans %}End at{% endtrans %}</strong> {{ trip.endDate|intldate }}</p>
 
     <p>{{ trip.description }}</p>
 
 
-    <a href="{{ path('trip') }}"> {% trans %}Back to the list{% endtrans %} </a>
+    <a href="{{ path('trip') }}" class="Button midButton"> {% trans %}Back to the list{% endtrans %} </a>
+    <a href="#lista" class="Button midButton">Lista uczestników</a>
 
 </div>
 
@@ -24,18 +25,19 @@
 </div>
 
 
-<a href="{{ path('signup',{ 'id': trip.id }) }}">{% trans %}Join this trip{% endtrans %}</a>
+<a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
 
 {% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
-<a href="{{ path('trip_edit', { 'id': trip.id }) }}">{% trans %}Edit{% endtrans %}</a>
+<a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
+
 {% endif %}
 
 {% if is_granted('ROLE_ADMIN') or is_granted('DELETE', trip)  %}
-<a href="{{ path('trip_delete', { 'id': trip.id }) }}">{% trans %}Delete{% endtrans %}</a>
+<a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Delete{% endtrans %}</a>
 {% endif %}
 
 
-{% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}
+{% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
 
 {% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
 {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}

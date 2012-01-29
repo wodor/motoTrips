@@ -158,6 +158,38 @@ div#map {
 .mainpageList   {
     margin-left: 40px;
 }
+/*candidatesTable*/
+
+.candidatesTable tr{
+    vertical-align: middle;
+}
+.kolumna_1{
+    width: 200px;
+    vertical-align: middle;
+    padding-left: 25px;
+}
+.kolumna_2{
+    width: 100px;
+    vertical-align: middle;
+}
+.kolumna_3{
+    width: 200px;
+    vertical-align: middle;
+}
+.wiersz_1{
+    height: 50px;
+    border-bottom: 2px dashed;
+    border-color: #b0a098;
+
+}
+
+.candidatesTable th{
+    height: 30px;
+    background-color: #403b37;
+    color: #f4ece5;
+
+}
+
 /*Lista wypadow mala*/
 .month_all{
     display: block;
@@ -297,7 +329,9 @@ input[type=submit], input[type=button], input[type=reset] {
 .bigButton {
     font-size: 20px;
 }
-
+.midButton{
+    font-size: 1.2em;
+}
 /*formularz rejestracji*/
 .Rejestracja label {
     display: inline-block;
