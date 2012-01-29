@@ -7,7 +7,7 @@ body {
     background-position: top center;
     background-repeat: no-repeat;
     background-color: #ded6ce;
-    font-family: verdana, sans-serif;
+    font-family: "Trebuchet MS", sans-serif;
     font-size: 0.8em;
     color: #403b37;
 }
@@ -17,9 +17,9 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lobster',   cursive;
+    font-family: 'Lobster', cursive;
     font-weight: 400;
-    text-shadow: 4px 4px 4px #777;
+    text-shadow: 1px 1px 1px #87786c;
     color: #403b37
 }
 
@@ -102,6 +102,45 @@ div.topBar {
     text-align: right;
 }
 
+/*Menu strony*/
+.menu{
+    margin: -80px 0 0 0px;
+}
+.menuButton{
+    font-family: 'Lobster', cursive;
+    text-decoration: none;
+    background-color: #403b37;
+
+
+
+    color: #f4ece5;
+    border: 2px solid #6c6159;
+
+    font-size: 1.6em;
+    font-weight: 400;
+    padding: 0 15px 3px 15px;
+
+}
+
+.current{
+    background-color: #376f85;
+
+}
+
+/*Guziki*/
+.Button{
+    font-family: 'Lobster', cursive;
+    text-decoration: none;
+    background-color: #403b37;
+    color: #f4ece5;
+    border: 2px solid #f4ece5;
+
+    font-size: 1.6em;
+    font-weight: 400;
+    padding: 0 15px 3px 15px;
+
+}
+
 .mainpageBox p {
 
     margin: 0 0 10px 40px;
@@ -114,6 +153,10 @@ div.topBar {
 
 div#map {
     margin-top: 20px;
+}
+
+.mainpageList   {
+    margin-left: 40px;
 }
 /*Lista wypadow mala*/
 .month_all{
@@ -241,7 +284,7 @@ form.top_login p {
 }
 
 input[type=text] {
-    border: solid 1px #403b37;
+    /*border: solid 1px #403b37;*/
 }
 
 input[type=submit], input[type=button], input[type=reset] {
@@ -254,6 +297,20 @@ input[type=submit], input[type=button], input[type=reset] {
 .bigButton {
     font-size: 20px;
 }
+
+/*formularz rejestracji*/
+.Rejestracja label {
+    display: inline-block;
+    font-family: sans-serif;
+    width: 150px;
+
+}
+
+.Rejestracja input {
+    margin: 3px 0 3px 0;
+
+}
+
 
 /* validacja */
 
