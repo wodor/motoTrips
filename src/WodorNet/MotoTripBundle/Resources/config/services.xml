@@ -6,8 +6,7 @@
 
 
     <parameters>
-        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator
-        </parameter>
+        <parameter key="wodor_net_moto_trip.datatable_paginator.class">WodorNet\MotoTripBundle\DataTable\Paginator</parameter>
     </parameters>
 
     <services>
