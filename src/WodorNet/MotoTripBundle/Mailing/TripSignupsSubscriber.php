@@ -44,7 +44,7 @@ class TripSignupsSubscriber implements \Doctrine\Common\EventSubscriber
 
     }
 
-    public function  postUpdate(\Doctrine\ORM\Event\PreUpdateEventArgs $args)
+    public function  postUpdate(\Doctrine\ORM\Event\LifecycleEventArgs $args)
     {
         echo "XXXXXXDXXXXXXXX";
     }
