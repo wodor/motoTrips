@@ -3,32 +3,32 @@
 {% block content %}
 <h1>Trip list</h1>
 
-<table class="records_list">
+<table class="records_list candidatesTable">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Creationdate</th>
-            <th>Description</th>
-            <th>Startdate</th>
-            <th>Enddate</th>
-            <th>Actions</th>
+            <th class="kolumna_id">Id</th>
+            <th class="kolumna_2">Creationdate</th>
+            <th class="kolumna_opis">Description</th>
+            <th class="kolumna_2">Startdate</th>
+            <th class="kolumna_2">Enddate</th>
+            <th class="kolumna_3">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{{ entity.description }}</td>
-            <td>{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>
-                <ul>
+        <tr class="wiersz_1">
+            <td class="kolumna_id"><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td class="kolumna_2">{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i') }}{% endif%}</td>
+            <td class="kolumna_opis">{{ entity.description }}</td>
+            <td class="kolumna_2">{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i') }}{% endif%}</td>
+            <td class="kolumna_2">{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i') }}{% endif%}</td>
+            <td class="kolumna_3">
+                <ul class="menuList">
                     <li>
-                        <a href="{{ path('trip_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('trip_show', { 'id': entity.id }) }}" class="Button midButton">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('trip_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('trip_edit', { 'id': entity.id }) }}" class="Button midButton">edit</a>
                     </li>
                 </ul>
             </td>
@@ -37,9 +37,9 @@
     </tbody>
 </table>
 
-<ul>
+<ul class="menuList">
     <li>
-        <a href="{{ path('trip_new') }}">
+        <a href="{{ path('trip_new') }}" class="Button midButton">
             Create a new entry
         </a>
     </li>
