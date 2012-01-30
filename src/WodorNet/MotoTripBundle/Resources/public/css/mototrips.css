@@ -182,12 +182,29 @@ div#map {
     border-color: #b0a098;
 
 }
-
+.kolumna_id{
+    width: 40px;
+    vertical-align: middle;
+    padding-left: 25px;
+}
+.kolumna_opis{
+    width: 360px;
+    vertical-align: middle;
+    padding-left: 25px;
+}
 .candidatesTable th{
     height: 30px;
     background-color: #403b37;
     color: #f4ece5;
 
+}
+/*Duza lista wypadow*/
+.menuList li{
+    list-style-type: none;
+    display: inline-block;
+   line-height: 50px;
+    padding-left: 0;
+    margin: 0;
 }
 
 /*Lista wypadow mala*/

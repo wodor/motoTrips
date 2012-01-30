@@ -12,7 +12,7 @@
         <tbody>
 
         {% for item in tripSignups %}
-        <tr>
+        <tr class="wiersz_1">
             <td class="kolumna_1">
                 <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
             </td>
