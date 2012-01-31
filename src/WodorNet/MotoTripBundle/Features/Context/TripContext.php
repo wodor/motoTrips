@@ -43,7 +43,6 @@ class TripContext extends BehatContext
 
         $hash = $table->getHash();
         $em = $this->getEntityManager();
-        echo "\n\n" . $tripTitle;
         $trip = current($em->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
         foreach ($hash as $row) {
             $user = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($row['user']));
@@ -74,20 +73,6 @@ class TripContext extends BehatContext
         $tripSignup = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->getByTripAndUser($trip, $candidate);
         $manager->approve($tripSignup);
     }
-
-
-    /**
-     * @Given /^User "([^"]*)" should be in trip candiates for trip "([^"]*)"$/
-     */
-    public function UserShouldBeInTripCandiatesOf($userName, $tripId)
-    {
-        $em = $this->getEntityManager();
-        $candidate = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($userName));
-        $trip = current($em->getRepository('WodorNetMotoTripBundle:Trip')->findById($tripId));
-
-        return $candidate->isCandidateForTrip($trip);
-    }
-
 
     /**
      * Returns entity manager

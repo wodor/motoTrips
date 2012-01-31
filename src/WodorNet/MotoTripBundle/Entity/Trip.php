@@ -358,4 +358,14 @@ class Trip implements OwnerAware
         return $this->getStartDate()->diff($this->getEndDate());
     }
 
+    public function getTripSignups()
+    {
+        return $this->tripSignups;
+    }
+
+    public function addTripSignup(TripSignup $tripSignup)
+    {
+        $this->tripSignups->add($tripSignup);
+    }
+
 }
