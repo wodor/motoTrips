@@ -36,7 +36,6 @@ class Manager
      */
     public function approve(TripSignup $tripSignup)
     {
-
         $tripSignup->setStatus('approved');
         $this->em->persist($tripSignup);
         $this->em->flush();
@@ -90,7 +89,6 @@ class Manager
         $event = new TripSignupEvent($tripSignup);
         $this->dispatcher->dispatch(MotoTripEvents::onTripSignupResign, $event);
     }
-
 
 
 }

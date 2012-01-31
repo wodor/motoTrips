@@ -18,7 +18,8 @@ Send: Wyślij
 mail:
     subject:
         trip_signup:
-            approve: Nowy Uczestnik wypadu
+            create: Nowa osoba chce dołączyć do Twojego wypadu
+            approve: %login% zgodził się na Twój udział w wypadzie '%name%'
             resign: Uczestnik zrezygnował z wypadu
             reject: Odrzucono Twoje uczestnictwo
 
@@ -29,4 +30,3 @@ Bad credentials: "Podane hasło jest niepoprawne"
 Logout: Wyloguj
 Start at: Początek
 End at: Koniec
-mail.subject.trip_signup.create: Nowa osoba chce dołączyć do Twojego wypadu

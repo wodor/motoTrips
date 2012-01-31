@@ -8,8 +8,9 @@ Background:
   | Kreator  | 123456   | wodor@wodor.net     |
   | Konsumer | 22@222   | wod.orw@gmail.com   |
   Given the site has following trips:
-  | creator | title |
-  | Kreator | wypad w góry |
+  | creator | title | description | descritpion_private |
+  | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
+  | Kreator | wypad w doły | Lorem ipsum dolor sit amet | The very private description |
 
 Scenario: Join trip when you're allowed
     Given I am logged in as "Konsumer" with "22@222" password
@@ -27,14 +28,13 @@ Scenario: When user is not logged he's not allowed to join trip
 
 @noweb
 Scenario: As a OwnerOfTheTrip I can approve a Candidate to my trip, to let him became Attendee and see the details.
-    Given the "wypad w góry" trip has the following signups:
+    Given the "wypad w doły" trip has the following signups:
     | user     | status |
     | Konsumer | new    |
-    When signup of "Konsumer" for "wypad w góry" is approved
-    And "Konsumer" has "VIEW" permission for "wypad w góry"
+    When signup of "Konsumer" for "wypad w doły" is approved
 
 
-Scenario: As a OwnerOfTheTrip I can see the list of candidates
+Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to approve them
     Given the "wypad w góry" trip has the following signups:
     | user     | status |
     | Konsumer | new    |
@@ -42,21 +42,12 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates
     When I go to "trip/1/show"
     Then I should see "Konsumer"
     When I follow "Approve"
-    Then  "Konsumer" has "VIEW" permission for "wypad w góry"
-    And email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
-
-
-Scenario: As an Attendee i can see private information of the trip
+    Then email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
+    When I am logged in as "Konsumer" with "22@222" password
+    And I go to "trip/1/show"
+    Then I should see "The very private description"
 
 Scenario: As an Candidate I cannot see private information
+
+
 Scenario: As an User (which is not owner of the trip) I cannot see candidates
-
-
-
-@noweb
-Scenario: Creator aquires OWNER permission and edits it
-    Given I am "Kreator"
-    And I create trip "Mr Kreator's Trip to hell and back"
-    Then I have "OWNER" permission for "Mr Kreator's Trip to hell and back" trip
-    And I edit trip "Mr Kreator's Trip to hell and back"
-    Then I have "OWNER" permission for "Mr Kreator's Trip to hell and back" trip

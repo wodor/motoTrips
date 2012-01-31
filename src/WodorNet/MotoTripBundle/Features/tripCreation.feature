@@ -9,8 +9,8 @@ Background:
   | Kreator  | 123456   | wodor@wodor.net     |
   | Konsumer | 22@222   | wod.orw@gmail.com   |
   Given the site has following trips:
-  | creator | title |
-  | Kreator | wypad  w góry |
+  | creator | title | description | descritpion_private |
+  | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
 
 
 @javascript
@@ -24,7 +24,9 @@ Scenario: Add a trip
     And I click randomly on the map in "map_canvas"
     And I press "Zapisz"
     Then I should see "The testing test of the test"
-    Then I should be on "/trip/2/show"
+    And I should be on "/trip/2/show"
+    And I should see "Edit"
+
 
 Scenario: Go to join trip
     Given I am logged in as "Konsumer" with "22@222" password
