@@ -11,6 +11,9 @@
     <p><strong>{% trans %}End at{% endtrans %}</strong> {{ trip.endDate|intldate }}</p>
 
     <p>{{ trip.description }}</p>
+    {% if is_expr_granted("hasPermission(object, 'VIEW')", trip) %}
+    <p>{{ trip.descriptionPrivate }}</p>
+    {% endif %}
 
 
     <a href="{{ path('trip') }}" class="Button midButton"> {% trans %}Back to the list{% endtrans %} </a>

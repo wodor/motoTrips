@@ -5,74 +5,13 @@ namespace WodorNet\MotoTripBundle\Features\Context;
 use Behat\BehatBundle\Context\BehatContext;
 use Symfony\Bundle\SecurityBundle\Command\InitAclCommand;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Feature context.
  */
 class AclContext extends BehatContext
 {
-
-    /**
-     * TODO
-     * this does not checks $this->aclProvider->updateAcl($acl)
-     * this test shoul use user as from a parameter not taken from inside of the object
-     * this test shoul use user as from a parameter not taken from inside of the object
-     *
-     * @Then /^I have "([^"]*)" permission for "([^"]*)" trip$/
-     */
-    public function iHavePermissionForTrip($permission, $tripTitle)
-    {
-        /** @var $trip \WodorNet\MotoTripBundle\Entity\Trip */
-        $trip = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
-
-        if (!$trip instanceof \WodorNet\MotoTripBundle\Entity\Trip) {
-            throw new \InvalidArgumentException('Trip titled "' . $tripTitle . '" does not exist');
-        }
-
-        $aclProvider = $this->getContainer()->get('security.acl.provider');
-        foreach ($aclProvider->findAcl($trip->getObjectIdentity(), array($trip->getObjectIdentity()))->getObjectAces() as $entry) {
-            /** @var $entry \Symfony\Component\Security\Acl\Domain\Entry */
-            $granted = $entry->getAcl()->isGranted(array(MaskBuilder::MASK_OWNER), array($trip->getSecurityIdentity()));
-
-            if ($granted) {
-                return true;
-            }
-        }
-
-        throw new \RuntimeException("OWNER of trip $tripTitle is not set properly");
-    }
-
-    /**
-     * @Given /^"([^"]*)" has "([^"]*)" permission for "([^"]*)"$/
-     */
-    public function hasPermissionFor($userName, $permission, $tripTitle)
-    {
-        /** @var $trip \WodorNet\MotoTripBundle\Entity\Trip */
-        $trip = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:Trip')->findByTitle($tripTitle));
-
-        if (!$trip instanceof \WodorNet\MotoTripBundle\Entity\Trip) {
-            throw new \InvalidArgumentException('Trip titled "' . $tripTitle . '" does not exist');
-        }
-
-        $candidate = current($this->getEntityManager()->getRepository('WodorNetMotoTripBundle:User')->findByUsername($userName));
-        $securityIdentity = \Symfony\Component\Security\Acl\Domain\UserSecurityIdentity::fromAccount($candidate);
-
-        $mask = constant("\\Symfony\\Component\\Security\\Acl\\Permission\\MaskBuilder::MASK_" . $permission);
-
-        $aclProvider = $this->getContainer()->get('security.acl.provider');
-        foreach ($aclProvider->findAcl($trip->getObjectIdentity(), array($trip->getObjectIdentity()))->getObjectAces() as $entry) {
-            /** @var $entry \Symfony\Component\Security\Acl\Domain\Entry */
-            $granted = $entry->getAcl()->isGranted(array($mask), array($securityIdentity));
-
-            if ($granted) {
-                return true;
-            }
-        }
-
-        throw new \RuntimeException("OWNER of trip $tripTitle is not set properly");
-
-    }
-
 
     /**
      * @param \Behat\Behat\Event\ScenarioEvent|\Behat\Behat\Event\OutlineExampleEvent $event

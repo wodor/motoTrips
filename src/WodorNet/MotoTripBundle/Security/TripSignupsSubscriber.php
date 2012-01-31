@@ -69,9 +69,15 @@ class TripSignupsSubscriber implements \Doctrine\Common\EventSubscriber
     {
         $tripSignup = $args->getEntity();
         $trip = $tripSignup->getTrip();
-        $acl = $this->aclProvider->findAcl(ObjectIdentity::fromDomainObject($trip));
-        $securityIdentity = UserSecurityIdentity::fromAccount($tripSignup->getUser());
+
+        $oi = new ObjectIdentity($trip->getId(), 'WodorNet\MotoTripBundle\Entity\Trip');
+
+        $acl = $this->aclProvider->findAcl($oi);
+        $securityIdentity = new UserSecurityIdentity($tripSignup->getUser()->getUserName(), 'WodorNet\MotoTripBundle\Entity\User');
         $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_VIEW);
+        $this->aclProvider->updateAcl($acl);
+
+
     }
 
     public function onDissapprovedStatus(\Doctrine\ORM\Event\PreUpdateEventArgs $args)

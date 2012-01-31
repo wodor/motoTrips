@@ -42,7 +42,12 @@ class Sender
     public function sendSingnupApprove(TripSignup $tripSignup)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject($this->translator->trans('mail.subject.trip_signup.approve'))
+            ->setSubject($this->translator->trans('mail.subject.trip_signup.approve',
+                array(
+                    '%login%' => $tripSignup->getTrip()->getCreator()->getUsername(),
+                    '%name%' => $tripSignup->getTrip()->getTitle(),
+                ))
+        )
             ->setFrom($tripSignup->getTrip()->getCreator()->getEmail())
             ->setReplyTo($tripSignup->getTrip()->getCreator()->getEmail())
             ->setTo($tripSignup->getUser()->getEmail())

@@ -111,17 +111,6 @@ class TripContext extends BehatContext
         $this->getEntityManager()->flush();
     }
 
-    /**
-     * @Given /^I create trip "([^"]*)"$/
-     */
-    public function iCreateTrip($title)
-    {
-        $trip = $this->getTrip($this->getMainContext()->getMe(), array('title' => $title));
-
-        $this->getEntityManager()->persist($trip);
-        $this->getEntityManager()->flush();
-    }
-
     protected function getTrip($creator, $data)
     {
         $trip = new Entity\Trip();
@@ -131,8 +120,8 @@ class TripContext extends BehatContext
         $trip->setEndDate(new \DateTime("tomorrow"));
         $trip->setLocation(array('lat' => '10.00', 'lng' => '20.00'));
         $trip->setTitle($data['title']);
-        $trip->setDescription('Lorem ipsum dolor sit amet');
-        $trip->setDescriptionPrivate("The very private description");
+        $trip->setDescription($data['description']);
+        $trip->setDescriptionPrivate($data['descritpion_private']);
         return $trip;
     }
 

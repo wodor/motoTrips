@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
+use JMS\SecurityExtraBundle\Security\Authorization\Expression\Expression;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
@@ -356,7 +357,8 @@ class TripSignupController extends Controller
     private function checkOwnership(TripSignup $tripSignup)
     {
         $securityContext = $this->get('security.context');
-        if (false === $securityContext->isGranted('EDIT', $tripSignup->getTrip())) {
+        /** @var $securityContext \Symfony\Component\Security\Core\SecurityContext */
+        if (false === $securityContext->isGranted(array(new Expression('hasPermission(object, "EDIT")'), $tripSignup->getTrip()))) {
             throw new AccessDeniedException();
         }
     }
