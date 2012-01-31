@@ -53,9 +53,10 @@ class User extends BaseUser
         return $this->tripSignups;
     }
 
-    public function addTrip($trips)
+    public function addTrip($trip)
     {
-        $this->trips[] = $trips;
+        $this->trips->add($trip);
+        $trip->setCreator($this);
     }
 
     public function getTrips()
@@ -68,11 +69,12 @@ class User extends BaseUser
      * @param Trip $trip
      * @return bool
      */
-    public function isCandidateForTrip(Trip $trip) {
-        foreach($this->getTripSignups() as $tripsignup) {
+    public function isCandidateForTrip(Trip $trip)
+    {
+        foreach ($this->getTripSignups() as $tripsignup) {
             /** @var $tripsignup \WodorNet\MotoTripBundle\Entity\TripSignup */
-            if($tripsignup->getStatus() == TripSignup::STATUS_NEW) {
-                if($tripsignup->getTrip() === $trip) {
+            if ($tripsignup->getStatus() == TripSignup::STATUS_NEW) {
+                if ($tripsignup->getTrip() === $trip) {
                     return true;
                 }
             }

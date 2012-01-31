@@ -104,6 +104,8 @@ class TripController extends Controller
         $marker = $this->get('ivory_google_map.marker');
         $marker->setPosition($trip->getLat(), $trip->getLng());
         $map->addMarker($marker);
+        $securityContext = $this->get('security.context');
+        $user = $securityContext->getToken()->getUser();
 
         return array(
             'map' => $map,

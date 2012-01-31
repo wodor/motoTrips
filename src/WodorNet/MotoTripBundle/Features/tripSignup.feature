@@ -12,14 +12,14 @@ Background:
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
   | Kreator | wypad w doły | Lorem ipsum dolor sit amet | The very private description |
 
+
 Scenario: Join trip when you're allowed
     Given I am logged in as "Konsumer" with "22@222" password
     Given I go to "/tripsignup/signup/1"
     And I fill in "wodornet_mototripbundle_tripsignuptype[description]" with "Hi I'm beria"
     When I do not follow redirects
     And I press "Wyślij"
-    And User "Konsumer" should be in trip candiates for trip "1"
-    And email with subject "Nowa osoba chce dołączyć do Twojego wypadu" should have been sent to "wodor@wodor.net"
+    Then email with subject "Nowa osoba chce dołączyć do Twojego wypadu" should have been sent to "wodor@wodor.net"
     When I am redirected
     Then I should be on "trip/1/show"
 

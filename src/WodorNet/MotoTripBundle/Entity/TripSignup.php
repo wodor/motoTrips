@@ -134,6 +134,7 @@ class TripSignup implements OwnerAware
     public function setTrip(Trip $trip)
     {
         $this->trip = $trip;
+        $trip->addTripSignup($this);
     }
 
     /**
@@ -151,9 +152,10 @@ class TripSignup implements OwnerAware
      *
      * @param object $user
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
+        $user->addTripSignup($this);
     }
 
     /**
