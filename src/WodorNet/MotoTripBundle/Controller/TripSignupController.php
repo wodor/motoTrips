@@ -37,10 +37,12 @@ class TripSignupController extends Controller
      */
     public function disapproveAction(TripSignup $tripSignup)
     {
-        $this->checkOwnership($tripSignup);
+        $this->ensureUserEqualsLoggedIn($tripSignup->getTrip()->getCreator());
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->disapprove($tripSignup);
+
+        return $this->redirect($this->generateUrl('trip_show', array('id' => $tripSignup->getTrip()->getId())));
     }
 
     /**
@@ -49,12 +51,15 @@ class TripSignupController extends Controller
      * @Route("/{id}/resign/", name="tripsignup_resign", options={"expose"=true})
      * @Template("WodorNetMotoTripBundle:TripSignup:singupList.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:TripSignup")
-     * @PreAuthorize("hasPermission(#tripSignup, 'OWNER')")
      */
     public function resignAction(TripSignup $tripSignup)
     {
+        $this->ensureUserEqualsLoggedIn($tripSignup->getTrip()->getCreator());
+
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->resign($tripSignup);
+
+        return $this->redirect($this->generateUrl('trip_show', array('id' => $tripSignup->getTrip()->getId())));
 
     }
 
@@ -67,10 +72,12 @@ class TripSignupController extends Controller
      */
     public function rejectAction(TripSignup $tripSignup)
     {
-        $this->checkOwnership($tripSignup);
+        $this->ensureUserEqualsLoggedIn($tripSignup->getTrip()->getCreator());
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->reject($tripSignup);
+
+        return $this->redirect($this->generateUrl('trip_show', array('id' => $tripSignup->getTrip()->getId())));
     }
 
     /**
@@ -82,10 +89,12 @@ class TripSignupController extends Controller
      */
     public function approveAction(TripSignup $tripSignup)
     {
-        $this->checkOwnership($tripSignup);
+        $this->ensureUserEqualsLoggedIn($tripSignup->getTrip()->getCreator());
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->approve($tripSignup);
+
+        return $this->redirect($this->generateUrl('trip_show', array('id' => $tripSignup->getTrip()->getId())));
     }
 
     /**
@@ -122,7 +131,14 @@ class TripSignupController extends Controller
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findApprovedByTrip($trip);
 
         $tripSignups = $qb->getQuery()->getResult();
-        return array('tripSignups' => $tripSignups);
+
+        $tripPerm = $this->get('tripPerm');
+
+        return array(
+            'tripSignups' => $tripSignups,
+            'tripEditAllowed' => $tripPerm->canEdit($trip),
+            'signupPerm' => $this->get('signupPerm')
+        );
     }
 
 
@@ -347,19 +363,4 @@ class TripSignupController extends Controller
     }
 
 
-    /**
-     * Checks it tripSingup is for the trip that user is owner of
-     * owner for
-     *
-     * @param \WodorNet\MotoTripBundle\Entity\TripSignup $tripSignup
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
-     */
-    private function checkOwnership(TripSignup $tripSignup)
-    {
-        $securityContext = $this->get('security.context');
-        /** @var $securityContext \Symfony\Component\Security\Core\SecurityContext */
-        if (false === $securityContext->isGranted(array(new Expression('hasPermission(object, "EDIT")'), $tripSignup->getTrip()))) {
-            throw new AccessDeniedException();
-        }
-    }
 }

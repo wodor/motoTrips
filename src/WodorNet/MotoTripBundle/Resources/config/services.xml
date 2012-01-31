@@ -46,6 +46,19 @@
             <argument type="service" id="translator"/>
         </service>
 
+        <service id="wodor_net_moto_trip.permissions.trip" class="WodorNet\MotoTripBundle\Security\TripPermissions">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="wodor_net_moto_trip.entity_manager"/>
+        </service>
+
+        <service id="tripPerm" alias="wodor_net_moto_trip.permissions.trip" />
+        <service id="signupPerm" alias="wodor_net_moto_trip.permissions.tripSignup" />
+
+        <service id="wodor_net_moto_trip.permissions.tripSignup" class="WodorNet\MotoTripBundle\Security\TripSignupPermissions">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="wodor_net_moto_trip.entity_manager"/>
+        </service>
+
 
     </services>
 

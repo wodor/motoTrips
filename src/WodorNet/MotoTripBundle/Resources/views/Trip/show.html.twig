@@ -11,7 +11,7 @@
     <p><strong>{% trans %}End at{% endtrans %}</strong> {{ trip.endDate|intldate }}</p>
 
     <p>{{ trip.description }}</p>
-    {% if is_expr_granted("hasPermission(object, 'VIEW')", trip) %}
+    {% if showAllowed %}
     <p>{{ trip.descriptionPrivate }}</p>
     {% endif %}
 
@@ -30,19 +30,15 @@
 
 <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
 
-{% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
+{% if editAllowed  %}
 <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
-
-{% endif %}
-
-{% if is_granted('ROLE_ADMIN') or is_granted('DELETE', trip)  %}
 <a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Delete{% endtrans %}</a>
 {% endif %}
 
 
 {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
 
-{% if is_granted('ROLE_ADMIN') or is_granted('EDIT', trip)  %}
+{% if editAllowed  %}
 {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
 {% endif %}
 
