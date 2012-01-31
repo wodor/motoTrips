@@ -20,7 +20,7 @@
                 {{item.signupDate.format("Y-m-d")}}
             </td>
             <td class="kolumna_3">
-                {% if is_expr_granted("hasPermission(object, 'OWNER')", item.trip) %}
+                {% if tripEditAllowed %}
                 <a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}"
                    title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
                 <a href="{{ path('tripsignup_show', { 'id': item.id}) }}"
@@ -28,7 +28,7 @@
                 {% endif %}
 
 
-                {% if is_expr_granted("hasPermission(object, 'OWNER')", item) %}
+                {% if signupPerm.canEdit(item) %}
                 <a href="{{ path('tripsignup_resign', { 'id': item.id}) }}"
                    title="{% trans %}Resign{% endtrans %}">{% trans %}Resign{% endtrans %}</a>
                 {% endif %}

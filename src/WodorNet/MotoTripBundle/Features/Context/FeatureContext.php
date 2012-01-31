@@ -47,7 +47,6 @@ class FeatureContext extends MinkContext //BehatContext //MinkContext if you wan
 
     public function __construct($kernel)
     {
-        $this->useContext('acl', new \WodorNet\MotoTripBundle\Features\Context\AclContext($kernel));
         $this->useContext('symfony_doctrine', new \Behat\CommonContexts\SymfonyDoctrineContext($kernel));
         $this->useContext('web_extra', new \Behat\CommonContexts\MinkExtraContext($kernel));
         $this->useContext('symfony_extra', new \Behat\CommonContexts\SymfonyMailerContext($kernel));

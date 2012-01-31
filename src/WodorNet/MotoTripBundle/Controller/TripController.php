@@ -104,12 +104,15 @@ class TripController extends Controller
         $marker = $this->get('ivory_google_map.marker');
         $marker->setPosition($trip->getLat(), $trip->getLng());
         $map->addMarker($marker);
-        $securityContext = $this->get('security.context');
-        $user = $securityContext->getToken()->getUser();
+
+        /** @var $tripPermission \WodorNet\MotoTripBundle\Security\TripPermissions */
+        $tripPermission = $this->get('tripPerm');
 
         return array(
             'map' => $map,
             'trip' => $trip,
+            'editAllowed' => $tripPermission->canEdit($trip),
+            'showAllowed' => $tripPermission->canView($trip)
         );
     }
 
@@ -211,10 +214,12 @@ class TripController extends Controller
      * @Route("/{id}/edit", name="trip_edit")
      * @Template()
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole('ADMIN') or hasPermission(#trip, 'EDIT')")
+     * @PreAuthorize("isFullyAuthenticated()")
      */
     public function editAction(Trip $trip)
     {
+        $this->ensureUserEqualsLoggedIn($trip->getCreator());
+
         $editForm = $this->createForm(new TripType(), $trip);
         $deleteForm = $this->createDeleteForm($trip->getId());
 
@@ -232,11 +237,12 @@ class TripController extends Controller
      * @Method("post")
      * @Template("WodorNetMotoTripBundle:Trip:edit.html.twig")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
-     * @PreAuthorize("hasRole('ADMIN') or hasPermission(#trip, 'EDIT')")
+     * @PreAuthorize("isFullyAuthenticated()")
      *
      */
     public function updateAction(Trip $trip)
     {
+        $this->ensureUserEqualsLoggedIn($trip->getCreator());
 
         $editForm = $this->createForm(new TripType(), $trip);
         $deleteForm = $this->createDeleteForm($trip->getId());
@@ -264,11 +270,12 @@ class TripController extends Controller
      * Deletes a Trip entity.
      *
      * @Route("/{id}/delete", name="trip_delete")
-     * @PreAuthorize("hasRole(ADMIN) or hasPermission(trip, DELETE)")
+     * @PreAuthorize("isFullyAuthenticated()")
      * @ParamConverter("trip", class="WodorNetMotoTripBundle:Trip")
      */
     public function deleteAction(Trip $trip)
     {
+        $this->ensureUserEqualsLoggedIn($trip->getCreator());
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($trip);

@@ -26,13 +26,10 @@ Scenario: Join trip when you're allowed
 Scenario: When user is not logged he's not allowed to join trip
     I should not be allowed to go to "/tripsignup/signup/1"
 
-@noweb
-Scenario: As a OwnerOfTheTrip I can approve a Candidate to my trip, to let him became Attendee and see the details.
-    Given the "wypad w doły" trip has the following signups:
-    | user     | status |
-    | Konsumer | new    |
-    When signup of "Konsumer" for "wypad w doły" is approved
-
+Scenario: When user is logged in he see private information, if he's not approved
+    Given I am logged in as "Konsumer" with "22@222" password
+    When I go to "trip/1/show"
+    Then I should not see "The very private description"
 
 Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to approve them
     Given the "wypad w góry" trip has the following signups:
@@ -41,13 +38,12 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to 
     And I am logged in as "Kreator" with "123456" password
     When I go to "trip/1/show"
     Then I should see "Konsumer"
+    When I do not follow redirects
     When I follow "Approve"
     Then email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
+    When I am redirected
     When I am logged in as "Konsumer" with "22@222" password
     And I go to "trip/1/show"
     Then I should see "The very private description"
-
-Scenario: As an Candidate I cannot see private information
-
 
 Scenario: As an User (which is not owner of the trip) I cannot see candidates

@@ -20,7 +20,7 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripRepository")
  */
-class Trip implements OwnerAware
+class Trip
 {
     /**
      * @var integer $id

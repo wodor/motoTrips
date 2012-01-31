@@ -15,7 +15,7 @@ use WodorNet\MotoTripBundle\Security\OwnerAware;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="WodorNet\MotoTripBundle\Entity\TripSignupRepository")
  */
-class TripSignup implements OwnerAware
+class TripSignup
 {
 
     const STATUS_NEW = 'new';

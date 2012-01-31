@@ -9,6 +9,8 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Feature context.
+ *
+ * @deprecated
  */
 class AclContext extends BehatContext
 {

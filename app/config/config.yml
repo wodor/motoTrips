@@ -50,14 +50,6 @@ doctrine:
                 user:     %database_user%
                 password: %database_password%
                 charset:  UTF8
-            acl:
-                driver:   %database_driver%
-                host:     %database_host%
-                port:     %database_port%
-                dbname:   %acl_database_name%
-                user:     %database_user%
-                password: %database_password%
-                charset:  UTF8
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -95,7 +87,7 @@ jms_security_extra:
     voters:
         disable_authenticated: false
         disable_role:          false
-        disable_acl:           false
+        disable_acl:           true
 
     # Allows you to specify access control rules for specific methods, such
     # as controller actions
