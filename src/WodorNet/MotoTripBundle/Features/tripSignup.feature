@@ -7,6 +7,7 @@ Background:
   | username | password | email               |
   | Kreator  | 123456   | wodor@wodor.net     |
   | Konsumer | 22@222   | wod.orw@gmail.com   |
+  | Lamer    | 123456   | wo.dorw@gmail.com   |
   Given the site has following trips:
   | creator | title | description | descritpion_private |
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
@@ -46,4 +47,37 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to 
     And I go to "trip/1/show"
     Then I should see "The very private description"
 
+
+Scenario: Owner And attendee cannot join the trip
+    Given the "wypad w góry" trip has the following signups:
+     | user     | status |
+     | Konsumer | new    |
+    And I am logged in as "Kreator" with "123456" password
+    When I go to "trip/1/show"
+    Then I should not see "Dołącz do wypadu"
+    #And I should not be allowed to go to "/tripsignup/signup/1". bug ?
+    When I am logged in as "Konsumer" with "22@222" password
+    And I go to "trip/1/show"
+    Then I should not see "Dołącz do wypadu"
+   # And I should not be allowed to go to "/tripsignup/signup/1". bug in context?
+    When I am logged in as "Lamer" with "123456" password
+    And I go to "trip/1/show"
+    Then I should see "Dołącz do wypadu"
+
+
+Scenario: Owner is able to reject candidate
+    Given the "wypad w góry" trip has the following signups:
+    | user     | status |
+    | Konsumer | new    |
+    And I am logged in as "Kreator" with "123456" password
+    When I go to "trip/1/show"
+    Then I should see "Odrzuć"
+    When I follow "Odrzuć"
+    Then email with subject "Kreator nie zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
+
+
+
+
+
 Scenario: As an User (which is not owner of the trip) I cannot see candidates
+
