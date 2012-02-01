@@ -57,7 +57,7 @@ class TripSignupRepository extends EntityRepository
     /**
      * Finds signup to $trip by $user
      */
-    public function getByTripAndUser(Trip $trip, User $user)
+    public function getByTripAndUser(Trip $trip, User $user, $status = null)
     {
         $qb = $this->createQueryBuilder('ts');
 
@@ -65,12 +65,17 @@ class TripSignupRepository extends EntityRepository
             $qb->expr()->eq('ts.trip', ':trip'),
             $qb->expr()->eq('ts.user', ':user')
         );
+        $qb->where($where);
 
-        $qb->add('where', $where);
+        if (!is_null($status)) {
+            $qb->andWhere($qb->expr()->eq('ts.status', ':status'));
+            $qb->setParameter('status', $status);
+        }
 
         $qb->setParameter('trip', $trip);
         $qb->setParameter('user', $user);
 
         return current($qb->getQuery()->getResult());
     }
+
 }

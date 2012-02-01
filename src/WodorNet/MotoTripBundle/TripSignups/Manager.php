@@ -36,7 +36,7 @@ class Manager
      */
     public function approve(TripSignup $tripSignup)
     {
-        $tripSignup->setStatus('approved');
+        $tripSignup->setStatus(TripSignup::STATUS_APPROVED);
         $this->em->persist($tripSignup);
         $this->em->flush();
 
@@ -50,8 +50,7 @@ class Manager
      */
     public function disApprove(TripSignup $tripSignup)
     {
-
-        $tripSignup->setStatus('new');
+        $tripSignup->setStatus(TripSignup::STATUS_NEW);
         $this->em->persist($tripSignup);
         $this->em->flush();
 
@@ -65,8 +64,7 @@ class Manager
      */
     public function reject(TripSignup $tripSignup)
     {
-
-        $tripSignup->setStatus('rejected');
+        $tripSignup->setStatus(TripSignup::STATUS_REJECTED);
         $this->em->persist($tripSignup);
         $this->em->flush();
 
@@ -82,7 +80,7 @@ class Manager
     public function resign(TripSignup $tripSignup)
     {
 
-        $tripSignup->setStatus('resigned');
+        $tripSignup->setStatus(TripSignup::STATUS_RESIGNED);
         $this->em->persist($tripSignup);
         $this->em->flush();
 

@@ -152,10 +152,17 @@ class TripSignupController extends Controller
      */
     public function signupAction(Trip $trip)
     {
+        $tripPerm = $this->get('tripPerm');
+        if (!$tripPerm->canJoin($trip)) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
+                "Użytkownik nie może dołączyć do wypadu"
+            );
+        }
+
         $tripSignup = new TripSignup();
 
-
         $user = $this->get('security.context')->getToken()->getUser();
+
         $tripSignup->setTrip($trip);
         $tripSignup->setUser($user);
         $tripSignup->setSignupType('join');
@@ -245,6 +252,8 @@ class TripSignupController extends Controller
      */
     public function createAction()
     {
+
+
         $entity = new TripSignup();
         $request = $this->getRequest();
         $form = $this->createForm(new TripSignupType(), $entity);

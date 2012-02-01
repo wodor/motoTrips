@@ -1,9 +1,7 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}
 
-
 <h1>{{trip.title}}</h1>
-
 
 <div class="grid_8">
     <p><strong>{% trans %}Start at{% endtrans %}</strong> {{ trip.startDate|intldate }}</p>
@@ -27,8 +25,9 @@
     {{ google_map_css(map) }}
 </div>
 
-
+{% if joinAllowed %}
 <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
+{% endif %}
 
 {% if editAllowed  %}
 <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>

@@ -112,7 +112,8 @@ class TripController extends Controller
             'map' => $map,
             'trip' => $trip,
             'editAllowed' => $tripPermission->canEdit($trip),
-            'showAllowed' => $tripPermission->canView($trip)
+            'showAllowed' => $tripPermission->canView($trip),
+            'joinAllowed' => $tripPermission->canJoin($trip)
         );
     }
 
