@@ -58,9 +58,16 @@ class Sender
     public function sendSingnupResign(TripSignup $tripSignup)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject($this->translator->trans('mail.subject.trip_signup.resign'))
-            ->setFrom('wodor@wodor.net')
-            ->setTo($tripSignup->getTrip()->getUser()->getEmail())
+            ->setSubject($this->translator->trans('mail.subject.trip_signup.resign',
+            array(
+                '%login%' => $tripSignup->getUser()->getUsername(),
+                '%name%' => $tripSignup->getTrip()->getTitle(),
+            )
+
+        ))
+            ->setFrom($tripSignup->getUser()->getEmail())
+            ->setReplyTo($tripSignup->getUser()->getEmail())
+            ->setTo($tripSignup->getTrip()->getCreator()->getEmail())
             ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
         return $this->mailer->send($message);
     }

@@ -2,6 +2,19 @@
 {% block content %}
 
 <h1>{{trip.title}}</h1>
+<div id="association_manage">
+    <span class="current_status">{{userAssociationStatus|trans}}</span>
+
+    {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
+        <a href="{{ path('tripsignup_resign',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
+    {% endif %}
+
+    {% if userAssociationStatus == 'trip.userrelation.unrelated' %}
+    <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
+    {% endif %}
+
+</div>
+
 
 <div class="grid_8">
     <p><strong>{% trans %}Start at{% endtrans %}</strong> {{ trip.startDate|intldate }}</p>
@@ -25,9 +38,7 @@
     {{ google_map_css(map) }}
 </div>
 
-{% if joinAllowed %}
-<a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
-{% endif %}
+
 
 {% if editAllowed  %}
 <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>

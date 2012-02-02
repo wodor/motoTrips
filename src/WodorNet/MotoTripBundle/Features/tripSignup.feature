@@ -65,7 +65,7 @@ Scenario: Owner And attendee cannot join the trip
     Then I should see "Dołącz do wypadu"
 
 
-Scenario: Owner is able to reject candidate
+Scenario: OwnerOfTheTrip is able to reject candidate
     Given the "wypad w góry" trip has the following signups:
     | user     | status |
     | Konsumer | new    |
@@ -78,7 +78,31 @@ Scenario: Owner is able to reject candidate
     Then email with subject "Kreator nie zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
     Then I should not see "Konsumer"
 
+Scenario: User cannot resign if he did not applied
+     Given I am logged in as "Konsumer" with "22@222" password
+     When I go to "trip/1/show"
+     Then I should not see "Rezygnuj"
+
+Scenario: Attendee is able to resign from the trip whe he's approved
+    Given the "wypad w góry" trip has the following signups:
+        | user     | status |
+        | Konsumer | approved    |
+    And I am logged in as "Konsumer" with "22@222" password
+    When I go to "trip/1/show"
+    Then I should see "Zrezygnuj z wypadu"
+    When I do not follow redirects
+    And I follow "Zrezygnuj z wypadu"
+    Then email with subject "Konsumer zrezygnował z udziału w wypadzie 'wypad w góry'" should have been sent to "wodor@wodor.net"
 
 
-Scenario: As an User (which is not owner of the trip) I cannot see candidates
+Scenario: Attendee is able to resign from the trip whe he's not approved
+    Given the "wypad w góry" trip has the following signups:
+        | user     | status |
+        | Konsumer | new    |
+    And I am logged in as "Konsumer" with "22@222" password
+    When I go to "trip/1/show"
+    Then I should see "Zrezygnuj z wypadu"
+    When I do not follow redirects
+    And I follow "Zrezygnuj z wypadu"
+    Then email with subject "Konsumer zrezygnował z udziału w wypadzie 'wypad w góry'" should have been sent to "wodor@wodor.net"
 

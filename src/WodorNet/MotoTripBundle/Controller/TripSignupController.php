@@ -54,7 +54,7 @@ class TripSignupController extends Controller
      */
     public function resignAction(TripSignup $tripSignup)
     {
-        $this->ensureUserEqualsLoggedIn($tripSignup->getTrip()->getCreator());
+        $this->ensureUserEqualsLoggedIn($tripSignup->getUser());
 
         $tripSignupsService = $this->get('wodor_net_moto_trip.tripsignups');
         $tripSignupsService->resign($tripSignup);

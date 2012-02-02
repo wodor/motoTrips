@@ -55,7 +55,7 @@ class TripSignupRepository extends EntityRepository
     }
 
     /**
-     * Finds signup to $trip by $user
+     * Finds last signup to $trip by $user
      */
     public function getByTripAndUser(Trip $trip, User $user, $status = null)
     {
@@ -74,6 +74,8 @@ class TripSignupRepository extends EntityRepository
 
         $qb->setParameter('trip', $trip);
         $qb->setParameter('user', $user);
+
+        $qb->orderBy('ts.signupDate', 'DESC');
 
         return current($qb->getQuery()->getResult());
     }
