@@ -42,7 +42,6 @@ class Status
 
         $signup = $this->tripSignupRepository->getByTripAndUser($trip, $user);
 
-
         if(!$signup instanceof TripSignup) {
             return 'trip.userrelation.unrelated';
         }
@@ -55,6 +54,11 @@ class Status
             return 'trip.userrelation.attendee';
         }
 
+        if($signup->getStatus() === TripSignup::STATUS_REJECTED) {
+            return 'trip.userrelation.rejected';
+        }
+
+        return 'trip.userrelation.unrelated';
     }
 
 

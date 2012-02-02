@@ -31,3 +31,12 @@ Logout: Wyloguj
 Start at: Początek
 End at: Koniec
 Resign from the attendance: Zrezygnuj z wypadu
+
+trip.userrelation:
+    owner: Jesteś właścicielem tego wypadu
+    candidate: Twój udział czeka na zatwierdzenie wypadzie
+    attendee: Jesteś uczestnikiem tego wypadu
+    unrelated: Nie uczestniczysz w tym wypadzie
+    rejected: Organizator odrzucił Twój udział
+
+

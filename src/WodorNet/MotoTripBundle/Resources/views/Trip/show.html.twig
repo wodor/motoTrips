@@ -9,7 +9,7 @@
         <a href="{{ path('tripsignup_resign',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
     {% endif %}
 
-    {% if userAssociationStatus == 'trip.userrelation.unrelated' %}
+    {% if joinAllowed %}
     <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
     {% endif %}
 
