@@ -13,7 +13,7 @@ Background:
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
 
 
-@javascript
+@nojavascript
 Scenario: Add a trip
     Given I am logged in as "Kreator" with "123456" password
     When I follow "dodaj wypad"
@@ -21,7 +21,9 @@ Scenario: Add a trip
         | wodornet_mototripbundle_triptype[title]   | The testing test of the test |
         | wodornet_mototripbundle_triptype[description]   | Hello There! Hello There! Hello There! Hello There! Hello There! Hello There!     |
         | wodornet_mototripbundle_triptype[descriptionPrivate]   | Hello There!  Hello There! Hello There! Hello There! Hello There! Hello There! Hello There! Hello There!    |
-    And I click randomly on the map in "map_canvas"
+        | wodornet_mototripbundle_triptype[location][lat] | 41.2757331547    |
+        | wodornet_mototripbundle_triptype[location][lng] | 22.6757812500    |
+    #And I click randomly on the map in "map_canvas".
     And I press "Zapisz"
     Then I should see "The testing test of the test"
     And I should be on "/trip/2/show"

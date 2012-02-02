@@ -49,6 +49,7 @@
         <service id="wodor_net_moto_trip.permissions.trip" class="WodorNet\MotoTripBundle\Security\TripPermissions">
             <argument type="service" id="security.context"/>
             <argument type="service" id="wodor_net_moto_trip.entity_manager"/>
+            <argument type="service" id="wodor_net_moto_trip.signupstatus"/>
         </service>
 
         <service id="tripPerm" alias="wodor_net_moto_trip.permissions.trip" />

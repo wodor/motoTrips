@@ -3,6 +3,10 @@ namespace WodorNet\MotoTripBundle\Security;
 
 class TripPermissions
 {
+    /**
+     * @var \WodorNet\MotoTripBundle\TripSignups\Status
+     */
+    protected $signupStatus;
 
     /**
      * @var \WodorNet\MotoTripBundle\Entity\TripSignupRepository
@@ -27,7 +31,9 @@ class TripPermissions
     /**
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      */
-    function __construct(\Symfony\Component\Security\Core\SecurityContextInterface $securityContext, \Doctrine\ORM\EntityManager $em)
+    function __construct(\Symfony\Component\Security\Core\SecurityContextInterface $securityContext,
+                         \Doctrine\ORM\EntityManager $em,
+                         \WodorNet\MotoTripBundle\TripSignups\Status $signupStatus)
     {
         $this->securityContext = $securityContext;
         $this->em = $em;
@@ -35,6 +41,7 @@ class TripPermissions
         $this->user = $this->securityContext->getToken()->getUser();
         $this->tripSignupRepository = $this->em->getRepository('\WodorNet\MotoTripBundle\Entity\TripSignup');
 
+        $this->signupStatus = $signupStatus;
     }
 
 
@@ -65,8 +72,9 @@ class TripPermissions
 
     public function canJoin(\WodorNet\MotoTripBundle\Entity\Trip $trip)
     {
-        $tsup = $this->tripSignupRepository->getByTripAndUser($trip, $this->user);
-        return !$tsup instanceof \WodorNet\MotoTripBundle\Entity\TripSignup && !$this->canEdit($trip);
+        $relation = $this->signupStatus->getRelationInfo($trip);
+
+        return $relation=='trip.userrelation.unrelated';
     }
 
 }
