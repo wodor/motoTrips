@@ -21,7 +21,7 @@ mail:
             create: Nowa osoba chce dołączyć do Twojego wypadu
             approve: %login% zgodził się na Twój udział w wypadzie '%name%'
             resign: Uczestnik zrezygnował z wypadu
-            reject: Odrzucono Twoje uczestnictwo
+            reject: %login% nie zgodził się na Twój udział w wypadzie '%name%'
 
 The presented password is invalid.: "Podane hasło jest niepoprawne"
 The presented password cannot be empty.: "Hasło nie może puste"

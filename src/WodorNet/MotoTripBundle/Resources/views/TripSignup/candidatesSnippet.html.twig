@@ -21,6 +21,10 @@
             <a href="{{ path('tripsignup_approve', { 'id': item.id}) }}"
                class="Button midButton"
                title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>
+
+            <a href="{{ path('tripsignup_reject', { 'id': item.id}) }}"
+               class="Button midButton"
+               title="{% trans %}Approve{% endtrans %}">{% trans %}Odrzuć{% endtrans %}</a>
         </td>
     </tr>
     {% endfor %}
