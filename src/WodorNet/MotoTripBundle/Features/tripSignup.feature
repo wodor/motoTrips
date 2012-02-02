@@ -72,10 +72,11 @@ Scenario: Owner is able to reject candidate
     And I am logged in as "Kreator" with "123456" password
     When I go to "trip/1/show"
     Then I should see "Odrzuć"
-    When I follow "Odrzuć"
+    And I should see "Konsumer"
+    When I do not follow redirects
+    And I follow "Odrzuć"
     Then email with subject "Kreator nie zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
-
-
+    Then I should not see "Konsumer"
 
 
 

@@ -69,10 +69,15 @@ class Sender
     public function sendSingnupReject(TripSignup $tripSignup)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject($this->translator->trans('mail.subject.trip_signup.reject'))
-            ->setFrom('wodor@wodor.net')
+            ->setSubject($this->translator->trans('mail.subject.trip_signup.reject',
+            array(
+                '%login%' => $tripSignup->getTrip()->getCreator()->getUsername(),
+                '%name%' => $tripSignup->getTrip()->getTitle(),
+            )))
+            ->setFrom($tripSignup->getTrip()->getCreator()->getEmail())
+            ->setReplyTo($tripSignup->getTrip()->getCreator()->getEmail())
             ->setTo($tripSignup->getUser()->getEmail())
-            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
+            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupReject.html.twig', array('name' => 'dupa')), 'text/html');
         return $this->mailer->send($message);
     }
 
