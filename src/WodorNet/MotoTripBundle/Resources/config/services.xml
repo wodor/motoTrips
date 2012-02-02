@@ -59,6 +59,19 @@
             <argument type="service" id="wodor_net_moto_trip.entity_manager"/>
         </service>
 
+        <service id="wodor_net_moto_trip.repository.tripsignups"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository"
+                 class="WodorNet\MotoTripBundle\Repository\TripSignups" >
+            <argument>WodorNet\MotoTripBundle\Entity\TripSignup</argument>
+        </service>
+
+        <service id="wodor_net_moto_trip.signupstatus" class="WodorNet\MotoTripBundle\TripSignups\Status">
+            <argument type="service" id="wodor_net_moto_trip.repository.tripsignups"/>
+            <argument type="service" id="security.context"/>
+        </service>
+
+        <service id="signupStatus" alias="wodor_net_moto_trip.signupstatus"/>
 
     </services>
 

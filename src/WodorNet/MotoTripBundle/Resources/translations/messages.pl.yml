@@ -20,7 +20,7 @@ mail:
         trip_signup:
             create: Nowa osoba chce dołączyć do Twojego wypadu
             approve: %login% zgodził się na Twój udział w wypadzie '%name%'
-            resign: Uczestnik zrezygnował z wypadu
+            resign:  %login% zrezygnował z udziału w wypadzie '%name%'
             reject: %login% nie zgodził się na Twój udział w wypadzie '%name%'
 
 The presented password is invalid.: "Podane hasło jest niepoprawne"
@@ -30,3 +30,4 @@ Bad credentials: "Podane hasło jest niepoprawne"
 Logout: Wyloguj
 Start at: Początek
 End at: Koniec
+Resign from the attendance: Zrezygnuj z wypadu

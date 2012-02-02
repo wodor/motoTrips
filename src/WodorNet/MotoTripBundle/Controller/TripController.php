@@ -90,7 +90,6 @@ class TripController extends Controller
 
         $map->setJavascriptVariable('tripsmap');
 
-
         $map->setAutoZoom(false);
         //$map->setMapOptions(array'zoom',9);
 
@@ -100,7 +99,6 @@ class TripController extends Controller
 
         $map->setCenter($trip->getLat(), $trip->getLng());
 
-
         $marker = $this->get('ivory_google_map.marker');
         $marker->setPosition($trip->getLat(), $trip->getLng());
         $map->addMarker($marker);
@@ -108,12 +106,16 @@ class TripController extends Controller
         /** @var $tripPermission \WodorNet\MotoTripBundle\Security\TripPermissions */
         $tripPermission = $this->get('tripPerm');
 
+
+        $signupStatus = $this->get('signupStatus');
+
         return array(
             'map' => $map,
             'trip' => $trip,
             'editAllowed' => $tripPermission->canEdit($trip),
             'showAllowed' => $tripPermission->canView($trip),
-            'joinAllowed' => $tripPermission->canJoin($trip)
+            'joinAllowed' => $tripPermission->canJoin($trip),
+            'userAssociationStatus' => $signupStatus->getRelationInfo($trip)
         );
     }
 

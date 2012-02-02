@@ -92,6 +92,7 @@ class Trip
 
     /**
      * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="trip")
+     * @ORM\OrderBy({"signupDate" = "DESC"})
      */
     protected $tripSignups;
 
