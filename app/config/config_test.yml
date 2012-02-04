@@ -24,14 +24,9 @@ mink:
 doctrine:
     dbal:
         connections:
-            default:
-                driver:   %database_driver%
-                host:     %database_host%
-                port:     %database_port%
-                dbname:   motowypady_test
-                user:     %database_user%
-                password: %database_password%
-                charset:  UTF8
+             default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
     orm:
         auto_generate_proxy_classes: true
         auto_mapping: true
