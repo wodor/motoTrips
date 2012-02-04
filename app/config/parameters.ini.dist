@@ -1,0 +1,13 @@
+[parameters]
+    database_driver="pdo_mysql"
+    database_host="localhost"
+    database_port=""
+    database_name="motowypad"
+    database_user="root"
+    database_password="rooted"
+    mailer_transport="gmail"
+    mailer_host="localhost"
+    mailer_user="gmail@somewhere.net"
+    mailer_password="ZZZZZZZ"
+    locale="pl"
+    secret="secretsXXecretsecret"
