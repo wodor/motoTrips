@@ -72,8 +72,9 @@ fos_user:
     user_class: WodorNet\MotoTripBundle\Entity\User
     registration:
         confirmation:
-            enabled: true;
-                fromemail: rejestracja@motowypady.pl
+            enabled: true
+            from_email:
+                address: rejestracja@motowypady.pl
                 sender_name: Motowypady.pl
 
 jms_security_extra:

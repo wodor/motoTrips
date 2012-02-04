@@ -61,7 +61,7 @@ class Trip
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
-     * @Assert\MinLength(limit=20, message="Nie tak szybko! Napisz kilka słow o wypadzie")
+     * @Assert\MinLength(limit=20, message="Nie tak szybko! Napisz poniżej kilka słow o wypadzie, co najmniej 20 znaków.")
      */
     private $description;
 
