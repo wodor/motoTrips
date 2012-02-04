@@ -74,6 +74,11 @@ class MapPointType extends AbstractType
             $this->map->setCenter((float)$value['lat'], (float)$value['lng'], true);
             $this->map->setMapOption('zoom', 10);
         }
+        else {
+            $this->map->setCenter(52, 19.5, true);
+
+
+        }
 
         $this->map->setJavascriptVariable('map');
 

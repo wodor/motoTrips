@@ -1,0 +1,13 @@
+{% extends 'WodorNetMotoTripBundle:Email:tripSignup.html.twig' %}
+{% block body %}
+Witaj,<br/>
+Użytkownik {{tripSignup.getuser.getusername}} rezygnuje z Twojego wypadu.<br/>
+Aby wyświetlić i edytować aktualną listę uczestników,
+przejdź bezpośrednio do strony wypadu za pomocą tego linka.<br/>
+<a href="{{url('trip_show',{'id':tripSignup.trip.id}) }}">{{url('trip_show',{'id':tripSignup.trip.id}) }}</a>
+
+
+
+{% endblock %}
+
+
