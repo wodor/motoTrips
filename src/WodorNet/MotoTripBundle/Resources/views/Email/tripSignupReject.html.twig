@@ -1,6 +1,12 @@
 {% extends 'WodorNetMotoTripBundle:Email:tripSignup.html.twig' %}
 {% block body %}
-<h1>Odrzucono , {{name}}</h1>
+Witaj,<br/>
+Z przykrością informujemy, że Użytkownik {{tripSignup.getuser.getusername}} nie dodał Cię do listy
+uczestników wypadu "{{tripSignup.gettrip.gettitle}}".
+<br/>Pamiętaj, że świat się na tym nie kończy, zobacz listę pozostałych wypadów.
+
+<a href="{{url('default') }}">{{url('default') }}</a>
+
 {% endblock %}
 
 

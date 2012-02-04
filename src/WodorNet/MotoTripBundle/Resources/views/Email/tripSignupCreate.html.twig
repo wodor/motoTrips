@@ -1,6 +1,12 @@
 {% extends 'WodorNetMotoTripBundle:Email:tripSignup.html.twig' %}
 {% block body %}
-<h1>Sedes , {{name}}</h1>
+Witaj,<br/>
+
+Użytkownik {{tripSignup.getuser.getusername}} chce dołączyć do Twojego wypadu "{{tripSignup.gettrip.gettitle}}".<br/>
+
+Aby zatwierdzić, bądź odrzucić jego udział oraz edytować aktualną listę
+uczestników, przejdź bezpośrednio do strony wypadu za pomocą tego linka.<br/>
+<a href="{{url('trip_show',{'id':tripSignup.trip.id}) }}">{{url('trip_show',{'id':tripSignup.trip.id}) }}</a><br/>
 {% endblock %}
 
 

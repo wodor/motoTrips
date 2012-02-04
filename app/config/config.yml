@@ -70,6 +70,11 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: WodorNet\MotoTripBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: true;
+                fromemail: rejestracja@motowypady.pl
+                sender_name: Motowypady.pl
 
 jms_security_extra:
     # Whether you want to secure all services (true), or only secure specific

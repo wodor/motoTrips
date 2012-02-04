@@ -1,6 +1,21 @@
 {% extends 'WodorNetMotoTripBundle:Email:tripSignup.html.twig' %}
+
 {% block body %}
-<h1>Sedes , {{name}}</h1>
+Witaj,<br/>
+
+Użytkownik {{tripSignup.gettrip.getcreator.getusername}} dodał Cię do listy uczestników wypadu "{{tripSignup.gettrip.gettitle}}".<br/>
+
+Aby poznać pozostałych uczestników, przejdź bezpośrednio do strony
+wypadu za pomocą tego linka.<br/>
+
+<a href="{{url('trip_show',{'id':tripSignup.trip.id}) }}">{{url('trip_show',{'id':tripSignup.trip.id}) }}</a><br/>
+
+<br/>
+Pamiętaj, że jeśli z jakichś powodów (poród, pożar, Tsunami, przyjazd teściowej), będziesz zmuszony odwołać swój udział, powinieneś
+powiadomić o rezygnacji organizatora wypadu.
+
+<br/>Aby to wykonać przejdź <a href="{{url('trip_show',{'id':tripSignup.trip.id}) }}">na stronę wypadu</a>  i wykonaj dalsze instrukcje.
+
 {% endblock %}
 
 

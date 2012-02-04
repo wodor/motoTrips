@@ -51,7 +51,10 @@ class Sender
             ->setFrom($tripSignup->getTrip()->getCreator()->getEmail())
             ->setReplyTo($tripSignup->getTrip()->getCreator()->getEmail())
             ->setTo($tripSignup->getUser()->getEmail())
-            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupApprove.html.twig', array('name' => 'dupa')), 'text/html');
+
+            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupApprove.html.twig',
+                array('tripSignup' => $tripSignup   ))
+            , 'text/html');
         return $this->mailer->send($message);
     }
 
@@ -68,7 +71,9 @@ class Sender
             ->setFrom($tripSignup->getUser()->getEmail())
             ->setReplyTo($tripSignup->getUser()->getEmail())
             ->setTo($tripSignup->getTrip()->getCreator()->getEmail())
-            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignup.html.twig', array('name' => 'dupa')), 'text/html');
+            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupResign.html.twig',
+                array('tripSignup' => $tripSignup   ))
+            , 'text/html');
         return $this->mailer->send($message);
     }
 
@@ -84,7 +89,9 @@ class Sender
             ->setFrom($tripSignup->getTrip()->getCreator()->getEmail())
             ->setReplyTo($tripSignup->getTrip()->getCreator()->getEmail())
             ->setTo($tripSignup->getUser()->getEmail())
-            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupReject.html.twig', array('name' => 'dupa')), 'text/html');
+            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupReject.html.twig',
+            array('tripSignup' => $tripSignup   ))
+            , 'text/html');
         return $this->mailer->send($message);
     }
 
@@ -95,7 +102,9 @@ class Sender
             ->setFrom($tripSignup->getUser()->getEmail())
             ->setReplyTo($tripSignup->getUser()->getEmail())
             ->setTo($tripSignup->getTrip()->getCreator()->getEmail())
-            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupCreate.html.twig', array('name' => 'dupa')), 'text/html');
+            ->setBody($this->templating->render('WodorNetMotoTripBundle:Email:tripSignupCreate.html.twig',
+                array('tripSignup' => $tripSignup   ))
+            , 'text/html');
         return $this->mailer->send($message);
 
     }
