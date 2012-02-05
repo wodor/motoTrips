@@ -16,7 +16,6 @@
     <testsuites>
         <testsuite name="WodorNet">
             <directory>../src/WodorNet/*Bundle/Tests</directory>
-            <directory>../src/*/Bundle/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
