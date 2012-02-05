@@ -4,4 +4,3 @@ Playground for symfony2, based on symfony/symfony-standard.
 
 Tests driven by Behat.
 
-
