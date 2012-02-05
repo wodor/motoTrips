@@ -31,41 +31,39 @@ class Status
         $this->tripSignupRepository = $tripSignupRepository;
     }
 
-    public function getRelationInfo(\WodorNet\MotoTripBundle\Entity\Trip $trip, User $user = null) {
+    public function getRelationInfo(\WodorNet\MotoTripBundle\Entity\Trip $trip, User $user = null)
+    {
 
-        if(is_null($user)) {
+        if (is_null($user)) {
             $user = $this->sc->getToken()->getUser();
         }
 
-        if(!$user instanceof User) {
+        if (!$user instanceof User) {
             return 'trip.userrelation.unrelated';
         }
 
-        if($trip->getCreator() === $user) {
+        if ($trip->getCreator() === $user) {
             return 'trip.userrelation.owner';
         }
 
         $signup = $this->tripSignupRepository->getByTripAndUser($trip, $user);
 
-        if(!$signup instanceof TripSignup) {
+        if (!$signup instanceof TripSignup) {
             return 'trip.userrelation.unrelated';
         }
 
-        if($signup->getStatus() === TripSignup::STATUS_NEW) {
+        if ($signup->getStatus() === TripSignup::STATUS_NEW) {
             return 'trip.userrelation.candidate';
         }
 
-        if($signup->getStatus() === TripSignup::STATUS_APPROVED) {
+        if ($signup->getStatus() === TripSignup::STATUS_APPROVED) {
             return 'trip.userrelation.attendee';
         }
 
-        if($signup->getStatus() === TripSignup::STATUS_REJECTED) {
+        if ($signup->getStatus() === TripSignup::STATUS_REJECTED) {
             return 'trip.userrelation.rejected';
         }
 
         return 'trip.userrelation.unrelated';
     }
-
-
-
 }
