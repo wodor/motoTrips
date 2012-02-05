@@ -5,6 +5,7 @@ namespace WodorNet\MotoTripBundle\TripSignups;
 use \WodorNet\MotoTripBundle\Entity\TripSignup;
 use \WodorNet\MotoTripBundle\Event\TripSignupEvent;
 use \WodorNet\MotoTripBundle\MotoTripEvents;
+use \WodorNet\MotoTripBundle\Entity\User;
 
 use \Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -30,10 +31,14 @@ class Status
         $this->tripSignupRepository = $tripSignupRepository;
     }
 
-    public function getRelationInfo(\WodorNet\MotoTripBundle\Entity\Trip $trip, \WodorNet\MotoTripBundle\Entity\User $user = null) {
+    public function getRelationInfo(\WodorNet\MotoTripBundle\Entity\Trip $trip, User $user = null) {
 
         if(is_null($user)) {
             $user = $this->sc->getToken()->getUser();
+        }
+
+        if(!$user instanceof User) {
+            return 'trip.userrelation.unrelated';
         }
 
         if($trip->getCreator() === $user) {

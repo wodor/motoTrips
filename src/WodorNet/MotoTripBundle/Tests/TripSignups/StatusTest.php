@@ -4,6 +4,10 @@ namespace WodorNet\MotoTripBundle\Tests\TripSignups;
 class StatusTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    public $securityContext;
+    /**
      * @var \WodorNet\MotoTripBundle\TripSignups\Manager
      */
     protected $statusService;
@@ -24,7 +28,10 @@ class StatusTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
         ->getMock();
 
-        $this->statusService = new \WodorNet\MotoTripBundle\TripSignups\Status($this->tripSignupRepository);
+        $this->securityContext = $this->getMockBuilder('\Symfony\Component\Security\Core\SecurityContext')
+            ->disableOriginalConstructor()->getMock();
+
+        $this->statusService = new \WodorNet\MotoTripBundle\TripSignups\Status($this->tripSignupRepository, $this->securityContext);
     }
 
     /**
@@ -103,5 +110,25 @@ class StatusTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('trip.userrelation.unrelated',$this->statusService->getRelationInfo($trip, $user));
 
+    }
+
+
+    public function testGetRelationInfoNotLoggedIn() {
+
+        $token = $this->getMockBuilder('\Symfony\Component\Security\Core\Authentication\Token\AnonymousToken')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $token->expects($this->any())
+            ->method('getUser')
+            ->will($this->returnValue(''));
+
+        $this->securityContext->expects($this->any())
+        ->method('getToken')
+        ->will($this->returnValue($token));
+
+        $trip = $this->getMock('WodorNet\MotoTripBundle\Entity\Trip');
+
+        $this->assertEquals('trip.userrelation.unrelated',$this->statusService->getRelationInfo($trip));
     }
 }
