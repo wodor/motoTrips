@@ -24,47 +24,6 @@ class MotoTripExtensionTest extends \PHPUnit_Framework_TestCase
         $this->object = new MotoTripExtension;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
-
-    /**
-     * @todo Implement testGetName().
-     */
-    public function testGetName()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testGetFilters().
-     */
-    public function testGetFilters()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @todo Implement testIntldate().
-     */
-    public function testIntldate()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
 
 
     public function intervalsProvider() {
@@ -90,15 +49,6 @@ class MotoTripExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($string, $this->object->intlinterval($interval));
     }
 
-    /**
-     * @todo Implement testCrop().
-     */
-    public function testCrop()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+
 }
 ?>
