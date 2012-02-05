@@ -95,6 +95,7 @@ Scenario: Attendee is able to resign from the trip whe he's approved
     Then email with subject "Konsumer zrezygnował z udziału w wypadzie 'wypad w góry'" should have been sent to "wodor@wodor.net"
 
 
+
 Scenario: Attendee is able to resign from the trip whe he's not approved
     Given the "wypad w góry" trip has the following signups:
         | user     | status |
@@ -105,6 +106,12 @@ Scenario: Attendee is able to resign from the trip whe he's not approved
     When I do not follow redirects
     And I follow "Zrezygnuj z wypadu"
     Then email with subject "Konsumer zrezygnował z udziału w wypadzie 'wypad w góry'" should have been sent to "wodor@wodor.net"
+
+
+    When I go to "trip/1/show"
+    Then I should see "wypad w góry"
+    But I should not see "Zrezygnuj z wypadu"
+
 
 Scenario: Attendee can rejoin after resign
      Given the "wypad w góry" trip has the following signups:
@@ -118,3 +125,14 @@ Scenario: Attendee can rejoin after resign
         And I fill in "wodornet_mototripbundle_tripsignuptype[description]" with "Hi I'm Konsumer"
         And I press "Wyślij"
         Then I should not see "Dołącz do wypadu"
+
+Scenario: Attendee can resign after rejoin
+    Given the "wypad w góry" trip has the following signups:
+        | user     | status |
+        | Konsumer | new        |
+        | Konsumer | resigned   |
+    When I am logged in as "Konsumer" with "22@222" password
+    And I go to "trip/1/show"
+    Then I should see "Zrezygnuj z wypadu"
+
+

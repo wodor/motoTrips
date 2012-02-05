@@ -105,8 +105,13 @@ class TripController extends Controller
         /** @var $tripPermission \WodorNet\MotoTripBundle\Security\TripPermissions */
         $tripPermission = $this->get('tripPerm');
 
-
         $signupStatus = $this->get('signupStatus');
+
+        $signup = false;
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($user instanceof \WodorNet\MotoTripBundle\Entity\User) {
+            $signup = $this->getDoctrine()->getEntityManager()->getRepository('WodorNetMotoTripBundle:TripSignup')->getByTripAndUser($trip, $user);
+        }
 
         return array(
             'map' => $map,
@@ -114,7 +119,8 @@ class TripController extends Controller
             'editAllowed' => $tripPermission->canEdit($trip),
             'showAllowed' => $tripPermission->canView($trip),
             'joinAllowed' => $tripPermission->canJoin($trip),
-            'userAssociationStatus' => $signupStatus->getRelationInfo($trip)
+            'userAssociationStatus' => $signupStatus->getRelationInfo($trip),
+            'tripSignup' => $signup
         );
     }
 
