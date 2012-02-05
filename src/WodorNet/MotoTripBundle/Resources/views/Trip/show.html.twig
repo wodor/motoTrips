@@ -8,13 +8,11 @@
     <span class="current_status">{{userAssociationStatus|trans}}</span>
 
     {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
-    <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from
-        the attendance{% endtrans %}</a>
+    <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
     {% endif %}
 
     {% if joinAllowed %}
-    <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this
-        trip{% endtrans %}</a>
+    <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
     {% endif %}
 </div>
 
