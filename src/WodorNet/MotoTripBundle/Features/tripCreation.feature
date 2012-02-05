@@ -38,3 +38,4 @@ Scenario: Not logged in user can see public trip
     When I go to "/trip/1/show"
     Then I should see "Dołącz do wypadu"
 
+
