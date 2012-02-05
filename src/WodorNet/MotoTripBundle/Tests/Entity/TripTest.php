@@ -26,6 +26,9 @@ class TripTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * @return array
+     */
     public function StartDateBeforeEndDateProvider() {
         $ret[] = array(new \DateTime("2012-01-01 12:10"), new \DateTime("2012-01-01 18:10"), true);
         $ret[] = array(new \DateTime("2012-01-01 12:10"), new \DateTime("2012-01-01 12:10"), false);
