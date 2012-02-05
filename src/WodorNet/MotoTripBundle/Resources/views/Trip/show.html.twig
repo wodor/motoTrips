@@ -1,23 +1,21 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}
 
+
+<div class="grid_16">
 <h1>{{trip.title}}</h1>
+</div>
 
-
-<div id="association_manage">
-    <span class="current_status">{{userAssociationStatus|trans}}</span>
-
-    {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
-    <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
-    {% endif %}
-
-    {% if joinAllowed %}
-    <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
+<div class="grid_16">
+    {% if editAllowed  %}
+    {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
     {% endif %}
 </div>
 
+<div class="clear"></div>
 
 <div class="grid_8">
+    <h6 class="current_status">{{userAssociationStatus|trans}}</h6>
     <p><strong>{% trans %}Start at{% endtrans %}</strong> {{ trip.startDate|intldate }}</p>
 
     <p><strong>{% trans %}End at{% endtrans %}</strong> {{ trip.endDate|intldate }}</p>
@@ -28,8 +26,27 @@
     {% endif %}
 
 
-    <a href="{{ path('trip') }}" class="Button midButton"> {% trans %}Back to the list{% endtrans %} </a>
-    <a href="#lista" class="Button midButton">Lista uczestników</a>
+    {# przyciski dolaczania / rezygnacji #}
+    {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
+        <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
+    {% endif %}
+    {% if joinAllowed %}
+        <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
+    {% endif %}
+    {# end przyciski dolaczania / rezygnacji #}
+
+    {% if editAllowed  %}
+        <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
+        <a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton" onclick="return confirm('Na pewno usunąć wypad {{trip.title}} ?')">{% trans %}Delete{% endtrans %}</a>
+    {% endif %}
+
+    <a href="{{ path('trip') }}" class="Button midButton">{% trans %}Back to the list{% endtrans %}</a>
+
+
+
+    {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
+
+
 
 </div>
 
@@ -39,18 +56,7 @@
     {{ google_map_css(map) }}
 </div>
 
-
-{% if editAllowed  %}
-<a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
-<a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Delete{% endtrans %}</a>
-{% endif %}
-
-
-{% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
-
-{% if editAllowed  %}
-{% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
-{% endif %}
+<div class="clear"></div>
 
 
 {% endblock %}

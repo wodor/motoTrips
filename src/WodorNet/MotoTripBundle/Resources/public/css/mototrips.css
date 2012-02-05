@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     text-shadow: 1px 1px 1px #87786c;
-    color: #403b37
+    color: #403b37;
 }
 
 h1 {
@@ -33,6 +33,19 @@ h3 {
 
 h4 {
     font-size: 1.5em;
+}
+
+.current_status {
+    font-style: italic;
+    font-family: sans-serif;
+    border: 2px solid ;
+    border-color: #d1c9c2;
+    padding: 15px;
+    background-color: #e3dbd3;
+    color: #696158;
+    text-shadow: none;
+
+
 }
 
 .h_icon {
@@ -159,7 +172,9 @@ div#map {
     margin-left: 40px;
 }
 /*candidatesTable*/
-
+.candidatesTable{
+    width: 100%;
+}
 .candidatesTable tr{
     vertical-align: middle;
 }
@@ -347,7 +362,9 @@ input[type=submit], input[type=button], input[type=reset] {
     font-size: 20px;
 }
 .midButton{
+    padding: 2px 7px 2px 7px;
     font-size: 1.2em;
+
 }
 /*formularz rejestracji*/
 .Rejestracja label {

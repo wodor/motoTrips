@@ -11,10 +11,15 @@ Details: Szczególy
 Upcoming Trips: Nadchodzące Wypady
 Create: Dodaj
 Trip: Wypad
-Back to the list: Powrót
+Back to the list: Lista wypadów
 Join this trip: Dołącz do wypadu
 Describe Yourself: Opisz siebie, podaj login z forum, lub daj się jakoś rozpoznać:
 Send: Wyślij
+Approve: Akceptuj
+Edit: Edytuj wypad
+Delete: Usuń wypad
+Disapprove: Odrzuć
+Look into: Obczaj
 mail:
     subject:
         trip_signup:
@@ -34,7 +39,7 @@ Resign from the attendance: Zrezygnuj z wypadu
 
 trip.userrelation:
     owner: Jesteś właścicielem tego wypadu
-    candidate: Twój udział czeka na zatwierdzenie wypadzie
+    candidate: Twój udział w tym wypadzie czeka na zatwierdzenie
     attendee: Jesteś uczestnikiem tego wypadu
     unrelated: Nie uczestniczysz w tym wypadzie
     rejected: Organizator odrzucił Twój udział
