@@ -6,7 +6,6 @@ use WodorNet\MotoTripBundle\Entity\Trip;
 class TripTest extends \PHPUnit_Framework_TestCase
 {
 
-
     public function GetDurationProvider() {
 
         $trip = new Trip();
@@ -46,11 +45,3 @@ class TripTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedResult, $trip->isStartDateBeforeEndDate());
     }
 }
-
-/**
- * do przetestowania
- *
- * wywołanie zdarzen przy zapisie
- * wykonanie zdarzen
- *
- */
