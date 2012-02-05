@@ -8,10 +8,12 @@ Background:
   | Kreator  | 123456   | wodor@wodor.net     |
   | Konsumer | 22@222   | wod.orw@gmail.com   |
   | Lamer    | 123456   | wo.dorw@gmail.com   |
+  | Pizza    | 123456   | w.odorw@gmail.com   |
   Given the site has following trips:
   | creator | title | description | descritpion_private |
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
   | Kreator | wypad w doły | Lorem ipsum dolor sit amet | The very private description |
+  | Kreator | 1234567890 1234567890 123456890 | Lorem ipsum dolor sit amet | The very private description |
 
 
 Scenario: Join trip when you're allowed
@@ -40,12 +42,19 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to 
     When I go to "trip/1/show"
     Then I should see "Konsumer"
     When I do not follow redirects
-    When I follow "Approve"
+    When I follow "Akceptuj"
     Then email with subject "Kreator zgodził się na Twój udział w wypadzie 'wypad w góry'" should have been sent to "wod.orw@gmail.com"
     When I am redirected
     When I am logged in as "Konsumer" with "22@222" password
     And I go to "trip/1/show"
     Then I should see "The very private description"
+
+@todo
+Scenario: OwnerOfTheTrip can see private description
+    Given I am logged in as "Kreator" with "123456" password
+    And I go to "trip/1/show"
+    Then I should see "The very private description"
+
 
 
 Scenario: Owner And attendee cannot join the trip
@@ -134,5 +143,9 @@ Scenario: Attendee can resign after rejoin
     When I am logged in as "Konsumer" with "22@222" password
     And I go to "trip/1/show"
     Then I should see "Zrezygnuj z wypadu"
+
+
+
+
 
 

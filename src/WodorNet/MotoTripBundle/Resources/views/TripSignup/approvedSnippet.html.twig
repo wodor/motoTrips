@@ -14,17 +14,17 @@
         {% for item in tripSignups %}
         <tr class="wiersz_1">
             <td class="kolumna_1">
-                <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+                <a href="{{ path('tripsignup_show', { 'id': item.id}) }}">{{item.user.username}}</a>
             </td>
             <td class="kolumna_2">
                 {{item.signupDate.format("Y-m-d")}}
             </td>
             <td class="kolumna_3">
                 {% if tripEditAllowed %}
-                <a href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}"
-                   title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
-                <a href="{{ path('tripsignup_show', { 'id': item.id}) }}"
-                   title="{% trans %}Details{% endtrans %}">{% trans %}Details{% endtrans %}</a>
+                <a class="Button midButton" href="{{ path('tripsignup_show', { 'id': item.id}) }}"
+                   title="{% trans %}Details{% endtrans %}">{% trans %}Look into{% endtrans %}</a>
+                <a class="Button midButton" href="{{ path('tripsignup_disapprove', { 'id': item.id}) }}"
+                title="{% trans %}Disapprove{% endtrans %}">{% trans %}Disapprove{% endtrans %}</a>
                 {% endif %}
 
 

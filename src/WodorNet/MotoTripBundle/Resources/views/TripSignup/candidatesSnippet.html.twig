@@ -1,10 +1,11 @@
 {% block list_content %}
-<h2>{%trans%}Uczestnicy niezatwierdzeni{%endtrans%}</h2>
+{% if tripSignups|length > 0 %}
+<h2>{%trans%}Nowe zgłoszenia{%endtrans%}</h2>
 <table class="candidatesTable">
     <thead>
     <tr>
-        <th class="kolumna_1">Nazwa</th>
-        <th class="kolumna_2">Data</th>
+        <th class="kolumna_1">Użytkownik</th>
+        <th class="kolumna_2">Data przyłączenia</th>
         <th class="kolumna_3">Akcje</th>
     </tr>
     </thead>
@@ -12,23 +13,26 @@
     {% for item in tripSignups %}
     <tr class="wiersz_1">
         <td class="kolumna_1">
-            <a href="{{ path('trip_show', { 'id': item.id }) }}">{{item.user.username}}</a>
+            <a href="{{ path('tripsignup_show', { 'id': item.id}) }}">{{item.user.username}}</a>
         </td>
         <td class="kolumna_2">
             {{item.signupDate.format("Y-m-d")}}
         </td>
         <td class="kolumna_3">
+            <a class="Button midButton" href="{{ path('tripsignup_show', { 'id': item.id}) }}"
+               title="{% trans %}Details{% endtrans %}">{% trans %}Look into{% endtrans %}</a>
             <a href="{{ path('tripsignup_approve', { 'id': item.id}) }}"
                class="Button midButton"
-               title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>
-
+            title="{% trans %}Approve{% endtrans %}">{% trans %}Approve{% endtrans %}</a>
             <a href="{{ path('tripsignup_reject', { 'id': item.id}) }}"
-               class="Button midButton"
+               class="Button midButton" onclick="confirm('Odrzucic bezpowrotnie to zgłoszenie?')"
                title="{% trans %}Approve{% endtrans %}">{% trans %}Odrzuć{% endtrans %}</a>
+
         </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+{% endif %}
 {% endblock %}
 
