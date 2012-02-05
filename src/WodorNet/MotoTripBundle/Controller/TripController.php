@@ -35,7 +35,6 @@ class TripController extends Controller
         return array('trip' => $trip);
     }
 
-
     /**
      * List of latest trips
      *
