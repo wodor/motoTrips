@@ -13,7 +13,6 @@ Background:
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
 
 
-@nojavascript
 Scenario: Add a trip
     Given I am logged in as "Kreator" with "123456" password
     When I follow "dodaj wypad"
@@ -29,11 +28,15 @@ Scenario: Add a trip
     And I should be on "/trip/2/show"
     And I should see "Edit"
 
-
 Scenario: Go to join trip
     Given I am logged in as "Konsumer" with "22@222" password
     And I go to "/trip/1/show"
     And I follow "Dołącz do wypadu"
     Then I should see "Dołącz do wypadu"
+
+Scenario: Not logged in user can see public trip
+    When I go to "/trip/1/show"
+    Then I should see "Dołącz do wypadu"
+
 
 
