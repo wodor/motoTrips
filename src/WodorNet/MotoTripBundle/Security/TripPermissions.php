@@ -60,6 +60,10 @@ class TripPermissions
      */
     public function canView(\WodorNet\MotoTripBundle\Entity\Trip $trip)
     {
+        if($this->user === $trip->getCreator()) {
+            return true;
+        }
+
         $tsups = $this->tripSignupRepository->findApprovedByTrip($trip);
 
         foreach ($tsups->getQuery()->getResult() as $tsup) {

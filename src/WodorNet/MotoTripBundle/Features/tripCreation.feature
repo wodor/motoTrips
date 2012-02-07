@@ -26,7 +26,7 @@ Scenario: Add a trip
     And I press "Zapisz"
     Then I should see "The testing test of the test"
     And I should be on "/trip/2/show"
-    And I should see "Edit"
+    And I should see "Edytuj wypad"
 
 Scenario: Go to join trip
     Given I am logged in as "Konsumer" with "22@222" password
