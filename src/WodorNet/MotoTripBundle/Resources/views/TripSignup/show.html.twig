@@ -1,41 +1,28 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}
 
-<h1>TripSignup</h1>
+<h1>{{ tripSignup.user }}</h1>
 
-<table class="record_properties">
-    <tbody>
-    <tr>
-        <th>Id</th>
-        <td>{{ tripSignup.id }}</td>
-    </tr>
-    <tr>
-        <th>Signupdate</th>
-        <td>{{ tripSignup.signupDate|intldate }}</td>
-    </tr>
-    <tr>
-        <th>Signuptype</th>
-        <td>{{ tripSignup.signupType }}</td>
-    </tr>
-    <tr>
-        <th>Testarray</th>
-        <td>{{ tripSignup.description }}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="record_properties">
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('tripsignup') }}">
-            Back to the list
+
+        <p>{{ tripSignup.signupDate|intldate }}</p>
+
+
+        <h6>Wiadomość:</h6>
+        <p>{{ tripSignup.description }}</p>
+
+</div>
+
+<div class="record_actions">
+
+        <a href="{{ path('tripsignup_approve', {'id': tripSignup.id}) }}" class="Button midButton">
+            Zaakceptuj
         </a>
-    </li>
-    <li>
-        <a href="{{ path('tripsignup_edit', { 'id': tripSignup.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-    </li>
-</ul>
+    <a href="{{ path('trip_show',{'id': tripSignup.gettrip.id}) }}" class="Button midButton">
+        &crarr; Użytkownicy
+    </a>
+
+
+</div>
         {% endblock %}
