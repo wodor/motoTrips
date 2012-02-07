@@ -222,6 +222,11 @@ div#map {
     margin: 0;
 }
 
+/*spacery*/
+.spacer_top{
+  margin-top: 25px;
+}
+
 /*Lista wypadow mala*/
 .month_all{
     display: block;
