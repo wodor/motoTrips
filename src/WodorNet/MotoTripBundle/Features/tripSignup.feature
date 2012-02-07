@@ -49,13 +49,10 @@ Scenario: As a OwnerOfTheTrip I can see the list of candidates and I am able to 
     And I go to "trip/1/show"
     Then I should see "The very private description"
 
-@todo
 Scenario: OwnerOfTheTrip can see private description
     Given I am logged in as "Kreator" with "123456" password
     And I go to "trip/1/show"
     Then I should see "The very private description"
-
-
 
 Scenario: Owner And attendee cannot join the trip
     Given the "wypad w góry" trip has the following signups:
