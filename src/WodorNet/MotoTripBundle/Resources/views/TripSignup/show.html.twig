@@ -8,17 +8,22 @@
 
         <p>{{ tripSignup.signupDate|intldate }}</p>
 
-
+    {% if editAllowed %}
         <h6>Wiadomość:</h6>
         <p>{{ tripSignup.description }}</p>
+
+    {% endif %}
 
 </div>
 
 <div class="record_actions">
 
+    {% if editAllowed %}
         <a href="{{ path('tripsignup_approve', {'id': tripSignup.id}) }}" class="Button midButton">
             Zaakceptuj
         </a>
+    {% endif %}
+
     <a href="{{ path('trip_show',{'id': tripSignup.gettrip.id}) }}" class="Button midButton">
         &crarr; Użytkownicy
     </a>

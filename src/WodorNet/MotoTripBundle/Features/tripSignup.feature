@@ -144,26 +144,22 @@ Scenario: Attendee can resign after rejoin
 
 Scenario: OwnerOfTheTrip is able to accept trip signup page
     Given the "wypad w góry" trip has the following signups:
-        | user     | status |
-        | Konsumer | new    |
+         | user     | status | message |
+         | Konsumer | new    | Mane tekel fares |
     And I am logged in as "Kreator" with "123456" password
     When I go to "trip/1/show"
     And I follow "Konsumer"
     Then I should see "Zaakceptuj"
+    And I should see "Mane tekel fares"
     When I follow "Zaakceptuj"
     Then I should see "Konsumer" in the "table#approvedList" element
 
-@todo
-Scenario: Person other than OwnerOfTheTrip is not able to accept trip signup page
+Scenario: Person other than OwnerOfTheTrip is not able to accept trip signup page and cannot see the message
     Given the "wypad w góry" trip has the following signups:
-            | user     | status |
-            | Konsumer | new    |
+            | user     | status | message |
+            | Konsumer | new    | Mane tekel fares |
     And I am logged in as "Konsumer" with "22@222" password
     Then I go to "tripsignup/1/show"
     Then I should not see "Zaakceptuj"
-
-
-
-
-
+    And I should not see "Mane tekel fares"
 

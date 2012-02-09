@@ -51,7 +51,9 @@ class TripContext extends BehatContext
             $tripSignup->setUser($user);
             $tripSignup->setStatus($row['status']);
             $tripSignup->setSignupDate(new \DateTime());
-            $tripSignup->setDescription('Mane tekel fares');
+
+            !isset($row['message']) AND $row['message'] = 'Mane! tekel! fares!';
+            $tripSignup->setDescription($row['message']);
 
             $em->persist($tripSignup);
 

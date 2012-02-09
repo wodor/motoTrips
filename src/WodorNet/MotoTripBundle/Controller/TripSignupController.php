@@ -116,7 +116,6 @@ class TripSignupController extends Controller
 
     }
 
-
     /**
      * List of approved candidates
      *
@@ -141,7 +140,6 @@ class TripSignupController extends Controller
         );
     }
 
-
     /**
      * Creates a new TripSignup entity.
      *
@@ -155,10 +153,6 @@ class TripSignupController extends Controller
         $tripPerm = $this->get('tripPerm');
         if (!$tripPerm->canJoin($trip)) {
             return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
-
-            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
-                "Użytkownik nie może dołączyć do wypadu"
-            );
         }
 
         $tripSignup = new TripSignup();
@@ -223,7 +217,11 @@ class TripSignupController extends Controller
      */
     public function showAction(TripSignup $tripSignup)
     {
+        /** @var $tripperm \WodorNet\MotoTripBundle\Security\TripPermissions */
+        $tripperm = $this->get('tripperm');
+
         return array(
+            'editAllowed' => $tripperm->canEdit($tripSignup->getTrip()),
             'tripSignup' => $tripSignup,
         );
     }
