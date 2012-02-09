@@ -154,6 +154,8 @@ class TripSignupController extends Controller
     {
         $tripPerm = $this->get('tripPerm');
         if (!$tripPerm->canJoin($trip)) {
+            return $this->redirect($this->generateUrl('trip_show', array('id' => $trip->getId())));
+
             throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
                 "Użytkownik nie może dołączyć do wypadu"
             );
