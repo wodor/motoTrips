@@ -15,39 +15,49 @@
 <div class="clear"></div>
 
 <div class="grid_8">
-    <h6 class="current_status">{{userAssociationStatus|trans}}</h6>
-    <p><strong>{% trans %}Start at{% endtrans %}</strong> {{ trip.startDate|intldate }}</p>
+    <div class="current_status"><h6>Status: <b>{{userAssociationStatus|trans}}</b></h6>
 
-    <p><strong>{% trans %}End at{% endtrans %}</strong> {{ trip.endDate|intldate }}</p>
+    {# przyciski dolaczania / rezygnacji #}
+    {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
+        <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
+        {% endif %}
+        {% if joinAllowed %}
+        <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
+        {% endif %}
+    {# end przyciski dolaczania / rezygnacji #}
 
+
+    {% if editAllowed  %}
+        <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
+        <a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton" onclick="return confirm('Na pewno usunąć wypad {{trip.title}} ?\nTej akcji nie można cofnąć!' )">{% trans %}Delete{% endtrans %}</a>
+        {% endif %}
+        <a href="{{ path('trip') }}" class="Button midButton">{% trans %}Back to the list{% endtrans %}</a>
+
+    </div>
+
+    <div class="trip_details">
+        <div class="grid_2">
+            <span class="date">{{ 'Start'|trans }}</span>
+            <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.startDate.format("m")}}">
+                <span >{{trip.startDate.format("d")}}</span>
+            </div>
+        </div>
+
+        <div class="grid_2" style="margin-left: -25px;">
+            <span class="date">{{ 'Powrót'|trans }}</span>
+            <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.endDate.format("m")}}">
+                <span title="{{ trip.endDate|intldate }}">{{trip.endDate.format("d")}}</span>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
     <p>{{ trip.description }}</p>
     {% if showAllowed %}
     <p>{{ trip.descriptionPrivate }}</p>
     {% endif %}
 
-
-    {# przyciski dolaczania / rezygnacji #}
-    {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
-        <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
-    {% endif %}
-    {% if joinAllowed %}
-        <a href="{{ path('signup',{ 'id': trip.id }) }}" class="Button midButton">{% trans %}Join this trip{% endtrans %}</a>
-    {% endif %}
-    {# end przyciski dolaczania / rezygnacji #}
-
-    {% if editAllowed  %}
-        <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
-        <a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton" onclick="return confirm('Na pewno usunąć wypad {{trip.title}} ?')">{% trans %}Delete{% endtrans %}</a>
-    {% endif %}
-
-    <a href="{{ path('trip') }}" class="Button midButton">{% trans %}Back to the list{% endtrans %}</a>
-
-
-
     {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
-
-
-
+    </div>
 </div>
 
 <div class="grid_8">

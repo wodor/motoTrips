@@ -1,7 +1,9 @@
 {% block list_content %}
 <div class="list_snippet spacer_top">
     <h2>{%trans%}Uczestnicy{%endtrans%}</h2>
-    <table class="dataTable2 candidatesTable">
+
+    {%if tripSignups|length > 0%}
+    <table class="dataTable2 candidatesTable" id="approvedList">
         <thead>
         <tr>
             <th class="kolumna_1">Nazwa</th>
@@ -39,5 +41,8 @@
 
         </tbody>
     </table>
+    {%else%}
+        Nikt jeszcze nie zgłosił się do tego wypadu.
+    {%endif%}
 </div>
 {% endblock %}
