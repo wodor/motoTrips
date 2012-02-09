@@ -35,17 +35,49 @@ h4 {
     font-size: 1.5em;
 }
 
+h6 {
+     font-family: sans-serif ;
+    text-shadow: none;
+}
+
 .current_status {
     font-style: italic;
-    font-family: sans-serif;
+    font-family: sans-serif ;
     border: 2px solid ;
     border-color: #d1c9c2;
     padding: 15px;
     background-color: #e3dbd3;
     color: #696158;
     text-shadow: none;
+}
 
+.current_status a.Button{
+    margin: 25px 0 25px 0;
+    /*font-family: sans-serif;*/
+    font-style:normal;
+    font-weight: 400;
+    font-size: 1em;
+    font-kerning:auto;
 
+}
+
+.trip_details {
+    margin-top: 25px;
+}
+.date{
+    border: 2px solid;
+    border-color: #d1c9c2;
+    color: #47403d;
+/*    background-color: #f0efdb;*/
+    display: block;
+    width: 70px;
+    margin: 0 0 -5px 3px;
+    text-align: center;
+    font-family: 'Lobster';
+    font-weight: 400;
+    font-size: 1.4em;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .h_icon {
@@ -58,6 +90,10 @@ h4 {
 a {
     color: #157fd5;
     font-weight: bold;
+}
+
+b {
+    font-weight: 600;
 }
 
 .find_icon {
@@ -240,6 +276,7 @@ div#map {
     background-image: url("../images/miesiace_sprite.png");
     background-repeat: no-repeat;
 }
+
 .month_01 {
 
     background-position: -25px -20px;
