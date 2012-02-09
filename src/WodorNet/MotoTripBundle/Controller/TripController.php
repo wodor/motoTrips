@@ -105,6 +105,7 @@ class TripController extends Controller
         /** @var $tripPermission \WodorNet\MotoTripBundle\Security\TripPermissions */
         $tripPermission = $this->get('tripPerm');
 
+        /** @var $signupStatus  \WodorNet\MotoTripBundle\TripSignups\Status */
         $signupStatus = $this->get('signupStatus');
 
         $signup = false;
