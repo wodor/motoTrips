@@ -19,6 +19,23 @@ use WodorNet\MotoTripBundle\Entity;
  */
 class TripContext extends BehatContext
 {
+
+    /**
+     * @Given /^the "([^"]*)" user has "([^"]*)" description$/
+     */
+    public function theUserHasDescription($userName, $description)
+    {
+        $em = $this->getEntityManager();
+        /** @var $user \WodorNet\MotoTripBundle\Entity\User */
+        $user = current($em->getRepository('WodorNetMotoTripBundle:User')->findByUsername($userName));
+
+        $user->setDescription($description);
+        $em->persist($user);
+        $em->flush();
+
+    }
+
+
     /**
      * @Given /^the site has following trips:$/
      */
