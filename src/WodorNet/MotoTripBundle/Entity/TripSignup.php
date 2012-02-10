@@ -208,6 +208,15 @@ class TripSignup
         return $this->status;
     }
 
+    public static function getValidStatuses() {
+        return array(
+            self::STATUS_NEW,
+            self::STATUS_APPROVED,
+            self::STATUS_REJECTED,
+            self::STATUS_RESIGNED,
+        );
+    }
+
     public function getObjectIdentity()
     {
         return ObjectIdentity::fromDomainObject($this);

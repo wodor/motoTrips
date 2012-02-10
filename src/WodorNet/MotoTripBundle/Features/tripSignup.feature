@@ -1,6 +1,10 @@
-Feature: permissions
-    In order to be sure that I'm safe
-    I need to others be unable to change my own data
+Feature: trip signups
+    As the OwnerOfTheTrip
+    I need to be able to manage the signups
+    In order to have list of users that i trust
+    As the User
+    I need to be able join trip
+    to see details of the trip, have trusted friends on the trip and to have fun
 
 Background:
   Given the site has following users:

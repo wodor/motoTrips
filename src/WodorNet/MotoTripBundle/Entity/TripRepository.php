@@ -24,6 +24,6 @@ class TripRepository extends EntityRepository
         return $qb;
         
     }
-    
-    
+
+
 }

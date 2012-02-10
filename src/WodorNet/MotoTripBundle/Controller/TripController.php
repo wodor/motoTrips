@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WodorNet\MotoTripBundle\Entity\Trip;
+use WodorNet\MotoTripBundle\Entity\User;
 use WodorNet\MotoTripBundle\Form\TripType;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -33,6 +34,21 @@ class TripController extends Controller
     public function infoWindowAction($trip)
     {
         return array('trip' => $trip);
+    }
+
+    /**
+     * List of user's trips
+     *
+     * @Route ("/usersTrips", name="usersTripsList"))
+     * @Template()
+     */
+    public function usersTripsListAction(User $user) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $trips = $em->getRepository('WodorNetMotoTripBundle:Trip')->findByCreator($user->getId());
+
+        return array(
+            'trips' => $trips
+        );
     }
 
     /**

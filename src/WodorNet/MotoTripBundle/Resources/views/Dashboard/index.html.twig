@@ -1,0 +1,24 @@
+{% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
+{% block content %}<h1>{%trans%}My Trips{%endtrans%}</h1>
+
+<a href="{{path('fos_user_profile_edit')}}">{{ 'Profile'|trans }}</a>
+<a href="{{path('fos_user_change_password')}}">{{ 'Change Password'|trans }}</a>
+<a id="change_description" href="{{path('descriptionEdit')}}">{{ 'Change description'|trans }}</a>
+
+<div class="grid_8">
+    <div id="approveds">
+        {% render "WodorNetMotoTripBundle:TripSignup:usersSignupsList" with {'user': user, 'status': 'approved'} %}
+    </div>
+
+    <div id="candidates">
+        {% render "WodorNetMotoTripBundle:TripSignup:usersSignupsList" with {'user': user, 'status': 'new'} %}
+    </div>
+</div>
+
+<div class="grid_8">
+    <div id="owned">
+        {% render "WodorNetMotoTripBundle:Trip:usersTripsList" with {'user': user} %}
+    </div>
+</div>
+
+{% endblock content %}

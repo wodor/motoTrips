@@ -1,0 +1,16 @@
+{% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
+{% block content %}<h1>{{user.username}}</h1>
+
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {{user.description}}
+
+    {% if isOwner %}
+        <a id="change_description" href="{{path('descriptionEdit')}}">{{ 'Change description'|trans }}</a>
+    {% endif %}
+
+{% else %}
+    {% trans %}Login to see more{% endtrans %}
+{% endif %}
+
+{% endblock content %}

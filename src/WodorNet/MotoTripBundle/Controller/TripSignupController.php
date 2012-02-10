@@ -106,14 +106,13 @@ class TripSignupController extends Controller
      */
     public function signupCandidatesListAction(Trip $trip)
     {
-
         $em = $this->getDoctrine()->getEntityManager();
         /** @var $qb \Doctrine\ORM\QueryBuilder */
         $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findCandidatesByTrip($trip);
 
         $tripSignups = $qb->getQuery()->getResult();
-        return array('tripSignups' => $tripSignups);
 
+        return array('tripSignups' => $tripSignups);
     }
 
     /**
@@ -137,6 +136,23 @@ class TripSignupController extends Controller
             'tripSignups' => $tripSignups,
             'tripEditAllowed' => $tripPerm->canEdit($trip),
             'signupPerm' => $this->get('signupPerm')
+        );
+    }
+
+
+    /**
+     * List of approved candidates
+     *
+     * @Route("/signpus/{id}/{status}", name="usersSignupList")
+     * @Template("WodorNetMotoTripBundle:TripSignup:usersSignupList.html.twig")
+     * @ParamConverter("user", class="WodorNetMotoTripBundle:User")
+     */
+    public function usersSignupsListAction(\WodorNet\MotoTripBundle\Entity\User $user, $status) {
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->getRepository('WodorNetMotoTripBundle:TripSignup')->findByStatusAndUser($user, $status);
+        $tripSignups = $qb->getQuery()->getResult();
+        return array(
+            'tripSignups' => $tripSignups,
         );
     }
 

@@ -4,6 +4,7 @@ namespace WodorNet\MotoTripBundle\Entity;
 
 use Doctrine\ORM\EntityRepository,
 WodorNet\MotoTripBundle\Entity\Trip,
+WodorNet\MotoTripBundle\Entity\TripSignup,
 WodorNet\MotoTripBundle\Entity\User;
 
 /**
@@ -14,11 +15,8 @@ WodorNet\MotoTripBundle\Entity\User;
  */
 class TripSignupRepository extends EntityRepository
 {
-
-
     private function findByTrip(Trip $trip)
     {
-
         $qb = $this->createQueryBuilder('ts');
 
         $where = $qb->expr()->andx(
@@ -33,25 +31,43 @@ class TripSignupRepository extends EntityRepository
         $qb->setParameter('trip', $trip);
 
         return $qb;
-
     }
 
     public function findCandidatesByTrip(Trip $trip)
     {
-
         $qb = $this->findByTrip($trip);
         $qb->setParameter('status', 'new');
         return $qb;
-
     }
 
     public function findApprovedByTrip(Trip $trip)
     {
-
         $qb = $this->findByTrip($trip);
         $qb->setParameter('status', 'approved');
 
         return $qb;
+    }
+
+    public function findByStatusAndUser(User $user, $status) {
+        if(!in_array($status, TripSignup::getValidStatuses())) {
+            throw new \InvalidArgumentException("Status $status is not valid");
+        }
+
+        $qb = $this->createQueryBuilder('ts');
+
+        $where = $qb->expr()->andx(
+            $qb->expr()->eq('ts.status', ':status'),
+            $qb->expr()->eq('ts.user', ':user')
+        );
+        $qb->where($where);
+
+        $qb->setParameter('status', $status);
+        $qb->setParameter('user', $user);
+
+        $qb->orderBy('ts.signupDate', 'DESC');
+
+        return $qb;
+
     }
 
     /**

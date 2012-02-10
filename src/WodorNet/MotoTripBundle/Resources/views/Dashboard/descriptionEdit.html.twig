@@ -1,0 +1,10 @@
+{% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
+{% block content %}
+
+<form class="validated" action="" method="post" {{ form_enctype(form) }}>
+    {{form_widget(form)}}
+    <p style="text-align: right; margin-top: 20px;">
+        <input id="save" class="bigButton" type="submit" value="Zapisz"/>
+    </p>
+</form>
+{% endblock content %}

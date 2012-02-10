@@ -23,12 +23,15 @@ class User extends BaseUser
      */
     protected $tripSignups;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Trip", mappedBy="creator")
      */
     protected $trips;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $description;
 
     public function __construct()
     {
@@ -80,6 +83,22 @@ class User extends BaseUser
             }
         }
         return false;
+    }
+
+    /**
+     * @param $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
 }
