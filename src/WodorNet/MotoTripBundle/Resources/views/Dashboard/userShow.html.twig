@@ -1,7 +1,6 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}<h1>{{user.username}}</h1>
 
-
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     {{user.description}}
 

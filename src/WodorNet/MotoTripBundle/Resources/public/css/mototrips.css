@@ -208,6 +208,13 @@ div#map {
     margin-left: 40px;
 }
 /*candidatesTable*/
+.brownRow{
+    height: 50px;
+    border: 1px dotted;
+    border-bottom: 1px dashed;
+    border-color: #b0a098;
+}
+
 .candidatesTable{
     width: 100%;
 }
@@ -227,12 +234,7 @@ div#map {
     width: 200px;
     vertical-align: middle;
 }
-.wiersz_1{
-    height: 50px;
-    border-bottom: 2px dashed;
-    border-color: #b0a098;
 
-}
 .kolumna_id{
     width: 40px;
     vertical-align: middle;
@@ -327,10 +329,14 @@ div#map {
     width: 300px;
     margin: 3px 0 0 15px;
 }
-.nazwa_wyjazdu{
-    font-family: 'Lobster', cursive;
+.trip_name{
+    /*font-family: 'Lobster', cursive;*/
     font-weight: 400;
-    font-size: 1.5em;
+    font-size: 1.1em;
+}
+
+.list_item {
+
 }
 
 
@@ -446,3 +452,48 @@ form.validated ul li {
     text-align: center;
 }
 
+/* userpage */
+.userPage_trip_list {
+    padding: 20px;
+    border: 2px solid;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+
+
+    border-color: #c2baa4;
+    background-color: #f2eddc;
+    margin-bottom: 25px;
+
+
+
+}
+
+.userPage_trip_list h5 {
+    display: block;
+    text-align: center;
+    padding: 15px 0 0 0;
+    height: 50px;
+    margin-bottom: 5px;
+    background-color: #403b37;
+    color: #f4ece5;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+
+    font-size: 1.7em;
+    text-shadow: 1px 1px 0px #66421f;
+
+}
+
+.row_underline {
+    border-bottom: 1px dashed;
+
+    border-color: #b0a098;
+    padding: 5px 0 0 0;
+}
+
+
+
+
+/* end userpage */

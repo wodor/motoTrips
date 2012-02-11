@@ -23,6 +23,9 @@ Background:
   Given the "wypad w góry" trip has the following signups:
         | user     | status     |
         | Konsumer              | approved        |
+        | Konsumer              | approved        |
+        | Konsumer              | approved        |
+        | Konsumer              | approved        |
   Given the "wypad na Doły" trip has the following signups:
         | user     | status     |
         | Konsumer              | rejected   |
@@ -72,7 +75,6 @@ Scenario: Logged in user can see profile of another user with description
     Then I should see "still looking for a bike"
     But I should not see an "#change_description" element
 
-@todo
 Scenario: Not Logged in user can only see name on the profile of another user
     Given the "Konsumer" user has "I'm still looking for a bike" description
     And I go to "/"
