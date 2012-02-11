@@ -1,24 +1,31 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
-{% block content %}<h1>{%trans%}My Trips{%endtrans%}</h1>
+{% block content %}
 
-<a href="{{path('fos_user_profile_edit')}}">{{ 'Profile'|trans }}</a>
-<a href="{{path('fos_user_change_password')}}">{{ 'Change Password'|trans }}</a>
-<a id="change_description" href="{{path('descriptionEdit')}}">{{ 'Change description'|trans }}</a>
 
-<div class="grid_8">
-    <div id="approveds">
+<h1 class="grid_16">{%trans%}My Trips{%endtrans%}</h1>
+
+<a href="{{path('fos_user_profile_edit')}}" class="midButton Button">{{ 'Profile'|trans }}</a>
+<a href="{{path('fos_user_change_password')}}" class="midButton Button">{{ 'Change Password'|trans }}</a>
+<a id="change_description" href="{{path('descriptionEdit')}}" class="midButton Button">{{ 'Change description'|trans }}</a>
+
+    <div id="approveds" class="userPage_trip_list grid_8">
+        <h5>Wypady w których uczestniczę</h5>
         {% render "WodorNetMotoTripBundle:TripSignup:usersSignupsList" with {'user': user, 'status': 'approved'} %}
-    </div>
+        </div>
 
-    <div id="candidates">
+
+
+    <div id="candidates " class="userPage_trip_list grid_8">
+    <h5>Wypady do których się zgłosiłem</h5>
         {% render "WodorNetMotoTripBundle:TripSignup:usersSignupsList" with {'user': user, 'status': 'new'} %}
     </div>
-</div>
 
 <div class="grid_8">
-    <div id="owned">
+    <div id="owned" class="userPage_trip_list">
+        <h5>Moje wypady</h5>
         {% render "WodorNetMotoTripBundle:Trip:usersTripsList" with {'user': user} %}
     </div>
 </div>
+
 
 {% endblock content %}

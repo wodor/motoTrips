@@ -16,7 +16,7 @@
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr class="wiersz_1">
+        <tr class="brownRow">
             <td class="kolumna_id"><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td class="kolumna_2">{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i') }}{% endif%}</td>
             <td class="kolumna_opis">{{ entity.description }}</td>
