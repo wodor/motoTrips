@@ -36,7 +36,7 @@ h4 {
 }
 
 h6 {
-     font-family: sans-serif ;
+    font-family: sans-serif ;
     text-shadow: none;
 }
 
@@ -68,7 +68,7 @@ h6 {
     border: 2px solid;
     border-color: #d1c9c2;
     color: #47403d;
-/*    background-color: #f0efdb;*/
+    /*    background-color: #f0efdb;*/
     display: block;
     width: 70px;
     margin: 0 0 -5px 3px;
@@ -255,14 +255,14 @@ div#map {
 .menuList li{
     list-style-type: none;
     display: inline-block;
-   line-height: 50px;
+    line-height: 50px;
     padding-left: 0;
     margin: 0;
 }
 
 /*spacery*/
 .spacer_top{
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 /*Lista wypadow mala*/
@@ -352,11 +352,12 @@ div#map {
     font-size:  1.2em;
 }
 
-td.duration{
-    width: 80px;
-
+.duration{
+    width: 30px;
     background-position: 0px -153px;
 }
+
+
 
 .road_szosa{
     background-position: 0px -200px;
@@ -453,7 +454,7 @@ form.validated ul li {
 }
 
 /* userpage */
-.userPage_trip_list {
+.Roundsquare {
     padding: 20px;
     border: 2px solid;
     -moz-border-radius: 10px;
@@ -469,7 +470,7 @@ form.validated ul li {
 
 }
 
-.userPage_trip_list h5 {
+.Roundsquare h5 {
     display: block;
     text-align: center;
     padding: 15px 0 0 0;
@@ -487,13 +488,20 @@ form.validated ul li {
 }
 
 .row_underline {
+    display: block;
     border-bottom: 1px dashed;
+    height: 80px;
 
     border-color: #b0a098;
     padding: 5px 0 0 0;
+
+
 }
 
+a.row_underline {
+    padding: 10px 0 0 0;
 
+}
 
 
 /* end userpage */
