@@ -6,6 +6,8 @@
 
     {% if isOwner %}
         <a id="change_description" href="{{path('descriptionEdit')}}">{{ 'Change description'|trans }}</a>
+    <a href="{{path('fos_user_change_password')}}" class="midButton Button">{{ 'Change Password'|trans }}</a>
+
     {% endif %}
 
 {% else %}

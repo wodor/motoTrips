@@ -1,21 +1,17 @@
 {% for signup in tripSignups %}
 {% set item = signup.trip %}
 
-<div class="alpha row_underline grid_8 omega">
-    <div class=" grid_2 omega">
+<div class="row_underline">
+    <div class="grid_1">
         <div class="month_all month_{{item.startDate.format("m")}}">
             <span>{{item.startDate.format("d")}}</span>
         </div>
     </div>
+        <a class="grid_4 push_1 trip_name" href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a>
+
+        <div class="duration ikona zegarek">{{item.getDuration|intlinterval}}</div>
 
 
-    <div class="alpha grid_6 ">
-
-        <a class="grid_5 trip_name" href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a>
-        <div class="clearfix"></div>
-        <span class="grid_1 duration ikona zegarek">{{item.getDuration|intlinterval}}</span>
-
-    </div>
 </div>
 
 <div class="clearfix"></div>
