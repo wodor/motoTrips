@@ -19,8 +19,9 @@ p {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', cursive;
     font-weight: 400;
-    text-shadow: 1px 1px 1px #87786c;
-    color: #403b37;
+    text-shadow: 1px 1px 1px #faf8d7;
+    color: #402120;
+    /*color: #faf8d7;*/
 }
 
 h1 {
@@ -59,6 +60,15 @@ h6 {
     font-size: 1em;
     font-kerning:auto;
 
+}
+.error{
+    color: #571310;
+    border-left: none;
+    border-right: none;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0 10px 0;
 }
 
 .trip_details {
@@ -143,6 +153,15 @@ label {
     font-weight: 100;
     font-size: 1.2em;
 }
+.sans_serif form label{
+    font-family: sans-serif;
+}
+.sans_serif form input{
+    margin-left: -2px;
+}
+.sans_serif form checkbox {
+    margin-left: 0px;
+}
 
 div.normalFont label {
     font-family: "Arial", sans-serif;
@@ -153,6 +172,7 @@ div.normalFont label {
     padding-left: 15px;
     background: rgb(230, 230, 230);
     background: rgba(160, 160, 160, 0.2);
+    text-align: center;
 }
 
 
@@ -171,17 +191,34 @@ div.topBar {
     font-family: 'Lobster', cursive;
     text-decoration: none;
     background-color: #403b37;
+    line-height: 25px;
 
+    color: #f8f7f5;
+    border: 2px solid;
+    border-bottom: 6px solid;
 
-
-    color: #f4ece5;
-    border: 2px solid #6c6159;
+    border-color: #3b3633;
 
     font-size: 1.6em;
     font-weight: 400;
     padding: 0 15px 3px 15px;
 
+    text-shadow: 1px 1px 1px #701c13;
+
+
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius-topleft: 3px;
+    border-radius-topleft: 3px;
+    -moz-border-radius-bottomright: 7px;
+    border-radius-bottomright: 7px;
+
+
+
+
 }
+
+
 
 .current{
     background-color: #376f85;
@@ -192,15 +229,21 @@ div.topBar {
 .Button{
     font-family: 'Lobster', cursive;
     text-decoration: none;
-    background-color: #403b37;
+    background-color: #4b5b70;
     color: #f4ece5;
-    border: 2px solid #f4ece5;
+    border: 2px solid #5d718c;
 
     font-size: 1.6em;
     font-weight: 400;
     padding: 0 15px 3px 15px;
 
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+
+
+
 }
+
 
 .mainpageBox p {
 
@@ -264,7 +307,7 @@ div#map {
 }
 .candidatesTable th{
     height: 30px;
-    background-color: #403b37;
+    background-color: #48535e;
     color: #f4ece5;
 
 }
@@ -373,6 +416,34 @@ div#map {
     margin-bottom: 25px;
 }
 
+.help {
+    position:relative;
+    padding:15px;
+    margin:1em 0 3em;
+    color: #fffae9;
+    background: #48535e;
+
+    /* css3 */
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+    min-height: 25px;
+
+
+}
+.help:after {
+    content:"";
+    display:block; /* reduce the damage in FF3.0 */
+    position:absolute;
+    top:25px;
+    left:-15px;
+    width:0;
+    border-width: 15px  0 0 15px;
+    border-style:solid;
+    border-color:#48535e transparent;
+}
+
+
 .ikona  {
     width: 26px;
     height: 26px;
@@ -402,7 +473,8 @@ td.duration, .zegarek {
 
 /* formularze */
 
-form.top_login input {
+
+form.top_login input , .topBar a {
     font-size: 12px;
     border: 1px solid #f4ece5;
     color: #395164
@@ -414,13 +486,17 @@ form.top_login label.normal {
     color: #395164;
 }
 
-form.top_login input[type=submit], form.top_login input[type=button], form.top_login input[type=reset] {
+form.top_login input[type=submit], form.top_login input[type=button], form.top_login input[type=reset] , .topBar a {
     background-color: #395164;
     color: #f4ece5;
 }
 
-form.top_login input[type=text], form.top_login input[type=password] {
+form.top_login input[type=text], form.top_login input[type=password] , .topBar a {
     width: 80px;
+}
+
+.top_bar a{
+    font-family: "Lobster" sans-serif;
 }
 
 form.top_login p {
@@ -432,7 +508,7 @@ input[type=text] {
     /*border: solid 1px #403b37;*/
 }
 
-input[type=submit], input[type=button], input[type=reset] {
+input[type=submit], input[type=button], input[type=reset]  {
     font-family: 'Lobster', cursive;
     background-color: #403b37;
     color: #f4ece5;
@@ -538,6 +614,12 @@ form.validated ul li {
     height: 70px;
 }
 
+.fos_user_user_show {
+    margin-left: 5px;
+    line-height: 25px;
+    font-size: 1.2em;
+
+}
 
 
 
@@ -551,7 +633,7 @@ form.validated ul li {
 
 .description {
     margin: 0 15px 0 15px;
-    text-align: justify;
+    /*text-align: justify;*/
     word-spacing: 0.25em;
 
 }

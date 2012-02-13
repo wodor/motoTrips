@@ -1,22 +1,30 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-{% if error %}
-<div>{{ error|trans }}</div>
-{% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
+<div class="Roundsquare grid_8 push_4" >
+    <h5>Logowanie</h5>
+    {% if error %}
+    <div class="current_status error">{{ error|trans }}</div>
+    {% endif %}
+    <div class=" sans_serif">
+<form action="{{ path("fos_user_security_check") }}" method="post" >
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-
-    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    
+    
+    <label class="grid_4" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
     <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <label class="grid_4" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
     <input type="password" id="password" name="_password"/>
 
+    <span class="grid_4">
     <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
     <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+    </span></br>
+    <input  type="submit"  class="Button midButton" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
 </form>
+    </div>
+</div>
 {% endblock fos_user_content %}

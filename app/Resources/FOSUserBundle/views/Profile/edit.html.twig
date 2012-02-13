@@ -1,5 +1,10 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+<div class="Rejestracja Roundsquare grid_8 push_4">
+    <h5>Edycja profilu</h5>
+    <div class="grid_8 description">
+        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+     </div>
+</div>
 {% endblock fos_user_content %}
