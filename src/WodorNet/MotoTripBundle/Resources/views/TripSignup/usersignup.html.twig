@@ -6,23 +6,15 @@
 <form action="{{ path('signup',{'id' :entity.trip.id }) }}" method="post" {{ form_enctype(form) }}>
 
     {{ form_errors(form) }}
-    <label class="big required" for="wodornet_mototripbundle_tripsignuptype_description">{% trans %}Describe
-        Yourself{% endtrans %}</label>
+    <label class="big required" for="wodornet_mototripbundle_tripsignuptype_description">
+        {% trans %}Describe Yourself{% endtrans %}</label>
     {{ form_widget(form.description) }}
     {{ form_rest(form)}}
 
-
     <p>
-        <button type="submit">{% trans %}Send{% endtrans %}</button>
+        <button type="submit" class="Button">{% trans %}Send{% endtrans %}</button>
+        <a href="{{path('trip')}}" class="Button">{% trans %}Cancel{% endtrans %}</a>
+        
     </p>
 </form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('tripsignup') }}" class="Button">
-            Back to the list
-        </a>
-    </li>
-</ul>
-
 {% endblock %}

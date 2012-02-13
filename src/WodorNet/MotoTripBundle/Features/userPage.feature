@@ -23,9 +23,6 @@ Background:
   Given the "wypad w góry" trip has the following signups:
         | user     | status     |
         | Konsumer              | approved        |
-        | Konsumer              | approved        |
-        | Konsumer              | approved        |
-        | Konsumer              | approved        |
   Given the "wypad na Doły" trip has the following signups:
         | user     | status     |
         | Konsumer              | rejected   |

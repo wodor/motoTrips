@@ -44,7 +44,7 @@ class Trip
      *
      * @ORM\Column(type="string")
      * @Assert\MinLength(limit=10, message="Dobry tytuł przyda się wszystkim")
-     * @Assert\MaxLength(limit=60)
+     * @Assert\MaxLength(limit=40)
      */
     private $title;
 
