@@ -1,5 +1,12 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:show_content.html.twig" %}
-{% endblock fos_user_content %}
+
+    {% block fos_user_content %}
+    <div class="Roundsquare grid_8 push_4">
+
+        <h5>Profil</h5>
+            <div class="grid_8">
+            {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+            </div>
+        </div>
+    {% endblock fos_user_content %}

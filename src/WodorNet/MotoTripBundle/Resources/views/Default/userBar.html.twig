@@ -1,8 +1,8 @@
 {% if is_expr_granted("isAuthenticated()") %}
 <div class="topBar">
-    Zalogowany: {{ user.username}}
-    <a href="{{path('fos_user_profile_show')}}">{% trans %}Twój Profil{% endtrans %}</a>
-    <a href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
+    <strong>Zalogowany:</strong> {{ user.username}}
+    <a class="Button" href="{{path('fos_user_profile_show')}}">{% trans %}Twój Profil{% endtrans %}</a>
+    <a class="Button" href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
 
 </div>
 {% else %}
@@ -18,8 +18,7 @@
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="position:relative;top:2px"/>
     <label for="remember_me" class="normal">Zapamiętaj</label>
 
-    <a href="{{path('fos_user_registration_register')}}"><input type="button" id="_submit" name="_submit"
-                                                                value="Rejestracja&raquo;"/></a>
+    <a href="{{path('fos_user_registration_register')}}"><input type="button" id="_submit" name="_submit" value="Rejestracja&raquo;"/></a>
 
 
 </form>
