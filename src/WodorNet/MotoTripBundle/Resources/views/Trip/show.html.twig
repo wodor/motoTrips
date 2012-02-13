@@ -6,7 +6,7 @@
 <h1>{{trip.title}}</h1>
 </div>
 
-<div class="grid_16">
+<div class="grid_16 Roundsquare">
     {% if editAllowed  %}
     {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
     {% endif %}
@@ -36,39 +36,48 @@
     </div>
 
     <div class="trip_details grid_8 alpha omega">
+        <div class="Roundsquare">
+        <h5>{{trip.title}}</h5>
+        </div>
         <div class="beautifull_watches dateSetXXX grid_8 alpha omega">
 
-            <div class="grid_2 overflowed">
-                <div class="date">{{ 'Start'|trans }}<br/>{{trip.startDate.format("H:i")}}</div>
-                <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.startDate.format("m")}}">
-                    <span >{{trip.startDate.format("d")}}</span></div>
-                <div class="date lower">{{trip.startDate.format("Y")}}</div>
-                </div>
+            <div class="watches">
+                <div class="grid_2 overflowed">
+                    <div class="date">{{ 'Start'|trans }}<br/><h5>{{trip.startDate.format("H:i")}}</h5></div>
+                    <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.startDate.format("m")}}">
+                        <span >{{trip.startDate.format("d")}}</span></div>
+                    <div class="date lower">{{trip.startDate.format("Y")}}</div>
+                    </div>
 
-            <div class="grid_2 overflowed omega">
-                <div class="date">{{ 'Powrót'|trans }}<br/>{{trip.endDate.format("H:i")}}</div>
-                <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.endDate.format("m")}}">
-                    <span title="{{ trip.endDate|intldate }}">{{trip.endDate.format("d")}}</span>
+                <div class="grid_1 overflowed omega pull_1" style="margin-left: 30px;">
+                    <div class="date">{{ 'Powrót'|trans }}<br/><h5>{{trip.endDate.format("H:i")}}</h5></div>
+                    <div title="{{ trip.startDate|intldate }}" class="month_all month_{{trip.endDate.format("m")}}">
+                        <span title="{{ trip.endDate|intldate }}">{{trip.endDate.format("d")}}</span>
+                    </div>
+                    <div class="date lower">{{trip.startDate.format("Y")}}</div>
                 </div>
-                <div class="date lower">{{trip.startDate.format("Y")}}</div>
             </div>
-
             <h5 class="description">Opis</h5>
             <p class="description">{{ trip.description }}{% if showAllowed %}
-            <h5 class="description">Dla uczestnmików</h5>
+            <h5 class="description">Dla uczestników</h5>
             <p class="description">{{ trip.descriptionPrivate }} asd adas d asdaspoidapsodi aspo dias d a ds  aspodiaspodiapsodipoasid  as dpoasidpaosidaspod op poioipoi </p>
+            {% endif %}
         </div>
-    {% endif %}
 
-    {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></Span>
+
     </div>
-</div>
+    <div class="Roundsquare grid_8 overflowed alpha omega">
+        {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></span>
+    </div>
 
-<div class="grid_8">
+</div>
+<div class="grid_8 alpha omega">
     {{ google_map_container(map) }}
     {{ google_map_js(map) }}
     {{ google_map_css(map) }}
 </div>
+
+
 
 <div class="clear"></div>
 

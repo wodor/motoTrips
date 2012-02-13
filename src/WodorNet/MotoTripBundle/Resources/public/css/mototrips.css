@@ -64,25 +64,32 @@ h6 {
 .trip_details {
     margin-top: 25px;
 }
+
 .date{
-    border: 2px solid;
+    border: 1px solid;
     border-color: #d1c9c2;
-    color: #47403d;
-/*    background-color: #f0efdb;*/
+    color: #324e57;
+ background-color: #fffae9;
     /*display: inline;*/
     width: 70px;
-    height: 60px;
+    height: 50px;
     margin: 0 0 -5px 3px;
     text-align: center;
     font-family: 'Lobster';
     font-weight: 400;
-    font-size: 1.4em;
+    font-size: 1.3em;
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+
+.date h5{
+    margin-top: -5px;
+    text-shadow: 1px 1px 1px #ffffff;
+}
+
 .lower{
     margin-top: -10px;
-    height: 25px
+    height: 30px
 }
 
 .h_icon {
@@ -215,14 +222,19 @@ div#map {
 /*candidatesTable*/
 .brownRow{
     height: 50px;
-    border: 1px dotted;
     border-bottom: 1px dashed;
     border-color: #b0a098;
+
+
 }
 
 .candidatesTable{
     width: 100%;
+    margin-bottom: 0px;
+
 }
+
+
 .candidatesTable tr{
     vertical-align: middle;
 }
@@ -232,11 +244,11 @@ div#map {
     padding-left: 25px;
 }
 .kolumna_2{
-    width: 100px;
+    width: 150px;
     vertical-align: middle;
 }
 .kolumna_3{
-    width: 200px;
+    width: 350px;
     vertical-align: middle;
 }
 
@@ -255,6 +267,11 @@ div#map {
     background-color: #403b37;
     color: #f4ece5;
 
+}
+
+.tableplacement{
+    margin: 0 auto;
+    text-align: center;
 }
 /*Duza lista wypadow*/
 .menuList li{
@@ -368,7 +385,7 @@ div#map {
     font-size:  1.2em;
 }
 
-td.duration{
+td.duration, .zegarek {
     width: 80px;
 
     background-position: 0px -153px;
@@ -474,12 +491,12 @@ form.validated ul li {
 
     border-color: #c2baa4;
     background-color: #f2eddc;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     padding: 15px 0;
 }
 
 
-.Roundsquare h5 {
+.Roundsquare h5, .Roundsquare h2  {
     display: block;
     text-align: center;
     padding: 15px 0 0 0;
@@ -495,6 +512,21 @@ form.validated ul li {
 
     font-size: 1.7em;
     text-shadow: 1px 1px 0px #66421f;
+
+}
+
+.Roundsquare h2{
+    text-align: left;
+   background-color: transparent;
+    color: #403b37;
+    height: 50px;
+    margin-top: 0px;
+    padding-top: 0px;
+
+    text-shadow: 1px 1px 0px #f4ecf5;
+    font-size: 1.7em;
+
+
 
 }
 
@@ -520,6 +552,8 @@ form.validated ul li {
 .description {
     margin: 0 15px 0 15px;
     text-align: justify;
+    word-spacing: 0.25em;
+
 }
 
 div.overflowed {
