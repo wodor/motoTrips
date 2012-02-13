@@ -1,6 +1,6 @@
 {% block list_content %}
-<div class="list_snippet spacer_top">
-    <h2>{%trans%}Uczestnicy{%endtrans%}</h2>
+<div class="list_snippet ">
+    <h2 >{%trans%}Uczestnicy{%endtrans%}</h2>
 
     {%if tripSignups|length > 0%}
     <table class="dataTable2 candidatesTable" id="approvedList">
@@ -31,7 +31,7 @@
 
 
                 {% if signupPerm.canEdit(item) %}
-                <a href="{{ path('tripsignup_resign', { 'id': item.id}) }}"
+                <a class="Button midButton" href="{{ path('tripsignup_resign', { 'id': item.id}) }}"
                    title="{% trans %}Resign{% endtrans %}">{% trans %}Resign{% endtrans %}</a>
                 {% endif %}
 
@@ -42,7 +42,8 @@
         </tbody>
     </table>
     {%else%}
-        Nikt jeszcze nie zgłosił się do tego wypadu.
+        <p class="description">Nikt jeszcze nie zgłosił się do tego wypadu.</p>
     {%endif%}
 </div>
+
 {% endblock %}
