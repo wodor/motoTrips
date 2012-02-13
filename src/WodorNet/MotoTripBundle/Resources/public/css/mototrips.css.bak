@@ -36,7 +36,7 @@ h4 {
 }
 
 h6 {
-     font-family: sans-serif ;
+    font-family: sans-serif ;
     text-shadow: none;
 }
 
@@ -68,8 +68,8 @@ h6 {
     border: 2px solid;
     border-color: #d1c9c2;
     color: #47403d;
-/*    background-color: #f0efdb;*/
-    /*display: inline;*/
+    /*    background-color: #f0efdb;*/
+    display: block;
     width: 70px;
     height: 60px;
     margin: 0 0 -5px 3px;
@@ -260,14 +260,14 @@ div#map {
 .menuList li{
     list-style-type: none;
     display: inline-block;
-   line-height: 50px;
+    line-height: 50px;
     padding-left: 0;
     margin: 0;
 }
 
 /*spacery*/
 .spacer_top{
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 /*Lista wypadow mala*/
@@ -435,12 +435,14 @@ input[type=submit], input[type=button], input[type=reset] {
     display: inline-block;
     font-family: sans-serif;
     width: 150px;
+
 }
 
 .Rejestracja input {
     margin: 3px 0 3px 0;
 
 }
+
 
 /* validacja */
 
@@ -466,62 +468,3 @@ form.validated ul li {
     text-align: center;
 }
 
-/* userpage */
-.Roundsquare {
-    border: 2px solid;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-
-    border-color: #c2baa4;
-    background-color: #f2eddc;
-    margin-bottom: 25px;
-    padding: 15px 0;
-}
-
-
-.Roundsquare h5 {
-    display: block;
-    text-align: center;
-    padding: 15px 0 0 0;
-    height: 50px;
-    margin: 0 15px 5px 15px;
-
-    background-color: #403b37;
-    color: #f4ece5;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
-
-
-
-    font-size: 1.7em;
-    text-shadow: 1px 1px 0px #66421f;
-
-}
-
-.row_underline {
-    border-bottom: 1px dashed;
-
-    border-color: #b0a098;
-    padding: 5px 0 0 0;
-    height: 70px;
-}
-
-
-
-
-/* end userpage */
-
-
-
-
-/* end userpage */
-
-
-.description {
-    margin: 0 15px 0 15px;
-    text-align: justify;
-}
-
-div.overflowed {
-    margin-bottom: 15px;
-}

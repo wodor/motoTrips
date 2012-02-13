@@ -117,11 +117,18 @@ class TripContext extends BehatContext
 
     protected function getTrip($creator, $data)
     {
+
+        $startDate = new \DateTime();
+
+        $startDate->add(new \DateInterval('P'.rand(0,200).'D'));
+        $endDate = clone $startDate;
+        $endDate->add(new \DateInterval('PT'.rand(3,48).'H'.rand(0,60).'M'));
+
         $trip = new Entity\Trip();
         $trip->setCreator($creator);
         $trip->setCreationDate(new \DateTime());
-        $trip->setStartDate(new \DateTime());
-        $trip->setEndDate(new \DateTime("tomorrow"));
+        $trip->setStartDate($startDate);
+        $trip->setEndDate($endDate);
         $trip->setLocation(array('lat' => '10.00', 'lng' => '20.00'));
         $trip->setTitle($data['title']);
         $trip->setDescription($data['description']);

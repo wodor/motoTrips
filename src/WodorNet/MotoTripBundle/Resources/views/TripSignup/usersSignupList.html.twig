@@ -1,20 +1,5 @@
 {% for signup in tripSignups %}
-{% set item = signup.trip %}
-
-<div class="row_underline">
-    <div class="grid_1">
-        <div class="month_all month_{{item.startDate.format("m")}}">
-            <span>{{item.startDate.format("d")}}</span>
-        </div>
-    </div>
-        <a class="grid_4 push_1 trip_name" href="{{ path('trip_show', { 'id': item.id }) }}">{{item.title}}</a>
-
-        <div class="duration ikona zegarek">{{item.getDuration|intlinterval}}</div>
-
-
-</div>
-
-<div class="clearfix"></div>
+{% include 'WodorNetMotoTripBundle:Trip:usersTripRow.html.twig' with {'item':  signup.trip} %}
 {% endfor %}
 
 
