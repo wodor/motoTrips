@@ -1,5 +1,6 @@
 {% block list_content %}
 {% if tripSignups|length > 0 %}
+<div class="grid_16 Roundsquare">
 <h2>{%trans%}Nowe zgłoszenia{%endtrans%}</h2>
 <table class="candidatesTable">
     <thead>
@@ -33,6 +34,7 @@
     {% endfor %}
     </tbody>
 </table>
+</div>
 {% endif %}
 {% endblock %}
 

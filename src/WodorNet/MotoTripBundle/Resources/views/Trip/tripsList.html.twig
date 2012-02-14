@@ -1,0 +1,3 @@
+{% for trip in trips %}
+    {% include 'WodorNetMotoTripBundle:Trip:tripRow.html.twig' with {'item':  trip} %}
+{% endfor %}

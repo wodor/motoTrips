@@ -38,10 +38,10 @@
     {% render "WodorNetMotoTripBundle:Default:allTripsMap" with {'max': 3} %}
 </div>
 
-
 <div id="trip_list_small" class="grid_8">
-    <div class="mainpageList">
-    {% include 'WodorNetMotoTripBundle:Trip:upcomingSnippet.html.twig' %}
+    <div id="approveds" class="X Roundsquare">
+        <h5>{% trans %}Nadchodzące wypady{% endtrans %}</h5>
+        {% render 'WodorNetMotoTripBundle:Trip:upcomingTripsList' %}
     </div>
 </div>
 <div class="clear"></div>
