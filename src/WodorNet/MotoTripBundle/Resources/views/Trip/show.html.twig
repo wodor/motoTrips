@@ -15,8 +15,8 @@
 <div class="clear"></div>
 
 <div class="grid_8">
-    <div class="Roundsquare grid_8 alpha omega ">
-        <div class="grid_8">
+    <div class="grid_8 alpha omega Roundsquare ">
+        <div class=" status">
             <h6>Status: <b>{{userAssociationStatus|trans}}</b></h6>
             {# przyciski dolaczania / rezygnacji #}
             {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
@@ -36,9 +36,7 @@
     </div>
 
     <div class="trip_details grid_8 alpha omega">
-        <div class="Roundsquare">
-        <h5>{{trip.title}}</h5>
-        </div>
+
         <div class="beautifull_watches grid_8 alpha omega">
 
             <div class="watches">
