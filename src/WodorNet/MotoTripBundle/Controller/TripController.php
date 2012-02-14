@@ -40,7 +40,7 @@ class TripController extends Controller
      * List of user's trips
      *
      * @Route ("/usersTrips", name="usersTripsList"))
-     * @Template()
+     * @Template("WodorNetMotoTripBundle:Trip:tripsList.html.twig")
      */
     public function usersTripsListAction(User $user) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -54,21 +54,15 @@ class TripController extends Controller
     /**
      * List of latest trips
      *
-     * @Route ("/upcomingTrips", name="upcomingTripsSnippet", options={"expose"=true}))
-     * @Template()
+     * @Route ("/upcomingTrips", name="upcomingTripsList"))
+     * @Template("WodorNetMotoTripBundle:Trip:tripsList.html.twig")
      */
-    public function snippetListAction()
+    public function upcomingTripsListAction()
     {
-
         $em = $this->getDoctrine()->getEntityManager();
         $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('10');
 
-        $paginator = $this->get('wodor_net_moto_trip.datatable_paginator');
-
-        $paginator->setItemTemplate('WodorNetMotoTripBundle:Trip:snippetItem.html.twig');
-        $output = $paginator->paginate($qb);
-
-        return new Response(json_encode($output));
+        return array('trips' => $qb->getQuery()->getResult());
     }
 
 

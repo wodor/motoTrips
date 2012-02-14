@@ -1,5 +1,8 @@
 {% for signup in tripSignups %}
-{% include 'WodorNetMotoTripBundle:Trip:usersTripRow.html.twig' with {'item':  signup.trip} %}
+    {% include 'WodorNetMotoTripBundle:Trip:tripRow.html.twig' with {'item':  signup.trip} %}
+{% else %}
+        <p style="text-align: center"><b>Nie dołączyłeś jeszcze do żadnegp wypadu.</b></p>
+        <p style="text-align: center"><b> Aby zacząć <a href="{{path('trip')}}">znajdź wypad który Cię interesuje</a></b></p>
 {% endfor %}
 
 

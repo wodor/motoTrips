@@ -6,11 +6,11 @@
 <h1>{{trip.title}}</h1>
 </div>
 
-<div class="grid_16 Roundsquare">
-    {% if editAllowed  %}
+
+{% if editAllowed  %}
     {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
-    {% endif %}
-</div>
+{% endif %}
+
 
 <div class="clear"></div>
 
@@ -39,7 +39,7 @@
         <div class="Roundsquare">
         <h5>{{trip.title}}</h5>
         </div>
-        <div class="beautifull_watches dateSetXXX grid_8 alpha omega">
+        <div class="beautifull_watches grid_8 alpha omega">
 
             <div class="watches">
                 <div class="grid_2 overflowed">
@@ -60,7 +60,7 @@
             <h5 class="description">Opis</h5>
             <p class="description">{{ trip.description }}{% if showAllowed %}
             <h5 class="description">Dla uczestników</h5>
-            <p class="description">{{ trip.descriptionPrivate }} asd adas d asdaspoidapsodi aspo dias d a ds  aspodiaspodiapsodipoasid  as dpoasidpaosidaspod op poioipoi </p>
+            <p class="description">{{ trip.descriptionPrivate }}</p>
             {% endif %}
         </div>
 

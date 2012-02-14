@@ -17,7 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array('name' => 'dfupa');
+        return array();
     }
 
     /**
@@ -54,6 +54,7 @@ class DefaultController extends Controller
          * @var  \Doctrine\ORM\QueryBuilder $qb
          */
         foreach ($qb->getQuery()->getResult() as $trip) {
+
             /**
              * @var  \WodorNet\MotoTripBundle\Entity\Trip $trip
              */

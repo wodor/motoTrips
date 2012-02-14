@@ -129,7 +129,7 @@ class TripContext extends BehatContext
         $trip->setCreationDate(new \DateTime());
         $trip->setStartDate($startDate);
         $trip->setEndDate($endDate);
-        $trip->setLocation(array('lat' => '10.00', 'lng' => '20.00'));
+        $trip->setLocation(array('lat' => '21.00', 'lng' => '52.00'));
         $trip->setTitle($data['title']);
         $trip->setDescription($data['description']);
         $trip->setDescriptionPrivate($data['descritpion_private']);
