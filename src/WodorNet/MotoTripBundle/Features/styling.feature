@@ -1,6 +1,5 @@
-Feature: permissions
-    In order to be sure that I'm safe
-    I need to others be unable to change my own data
+Feature: styling
+    Some fixtures to see more
 
 Background:
   Given the site has following users:
