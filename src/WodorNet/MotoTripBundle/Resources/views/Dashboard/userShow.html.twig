@@ -1,7 +1,10 @@
-{% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
+{% extends app.request.get('_route') == '_internal' ? 'WodorNetMotoTripBundle::minimal.html.twig' : 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}<h1>{{user.username}}</h1>
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+    Info o użytkowniku:
     {{user.description}}
 
     {% if isOwner %}

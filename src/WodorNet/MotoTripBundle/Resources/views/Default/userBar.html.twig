@@ -1,7 +1,7 @@
 {% if is_expr_granted("isAuthenticated()") %}
 <div class="topBar">
     <strong>Zalogowany:</strong> {{ user.username}}
-    <a class="Button" href="{{path('fos_user_profile_show')}}">{% trans %}Twój Profil{% endtrans %}</a>
+    <a class="Button" href="{{path('dashboard')}}">{% trans %}Twój Profil{% endtrans %}</a>
     <a class="Button" href="{{path('fos_user_security_logout')}}">{% trans %}Logout{% endtrans %}</a>
 
 </div>

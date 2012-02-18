@@ -1,3 +1,6 @@
 {% for trip in trips %}
     {% include 'WodorNetMotoTripBundle:Trip:tripRow.html.twig' with {'item':  trip} %}
+{% else %}
+    <p style="text-align: center"><b>Nie utworzyłeś jeszcze do żadnegp wypadu.</b></p>
+    <p style="text-align: center"><b>Masz pomysł ? <a href="{{path('trip_new')}}">Utwórz wypad  i zaproś znajomych</a></b></p>
 {% endfor %}

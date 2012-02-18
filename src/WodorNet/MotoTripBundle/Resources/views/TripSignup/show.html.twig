@@ -1,17 +1,18 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 {% block content %}
 
-<h1>{{ tripSignup.user }}</h1>
+<h1>Zgłoszenie do {{tripSignup.trip.title}}</h1>
+Użytkownik:
+{% render "WodorNetMotoTripBundle:Dashboard:userShow" with {"user":tripSignup.user}%}
 
 <div class="record_properties">
 
-
+    Data przyłączenia do wypadu:
         <p>{{ tripSignup.signupDate|intldate }}</p>
 
     {% if editAllowed %}
         <h6>Wiadomość:</h6>
         <p>{{ tripSignup.description }}</p>
-
     {% endif %}
 
 </div>
@@ -25,9 +26,9 @@
     {% endif %}
 
     <a href="{{ path('trip_show',{'id': tripSignup.gettrip.id}) }}" class="Button midButton">
-        &crarr; Użytkownicy
+        &crarr; Powrót Do Wypadu
     </a>
 
 
 </div>
-        {% endblock %}
+{% endblock %}
