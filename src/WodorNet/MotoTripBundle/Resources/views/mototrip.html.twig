@@ -44,6 +44,15 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="container_16">
     <div class="grid_8 prefix_8 userbar">
         {% if '/login' not in app.request.getRequestUri %}
@@ -79,6 +88,10 @@
         {% block content %}
         {% endblock %}
     </div>
+
+    <div class="clear"></div>
+    <br/>
+    <div class="fb-like-box" data-href="http://www.facebook.com/pages/Motowypadypl/108577275932765" data-width="950" data-height="200" data-show-faces="true" data-stream="false" data-header="false"></div>
 
     <div class="grid_16 footer">
         Code by <a href="http://wodor.net/">wodor.net</a>. Powered by <a href="http://symfony.com">Symfony2</a>.<br>
