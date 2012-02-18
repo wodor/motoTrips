@@ -98,3 +98,9 @@ jms_security_extra:
     # Allows you to specify access control rules for specific methods, such
     # as controller actions
     method_access_control: { }
+
+services:
+    text.twig.extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            -  { name: twig.extension }
