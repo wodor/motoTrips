@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/text.css') }}">
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/960_16_col.css') }}">
@@ -11,7 +10,7 @@
 
     <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/octinspraypaint_aregular_polish/stylesheet.css') }}" type="text/css" charset="utf-8">
 
-    <title>{% block title %}Demo Bundle{% endblock %}</title>
+    <title>{% block title %}Motowypady.pl - wypady motocyklowe{% endblock %}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 
     {% include 'HudsonJQueryBundle::_jQueryUI.html.twig' %}
@@ -19,11 +18,23 @@
 
     <script type="text/javascript" src="{{ asset('bundles/wodornetmototrip/js/mapevents.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+  {#  <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script> #}
 
+<script type="text/javascript">
 
-    {# <link rel="stylesheet" href="{{ asset('bundles/wodornetmototrip/css/demo_table.css') }}" type="text/css" media="all"/> #}
-    </head>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7478871-14']);
+    _gaq.push(['_setDomainName', 'motowypady.pl']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+</head>
+
 <body>
 <div class="container_16">
     <div class="grid_8 prefix_8 userbar">
@@ -44,7 +55,6 @@
     <div class="menu grid_16">
         <a href="{{ path('default') }}" class="menuButton">Start</a>
         <a href="{{ path('trip_new') }}" class="menuButton">Dodaj Wypad</a>
-        <a href="{{ path('trip') }}" class="menuButton">Wypady</a>
         <a href="{{ path('dashboard') }}" id="dashboard" class="menuButton">Moje Wypady</a>
         <a href="{{ path('fos_user_registration_register') }}" class="menuButton">Rejestracja</a>
     </div>

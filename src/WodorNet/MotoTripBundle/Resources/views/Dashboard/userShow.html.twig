@@ -1,20 +1,22 @@
 {% extends app.request.get('_route') == '_internal' ? 'WodorNetMotoTripBundle::minimal.html.twig' : 'WodorNetMotoTripBundle::mototrip.html.twig' %}
-{% block content %}<h1>{{user.username}}</h1>
+{% block content %}
+<div class="grid_8">
+    <h1>{{user.username}}</h1>
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
-
-    Info o użytkowniku:
+    <h4>{% trans %}Informacje:{% endtrans %}</h4>
+    <p>
     {{user.description}}
-
+    </p>
     {% if isOwner %}
         <a id="change_description" href="{{path('descriptionEdit')}}">{{ 'Change description'|trans }}</a>
     <a href="{{path('fos_user_change_password')}}" class="midButton Button">{{ 'Change Password'|trans }}</a>
-
     {% endif %}
 
 {% else %}
     {% trans %}Login to see more{% endtrans %}
 {% endif %}
+</div>
 
 {% endblock content %}
