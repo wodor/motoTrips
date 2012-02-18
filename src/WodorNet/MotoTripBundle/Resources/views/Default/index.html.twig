@@ -34,30 +34,33 @@
 
 <div class="clear"></div>
 
-<div id="map" class="grid_8">
-    {% render "WodorNetMotoTripBundle:Default:allTripsMap" with {'max': 3} %}
-</div>
-
+<div class="clear"></div>
 <div id="trip_list_small" class="grid_8">
-    <div id="approveds" class="X Roundsquare">
+    <div id="approveds" class="Roundsquare">
         <h5>{% trans %}Nadchodzące wypady{% endtrans %}</h5>
         {% render 'WodorNetMotoTripBundle:Trip:upcomingTripsList' %}
     </div>
 </div>
-<div class="clear"></div>
-<div id="about_box" class="grid_8">
-    <h3>Jak to działa</h3>
+<div id="about_box" class="Roundsquare grid_8 mainpageBox">
+    <h5>Jak to działa</h5>
 
-    <p>To proste!</p>
+    <div class="grid_7">
+
+        <p>To proste!</p>
 
     <p>Czy nie zdażyło Ci się przegapić fajnego wyjazdu? Czy szukając kompanii musisz odwiedzać kilka for jednocześnie
-        i wklejać te same informacje, aby poinformować innych o wyjeździe ?
+    i wklejać te same informacje, aby poinformować innych o wyjeździe ?
 
     <p>Teraz możesz tutaj stworzyć "wypad", a na forach wkleić tylko link.
-        Zainteresowani łatwo dołączą do Twojego Wypadu, a rejestracja jest bardzo prosta.
-        Masz również możliwość zalogować się za pośrednictwem Facebook'a.</p>
-    </p>
+    Zainteresowani łatwo dołączą do Twojego Wypadu, a rejestracja jest bardzo prosta.
+    Masz również możliwość zalogować się za pośrednictwem Facebook'a.</p>
+
     <p>Twoj "wypad" nie musi być publiczny, możesz udostępnić go tylko swoim znajomym
-        lub osobom posiadającym unikalny link, który wklejasz w prywatnej części forum.</p>
+    lub osobom posiadającym unikalny link, który wklejasz w prywatnej części forum.</p>
+    </div>
+</div>
+
+<div id="map" class="grid_16">
+    {% render "WodorNetMotoTripBundle:Default:allTripsMap" with {'max': 3} %}
 </div>
         {% endblock %}

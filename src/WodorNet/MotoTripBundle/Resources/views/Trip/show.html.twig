@@ -1,11 +1,13 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
-{% block content %}
+{% block title %}
+{{trip.title|capitalize}} - {{parent()}}
+{% endblock title %}
 
+{% block content %}
 
 <div class="grid_16">
 <h1>{{trip.title}}</h1>
 </div>
-
 
 {% if editAllowed  %}
     {% render 'WodorNetMotoTripBundle:TripSignup:signupCandidatesList'  with {'id':  trip.id }%}
@@ -31,7 +33,7 @@
                 <a href="{{ path('trip_edit', { 'id': trip.id }) }}" class="Button midButton">{% trans %}Edit{% endtrans %}</a>
                 <a href="{{ path('trip_delete', { 'id': trip.id }) }}" class="Button midButton" onclick="return confirm('Na pewno usunąć wypad {{trip.title}} ?\nTej akcji nie można cofnąć!' )">{% trans %}Delete{% endtrans %}</a>
             {% endif %}
-            <a href="{{ path('trip') }}" class="Button midButton">{% trans %}Back to the list{% endtrans %}</a>
+            {#<a href="{{ path('trip') }}" class="Button midButton">{% trans %}Back to the list{% endtrans %}</a>#}
         </div>
     </div>
 
