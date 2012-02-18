@@ -24,7 +24,10 @@
     </span></br>
     <input  type="submit"  class="Button midButton" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}"/>
 
-</form>
+<br/>
+<br/>
+    <p style="text-align: center">Nie masz konta? <a href="{{path('fos_user_registration_register')}}">Zarejestruj się</a></p>
+    </form>
     </div>
 </div>
 {% endblock fos_user_content %}
