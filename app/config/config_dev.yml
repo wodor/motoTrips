@@ -23,5 +23,5 @@ assetic:
     use_controller: true
 
 swiftmailer:
-    delivery_address: wodorw@gmail.com
-    disable_delivery: true
+    #delivery_address: wodorw@gmail.com
+    disable_delivery: false
