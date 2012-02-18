@@ -32,7 +32,6 @@ Background:
         | Konsumer              | new   |
 
 Scenario: Logged in User can go to his profile page
-    Scenario: Join trip when you're allowed
     Given I am logged in as "Konsumer" with "22@222" password
     And I go to "/"
     When I follow "dashboard"
