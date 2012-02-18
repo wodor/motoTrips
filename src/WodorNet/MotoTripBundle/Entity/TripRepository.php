@@ -18,7 +18,7 @@ class TripRepository extends EntityRepository
         $qb = $this->createQueryBuilder('t');
 
         $qb->add('where',  $qb->expr()->gt('t.startDate', ':now'));
-        $qb->add('orderBy', "t.startDate desc");
+        $qb->add('orderBy', "t.startDate asc");
         
         $qb->setParameter('now', new \DateTime('yesterday'));
         return $qb;
