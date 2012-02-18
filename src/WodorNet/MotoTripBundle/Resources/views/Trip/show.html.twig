@@ -68,6 +68,20 @@
         {% render 'WodorNetMotoTripBundle:TripSignup:signupList' with {'id':  trip.id }%}<span id="lista"></span>
     </div>
 
+
+{#
+    <div class="grid_8" id="invite">
+        Zaproś
+        <a href=http://onet.pl">
+            <div id="inviteDialog">
+
+            </div>
+        </a>
+    </div>
+
+#}
+
+
 </div>
 <div class="grid_8 alpha omega">
     {{ google_map_container(map) }}
@@ -75,9 +89,16 @@
     {{ google_map_css(map) }}
 </div>
 
-
-
 <div class="clear"></div>
+
+{#
+<script type="text/javascript">
+    $(function() {
+        $( "#inviteDialog" ).dialog({ autoOpen: false });
+        $("#invite").click(function() { $("#inviteDialog").dialog('open');});
+    });
+</script>
+    #}
 
 
 {% endblock %}

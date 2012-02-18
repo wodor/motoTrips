@@ -25,6 +25,21 @@ use JMS\SecurityExtraBundle\Annotation\PreAuthorize;
  */
 class TripController extends Controller
 {
+
+    /**
+     *
+     * @Route ("/{trip}/invite", name="inviteByEmail")
+     */
+    public function inviteByEmailAction() {
+
+
+        return new \Symfony\Component\BrowserKit\Response('ok');
+    }
+
+    public function sendMessageAction() {
+
+    }
+
     /**
      * Info window on map
      *
