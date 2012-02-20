@@ -20,7 +20,7 @@ class TripRepository extends EntityRepository
         $qb->add('where',  $qb->expr()->gt('t.startDate', ':now'));
         $qb->add('orderBy', "t.startDate asc");
         
-        $qb->setParameter('now', new \DateTime('yesterday'));
+        $qb->setParameter('now', new \DateTime('midnight today'));
         return $qb;
         
     }
