@@ -91,7 +91,7 @@ class Trip
     private $endDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="trip")
+     * @ORM\OneToMany(targetEntity="TripSignup", mappedBy="trip", cascade={"all"})
      * @ORM\OrderBy({"signupDate" = "DESC"})
      */
     protected $tripSignups;

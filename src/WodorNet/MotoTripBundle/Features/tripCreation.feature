@@ -38,4 +38,16 @@ Scenario: Not logged in user can see public trip
     When I go to "/trip/1/show"
     Then I should see "Dołącz do wypadu"
 
+Scenario: Delete trip with signups
+    Given the site has following trips:
+        | creator | title | description | descritpion_private |
+        | Kreator | to delete | Lorem ipsum dolor sit amet | The very private description |
+    And the "to delete" trip has the following signups:
+         | user     | status |
+         | Konsumer | approved |
+    Given I am logged in as "Kreator" with "123456" password
+    And I go to "/trip/2/show"
+    And I follow "Usuń wypad"
+    Then I should be on "/dashboard"
+
 

@@ -315,7 +315,7 @@ class TripController extends Controller
         $em->remove($trip);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('trip'));
+        return $this->redirect($this->generateUrl('dashboard'));
     }
 
 
