@@ -17,9 +17,21 @@
 <div class="clear"></div>
 
 <div class="grid_8">
-    <div class="grid_8 alpha omega Roundsquare ">
-        <div class=" status">
-            <h6>Status: <b>{{userAssociationStatus|trans}}</b></h6>
+    <div class="grid_8 alpha omega">
+        <div class="grid_2">
+            <img src="{{ asset('bundles/wodornetmototrip/images/avatar.png') }}" alt="avatar">
+        </div>
+        <div class="grid_5">
+            <label>Ten wypad organizuje:</label><br/>
+            <h4><b>{{trip.creator.userName}}</b></h4>
+            <img src="{{ asset('bundles/wodornetmototrip/images/green_star.png') }}" alt="green_star" style="margin-bottom: 5px;"/>
+            <p><a href="{{trip.link}}">{{trip.link|truncate}}</a></p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="grid_8 alpha omega Roundsquare">
+        <div class="status">
+            <h6><b>{{userAssociationStatus|trans}}</b></h6>
             {# przyciski dolaczania / rezygnacji #}
             {% if userAssociationStatus == 'trip.userrelation.candidate' or  userAssociationStatus == 'trip.userrelation.attendee' %}
                 <a href="{{ path('tripsignup_resign',{ 'id': tripSignup.id }) }}" class="Button midButton">{% trans %}Resign from the attendance{% endtrans %}</a>
@@ -86,6 +98,7 @@
 
 </div>
 <div class="grid_8 alpha omega">
+    <label>{% trans %}map.label.gatheringPoint{% endtrans %}</label>
     {{ google_map_container(map) }}
     {{ google_map_js(map) }}
     {{ google_map_css(map) }}

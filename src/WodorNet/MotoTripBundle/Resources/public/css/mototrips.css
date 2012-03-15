@@ -168,6 +168,10 @@ input.title {
     font-size: large;
 }
 
+input.big {
+    width: 100%;
+}
+
 label {
     font-family: 'OctinSpraypaintARegular', sans-serif;
     font-weight: 100;

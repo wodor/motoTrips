@@ -14,6 +14,7 @@ class TripType extends AbstractType
             ->add('descriptionPrivate', 'textarea', array('attr' => array('class' => 'big')))
             ->add('startDate', 'datepicker')
             ->add('endDate', 'datepicker')
+            ->add('link', 'text', array('attr' => array('class' => 'big')))
             //->add('roadTypes', null, array('expanded' => true, 'csrf_protection' => false, 'attr' => array('class' => 'normalFont')))
             ->add('location', 'mapPoint');
     }

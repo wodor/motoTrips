@@ -50,4 +50,6 @@ Scenario: Delete trip with signups
     And I follow "Usuń wypad"
     Then I should be on "/dashboard"
 
-
+Scenario:Creator's name is visible
+    When I go to "trip/1/show"
+    Then I should see "Kreator"

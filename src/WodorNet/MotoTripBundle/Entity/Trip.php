@@ -119,6 +119,11 @@ class Trip
      */
     private $lng;
 
+    /**
+     * @var string $link
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $link;
 
     public function __construct()
     {
@@ -367,6 +372,22 @@ class Trip
     public function addTripSignup(TripSignup $tripSignup)
     {
         $this->tripSignups->add($tripSignup);
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
     }
 
 }
