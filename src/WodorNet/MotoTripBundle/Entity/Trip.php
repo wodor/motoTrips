@@ -96,7 +96,6 @@ class Trip
      */
     protected $tripSignups;
 
-
     /**
      * @var string $terrainType
      *
@@ -104,7 +103,6 @@ class Trip
      * @ORM\JoinTable(name="trips_roadtypes")
      */
     private $roadTypes;
-
 
     /**
      * @var float $lat
