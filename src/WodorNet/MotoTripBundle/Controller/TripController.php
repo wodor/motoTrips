@@ -80,7 +80,6 @@ class TripController extends Controller
         return array('trips' => $qb->getQuery()->getResult());
     }
 
-
     /**
      * Lists all Trip entities.
      *
@@ -90,11 +89,8 @@ class TripController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-
-        $entities = $em->getRepository('WodorNetMotoTripBundle:Trip')->findAll();
-
-
-        return array('entities' => $entities);
+        $qb = $em->getRepository('WodorNetMotoTripBundle:Trip')->findUpcomingTrips('20');
+        return array('entities' => $qb->getQuery()->getResult());
     }
 
     /**

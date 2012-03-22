@@ -1,49 +1,13 @@
 {% extends 'WodorNetMotoTripBundle::mototrip.html.twig' %}
 
 {% block content %}
-<div class="Roundsquare">
-<h2>Trip list</h2>
 
-<table class="records_list candidatesTable">
-    <thead>
-        <tr>
-            <th class="kolumna_id">Id</th>
-            <th class="kolumna_2">Creationdate</th>
-            <th class="kolumna_opis">Description</th>
-            <th class="kolumna_2">Startdate</th>
-            <th class="kolumna_2">Enddate</th>
-            <th class="kolumna_3">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr class="brownRow">
-            <td class="kolumna_id"><a href="{{ path('trip_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td class="kolumna_2">{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i') }}{% endif%}</td>
-            <td class="kolumna_opis">{{ entity.description }}</td>
-            <td class="kolumna_2">{% if entity.startDate %}{{ entity.startDate|date('Y-m-d H:i') }}{% endif%}</td>
-            <td class="kolumna_2">{% if entity.endDate %}{{ entity.endDate|date('Y-m-d H:i') }}{% endif%}</td>
-            <td class="kolumna_3">
-                <ul class="menuList">
-                    <li>
-                        <a href="{{ path('trip_show', { 'id': entity.id }) }}" class="Button midButton">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('trip_edit', { 'id': entity.id }) }}" class="Button midButton">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<h3>{% trans %}Lista wypadów{% endtrans %}</h3>
+{% for trip in entities %}
+{% include 'WodorNetMotoTripBundle:Trip:tripRowSearch.html.twig' with {'item':  trip} %}
+{% else %}
+    <p style="text-align: center"><b>Nie utworzyłeś jeszcze do żadnegp wypadu.</b></p>
+    <p style="text-align: center"><b>Masz pomysł ? <a href="{{path('trip_new')}}">Utwórz wypad  i zaproś znajomych</a></b></p>
+{% endfor %}
 
-<ul class="menuList">
-    <li>
-        <a href="{{ path('trip_new') }}" class="Button midButton">
-            Create a new entry
-        </a>
-    </li>
-</ul>
-</div>
 {% endblock %}
