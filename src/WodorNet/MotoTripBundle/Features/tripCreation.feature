@@ -12,7 +12,7 @@ Background:
   | creator | title | description | descritpion_private |
   | Kreator | wypad w góry | Lorem ipsum dolor sit amet | The very private description |
 
-
+@mink:symfony
 Scenario: Add a trip
     Given I am logged in as "Kreator" with "123456" password
     When I follow "dodaj wypad"

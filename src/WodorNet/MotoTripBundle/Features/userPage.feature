@@ -74,6 +74,7 @@ Scenario: Logged in user can see profile of another user with description
 Scenario: Not Logged in user can only see name on the profile of another user
     Given the "Konsumer" user has "I'm still looking for a bike" description
     And I go to "/"
+    And I follow "Wyloguj"
     When I go to "user/2"
     Then I should not see "I'm still looking for a bike"
     But I should see "Konsumer"

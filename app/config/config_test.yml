@@ -19,6 +19,7 @@ mink:
     show_cmd:             google-chrome %s
     sahi:       ~
     browser_name:  chrome
+    default_session:     sahi
 
 
 doctrine:
